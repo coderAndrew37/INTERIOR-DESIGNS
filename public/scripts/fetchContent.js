@@ -1,7 +1,36 @@
-import { testimonials, projects, services, faqs } from "../data/data.js";
+import { testimonials, projects, services, faqs, blogs } from "../data/data.js";
 
 // Wait until the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
+  // Blogs Section
+  const blogsContainer = document.querySelector("#blogs .grid");
+  if (blogsContainer) {
+    blogs.forEach((blog) => {
+      const blogHTML = `
+  <div class="bg-background p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105">
+    <img
+      src="${blog.image}"
+      alt="${blog.title}"
+      class="rounded-lg mb-4 w-full h-48 object-cover"
+    />
+    <h3 class="text-2xl font-bold text-primary mb-2">${blog.title}</h3>
+    <p class="text-gray-300 mb-4">${blog.description}</p>
+    <p class="text-sm text-gray-400 mb-4">${new Date(
+      blog.date
+    ).toDateString()}</p>
+    <a
+      href="/blog.html?id=${blog.id}"
+      class="px-4 py-2 bg-primary text-white rounded-lg font-bold hover:bg-opacity-90"
+    >
+      Read More
+    </a>
+  </div>
+`;
+
+      blogsContainer.innerHTML += blogHTML;
+    });
+  }
+
   // Testimonials Section
   const testimonialsContainer = document.querySelector("#testimonials .grid");
   if (testimonialsContainer) {
