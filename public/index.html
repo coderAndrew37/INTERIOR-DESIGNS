@@ -3,23 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dev Andrew - Developer Portfolio</title>
-
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
-    <!-- Gsap -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <link rel="stylesheet" href="/styles.css" />
+    <title>Interior Design Kenya | Transforming Spaces</title>
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="/output.css" />
   </head>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- custom css -->
+  <link rel="stylesheet" href="/styles.css" />
 
   <body class="bg-background text-text font-sans">
     <!-- Navbar -->
@@ -27,11 +24,13 @@
       <div
         class="container mx-auto flex items-center justify-between py-4 px-6"
       >
-        <a href="#hero" class="text-xl font-bold text-primaryCol">Dev Andrew</a>
+        <a href="#hero" class="text-xl font-bold text-primary"
+          >Interior Design</a
+        >
         <nav id="mobile-nav" class="hidden md:flex space-x-8">
           <a href="#about" class="hover:text-primary">About</a>
           <a href="#services" class="hover:text-primary">Services</a>
-          <a href="#projects" class="hover:text-primary">Projects</a>
+          <a href="#projects" class="hover:text-primary">Portfolio</a>
           <a href="#contact" class="hover:text-primary">Contact</a>
         </nav>
         <button id="mobile-menu" class="md:hidden text-primary">
@@ -47,25 +46,27 @@
     >
       <div>
         <h1 class="text-5xl font-bold text-gray-900 leading-tight">
-          Transforming Spaces in Kenya<br />
-          <span class="text-primary">Crafting Beauty & Functionality</span>
+          Transforming Kenyan Spaces<br />
+          <span class="text-primary"
+            >Designing with Elegance & Functionality</span
+          >
         </h1>
         <p class="mt-4 text-gray-700 text-lg">
-          We specialize in creating elegant, functional interiors tailored to
-          your needs and budget.
+          We specialize in crafting tailored, beautiful, and functional
+          interiors for Kenyan homes and businesses.
         </p>
         <a
-          href="#contact"
+          href="#services"
           class="mt-6 px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-opacity-90 inline-block smooth-scroll"
         >
-          Get a Free Consultation
+          Explore Our Services
         </a>
       </div>
       <div>
         <img
-          src="/images/profile.jpg"
+          src="/images/hero-interior.jpg"
           alt="Hero Image"
-          class="rounded shadow-lg"
+          class="rounded-lg shadow-lg"
           loading="lazy"
         />
       </div>
@@ -80,115 +81,28 @@
           About Us
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <!-- Left Column: Project Image -->
-          <div class="flex items-center justify-center">
+          <div>
             <img
-              src="/images/interior-project.jpg"
-              alt="Elegant Interior Design Project"
-              class="rounded-lg shadow-lg w-2/3 md:w-full"
-              loading="lazy"
+              src="/images/team.jpg"
+              alt="Interior Design Team"
+              class="rounded-lg shadow-lg w-full"
             />
           </div>
-
-          <!-- Right Column: Text & Tabs -->
-          <div class="flex flex-col justify-center space-y-6">
-            <!-- Description -->
+          <div>
             <p class="text-gray-300 text-lg">
-              We are a premier Interior Design company based in Kenya,
-              specializing in creating elegant, functional, and personalized
-              spaces. From homes to offices, we transform ideas into stunning
-              interiors that reflect your personality and vision.
+              Based in Kenya, we specialize in creating stunning interiors that
+              blend modern aesthetics with cultural inspirations.
             </p>
             <p class="text-gray-300 text-lg">
-              With a deep understanding of Kenyan culture and architecture, we
-              pride ourselves on sourcing the finest local materials and
-              crafting innovative solutions that meet your needs and budget.
+              From residential makeovers to commercial transformations, our
+              designs deliver comfort, functionality, and beauty.
             </p>
-
-            <!-- Tab Buttons -->
-            <div class="flex space-x-4 justify-center md:justify-start">
-              <button
-                class="tab-button bg-primary hover:bg-opacity-90 text-white font-bold px-4 py-2 rounded transition"
-                data-target="skills"
-              >
-                Our Expertise
-              </button>
-              <button
-                class="tab-button font-bold px-4 py-2 rounded transition"
-                data-target="experience"
-              >
-                Why Choose Us
-              </button>
-            </div>
-
-            <!-- Tab Content -->
-            <div class="mt-4">
-              <!-- Expertise Content -->
-              <div
-                id="skills"
-                class="tab-content transition-opacity duration-500"
-              >
-                <ul class="space-y-2">
-                  <li class="flex items-center">
-                    <i class="fas fa-check-circle text-primary mr-2"></i>
-                    <span class="text-gray-300">
-                      Expertise in Residential, Commercial, and Office Interiors
-                    </span>
-                  </li>
-                  <li class="flex items-center">
-                    <i class="fas fa-check-circle text-primary mr-2"></i>
-                    <span class="text-gray-300">
-                      Mastery in Material Selection, Color Schemes, and Space
-                      Planning
-                    </span>
-                  </li>
-                  <li class="flex items-center">
-                    <i class="fas fa-check-circle text-primary mr-2"></i>
-                    <span class="text-gray-300">
-                      End-to-End Project Management from Concept to Execution
-                    </span>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Why Choose Us Content -->
-              <div
-                id="experience"
-                class="tab-content hidden transition-opacity duration-500"
-              >
-                <ul class="space-y-2">
-                  <li class="flex items-center">
-                    <i class="fas fa-briefcase text-primary mr-2"></i>
-                    <span class="text-gray-300">
-                      Over 10 Years of Experience Transforming Kenyan Spaces
-                    </span>
-                  </li>
-                  <li class="flex items-center">
-                    <i class="fas fa-briefcase text-primary mr-2"></i>
-                    <span class="text-gray-300">
-                      Worked with Top Kenyan Companies and Homeowners
-                    </span>
-                  </li>
-                  <li class="flex items-center">
-                    <i class="fas fa-briefcase text-primary mr-2"></i>
-                    <span class="text-gray-300">
-                      Tailored Solutions Designed to Meet Your Unique Style and
-                      Budget
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- Get a Free Quote Button -->
-            <div>
-              <a
-                href="#contact"
-                class="px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-opacity-90 inline-block"
-              >
-                Get a Free Quote
-              </a>
-            </div>
+            <a
+              href="/about.html"
+              class="px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-opacity-90 inline-block"
+            >
+              Read More About Us
+            </a>
           </div>
         </div>
       </div>
@@ -200,83 +114,50 @@
         <h2 class="text-3xl font-bold text-primary mb-6 text-center">
           Our Services
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Service cards will be dynamically populated -->
+        </div>
       </div>
     </section>
 
-    <!-- Process Section -->
-    <section id="process" class="py-16 bg-gray-100 text-gray-900">
+    <!-- Why Choose Us Section -->
+    <section id="why-us" class="py-16 bg-accent text-gray-300">
       <div class="container mx-auto px-6">
         <h2 class="text-3xl font-bold text-primary mb-6 text-center">
-          Our Process
+          Why Choose Us?
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div class="text-center">
-            <div
-              class="w-16 h-16 bg-primary text-white flex items-center justify-center rounded-full mb-4"
-            >
-              <i class="fas fa-comments text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-semibold mb-2">Step 1: Consultation</h3>
+            <i class="fas fa-paint-brush text-primary text-5xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Creative Expertise</h3>
             <p>
-              We start with understanding your vision and goals for the space.
+              We deliver innovative designs that reflect your unique vision.
             </p>
           </div>
           <div class="text-center">
-            <div
-              class="w-16 h-16 bg-primary text-white flex items-center justify-center rounded-full mb-4"
-            >
-              <i class="fas fa-pencil-ruler text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-semibold mb-2">Step 2: Design</h3>
-            <p>
-              We create custom design concepts and 3D renderings for your
-              review.
-            </p>
+            <i class="fas fa-handshake text-primary text-5xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Client Focus</h3>
+            <p>Our approach is collaborative, ensuring your needs are met.</p>
           </div>
           <div class="text-center">
-            <div
-              class="w-16 h-16 bg-primary text-white flex items-center justify-center rounded-full mb-4"
-            >
-              <i class="fas fa-tools text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-semibold mb-2">Step 3: Execution</h3>
+            <i class="fas fa-tools text-primary text-5xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Quality Execution</h3>
             <p>
-              Our team brings the design to life, ensuring quality and
-              precision.
+              We guarantee professional workmanship and attention to detail.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects" class="py-16 bg-accent">
       <div class="container mx-auto px-6">
         <h2 class="text-3xl font-bold text-primary mb-6 text-center">
-          Projects
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
-      </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-16 bg-accent">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-primary mb-6 text-center">
-          Pricing
+          Our Portfolio
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Pricing cards will be dynamically populated here -->
+          <!-- Portfolio cards will be dynamically populated -->
         </div>
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-16 bg-accent">
-      <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold text-primary mb-6">Testimonials</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
       </div>
     </section>
 
@@ -383,8 +264,10 @@
       </div>
     </section>
 
-    <footer class="bg-accent py-4 text-center">
-      <p class="text-gray-400">© 2024 Omollo Andrew. All rights reserved.</p>
+    <footer class="bg-gray-900 text-center py-4">
+      <p class="text-gray-400">
+        © 2024 Interior Design Kenya. All Rights Reserved.
+      </p>
     </footer>
 
     <!-- Floating WhatsApp Button -->

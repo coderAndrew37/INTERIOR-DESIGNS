@@ -2,155 +2,125 @@ export const services = [
   {
     id: "1",
     name: "Residential Interior Design",
-    desc: "Transforming Kenyan homes into elegant, functional spaces tailored to your taste.",
+    desc: "Transform your home into a stylish and functional haven, tailored to your personal taste.",
     icon: "fas fa-home",
+    image: "/images/services/residential.jpg",
   },
   {
     id: "2",
     name: "Office Interior Design",
-    desc: "Designing modern, productive office spaces that inspire creativity.",
+    desc: "Create modern, productive workspaces that inspire creativity and enhance efficiency.",
     icon: "fas fa-briefcase",
+    image: "/images/services/office.jpg",
   },
   {
     id: "3",
     name: "Custom Furniture Design",
-    desc: "Creating unique furniture pieces to match your style and space.",
+    desc: "Craft unique furniture pieces that perfectly complement your space and style.",
     icon: "fas fa-couch",
+    image: "/images/services/furniture.jpg",
   },
   {
     id: "4",
     name: "Renovations",
-    desc: "Breathing new life into outdated spaces with creative makeovers.",
+    desc: "Revamp and refresh your spaces with expert renovation services tailored to your vision.",
     icon: "fas fa-sync-alt",
+    image: "/images/services/renovation.jpg",
   },
   {
     id: "5",
     name: "Space Planning",
-    desc: "Maximizing the use of your space with expert planning and layout design.",
+    desc: "Maximize the potential of your space with professional layout and planning expertise.",
     icon: "fas fa-ruler-combined",
+    image: "/images/services/space-planning.jpg",
   },
   {
     id: "6",
     name: "Lighting Design",
-    desc: "Enhancing interiors with functional and aesthetic lighting solutions.",
+    desc: "Enhance your interiors with elegant and functional lighting solutions.",
     icon: "fas fa-lightbulb",
+    image: "/images/services/lighting.jpg",
   },
 ];
 
 export const projects = [
   {
-    title: "Kami",
-    desc: "A beautiful modern personal portfolio website.",
-    vercel: "https://kami-mbaabu.vercel.app/",
-    image: "/images/kami.jpg", // This will be replaced with a screenshot later.
+    id: "1",
+    title: "Modern Nairobi Apartment",
+    desc: "A sleek and functional design for urban living in Nairobi.",
+    image: "/images/projects/nairobi-apartment.jpg",
   },
   {
-    title: "Stream Cash",
-    desc: "A dynamic app for managing and tracking online streams and payments for Affiliate Marketing.",
-    vercel: "https://stream-qash.vercel.app/",
-    image: "/images/stream-cash.jpg",
+    id: "2",
+    title: "Coastal Vacation Home",
+    desc: "A serene and luxurious retreat inspired by Kenyan coastlines.",
+    image: "/images/projects/coastal-home.jpg",
   },
   {
-    title: "Modern Furniture Website",
-    desc: "An Amazon-inspired e-commerce site using modern JavaScript.",
-    vercel: "https://quality-home-furniture.vercel.app/",
-    image: "/images/amazon.jpg",
+    id: "3",
+    title: "Nairobi Office Space",
+    desc: "A collaborative office designed for creativity and productivity.",
+    image: "/images/projects/nairobi-office.jpg",
   },
   {
-    title: "Massage Parlour",
-    desc: "A clean and simple site for booking massage services.",
-    vercel: "https://massage-2.vercel.app/",
-    image: "/images/massage-parlour.jpg",
+    id: "4",
+    title: "Rustic Farmhouse",
+    desc: "A cozy and rustic interior for a countryside farmhouse.",
+    image: "/images/projects/farmhouse.jpg",
+  },
+  {
+    id: "5",
+    title: "Luxury Penthouse",
+    desc: "An elegant and opulent penthouse overlooking Nairobi's skyline.",
+    image: "/images/projects/luxury-penthouse.jpg",
   },
 ];
 
 export const testimonials = [
   {
-    image: "images/profile.jpg",
-    name: "Alex Johnson",
-    message: "Andrew is a skilled developer who delivered beyond expectations.",
+    image: "/images/testimonials/client1.jpg",
+    name: "Jane Wanjiru",
+    message:
+      "Their designs transformed my home into a space I love. Highly recommended!",
   },
   {
-    image: "images/profile.jpg",
-    name: "Sophia Lee",
-    message: "Working with Andrew was a pleasure. Highly recommend him!",
+    image: "/images/testimonials/client2.jpg",
+    name: "Michael Otieno",
+    message:
+      "Our office now inspires creativity and productivity thanks to their expertise.",
   },
   {
-    image: "images/profile.jpg",
-    name: "Michael Smith",
-    message: "Professional and dedicated. Great results!",
+    image: "/images/testimonials/client3.jpg",
+    name: "Lydia Nduta",
+    message:
+      "The custom furniture they designed was exactly what I wanted. Excellent work!",
   },
 ];
 
 export const faqs = [
   {
-    question: "What services do you offer?",
+    question: "How long does a typical project take?",
     answer:
-      "We offer a wide range of services including full-stack development, UI/UX design, API development, performance optimization, database management, and cloud integration.",
+      "Timelines depend on the scope of the project. Most designs take 2–6 weeks.",
   },
   {
-    question: "How can I contact you for a project?",
+    question: "Do you offer services outside Nairobi?",
     answer:
-      "You can contact us through our contact form or email us directly. We will get back to you as soon as possible.",
+      "Yes, we work with clients across Kenya, including coastal and upcountry regions.",
   },
   {
-    question: "Do you provide maintenance services?",
+    question: "Can I request a consultation before committing?",
     answer:
-      "Yes, we offer ongoing maintenance services to ensure that your application remains up-to-date and performs well.",
+      "Absolutely! We offer free initial consultations to discuss your needs.",
+  },
+  {
+    question: "Do you handle renovations?",
+    answer:
+      "Yes, we specialize in transforming outdated spaces into stunning interiors.",
   },
   {
     question: "What is your pricing structure?",
     answer:
-      "Our pricing depends on the scope and complexity of the project. We offer custom quotes based on your specific requirements.",
-  },
-  {
-    question: "Do you offer remote services?",
-    answer:
-      "Yes, all of our services are available remotely, allowing us to work with clients from anywhere in the world.",
-  },
-];
-
-export const pricing = [
-  {
-    id: "1",
-    service: "Single Page Applications (SPA)",
-    description: "Interactive and modern single-page applications.",
-    price: "KSh 15,000 - KSh 20,000",
-    whatsappMessage: "I'm interested in SPA development services.",
-  },
-  {
-    id: "2",
-    service: "E-commerce Development",
-    description: "Build scalable and secure e-commerce platforms.",
-    price: "KSh 30,000 - KSh 300,000",
-    whatsappMessage: "I'm interested in E-commerce development services.",
-  },
-  {
-    id: "3",
-    service: "Portfolio Websites",
-    description: "Professional websites to showcase your work.",
-    price: "KSh 20,000 - KSh 50,000",
-    whatsappMessage: "I'm interested in a Portfolio Website.",
-  },
-  {
-    id: "4",
-    service: "Mobile App Development",
-    description: "Native and cross-platform mobile apps.",
-    price: "KSh 100,000 - KSh 250,000",
-    whatsappMessage: "I'm interested in Mobile App Development services.",
-  },
-  {
-    id: "5",
-    service: "Custom Software Development",
-    description: "Tailored software solutions for your business.",
-    price: "KSh 200,000+",
-    whatsappMessage: "I'm interested in Custom Software Development services.",
-  },
-  {
-    id: "6",
-    service: "UI/UX Design",
-    description: "Intuitive and engaging design for apps and websites.",
-    price: "KSh 30,000 - KSh 70,000",
-    whatsappMessage: "I'm interested in UI/UX design services.",
+      "Our pricing depends on the project’s complexity and size. Contact us for a custom quote.",
   },
 ];

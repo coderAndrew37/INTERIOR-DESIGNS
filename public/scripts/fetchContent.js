@@ -1,10 +1,4 @@
-import {
-  testimonials,
-  projects,
-  services,
-  faqs,
-  pricing,
-} from "../data/data.js";
+import { testimonials, projects, services, faqs } from "../data/data.js";
 
 // Wait until the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,33 +17,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Projects Section
+  // Portfolio Section
   const projectsContainer = document.querySelector("#projects .grid");
-
   if (projectsContainer) {
-    projects.forEach(async (project) => {
-      // Fetch screenshot from Screenshot API
-      const screenshotUrl = `https://shot.screenshotapi.net/screenshot?&token=43NWCR4-XQTMPGE-M16JCGQ-TFRBPAW&url=${project.vercel}&width=1280&height=720&output=image`;
-
-      // Create project card
+    projects.forEach((project) => {
       const projectHTML = `
-        <div class="bg-background p-4 rounded shadow-lg hover:scale-105 hover:shadow-xl transition transform">
-          <img
-            src="${screenshotUrl}"
-            alt="${project.title}"
-            class="rounded mb-4"
-            loading="lazy"
-          />
-          <h3 class="text-xl font-semibold text-white">${project.title}</h3>
-          <p class="mt-2 text-gray-300">${project.desc}</p>
-          <a href="${project.vercel}" target="_blank" class="text-primary hover:underline mt-4 inline-block">
-            Visit Live
-          </a>
-        </div>
-      `;
+      <div class="bg-accent p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105">
+        <img
+          src="${project.image}"
+          alt="${project.title}"
+          class="rounded-lg mb-4"
+        />
+        <h3 class="text-xl font-bold text-primary mb-2">${project.title}</h3>
+        <p class="text-gray-300 mb-4">${project.desc}</p>
+        <a
+          href="${project.link}"
+          target="_blank"
+          class="px-4 py-2 bg-primary text-white rounded-lg font-bold hover:bg-opacity-90"
+        >
+          View Details
+        </a>
+      </div>
+    `;
       projectsContainer.innerHTML += projectHTML;
     });
   }
+
   // FAQs Section
   const accordion = document.getElementById("faqsAccordion");
   if (accordion) {
@@ -84,39 +77,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Pricing Section
-  const pricingContainer = document.querySelector("#pricing .grid");
-  if (pricingContainer) {
-    pricing.forEach((item) => {
-      const pricingHTML = `
-      <div class="bg-background p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition">
-        <h3 class="text-xl font-semibold text-primary mb-2">${item.service}</h3>
-        <p class="text-gray-400 mb-4">${item.description}</p>
-        <p class="text-lg font-bold text-white mb-4">${item.price}</p>
-        <button
-          class="open-modal px-4 py-2 bg-primary hover:bg-opacity-90 text-white rounded-lg font-bold"
-          data-service="${item.service}"
-          data-whatsapp="${encodeURIComponent(item.whatsappMessage)}"
-        >
-          Book Now
-        </button>
-      </div>
-    `;
-      pricingContainer.innerHTML += pricingHTML;
-    });
-  }
-
   // Services Section
   const servicesContainer = document.querySelector("#services .grid");
   if (servicesContainer) {
     services.forEach((service) => {
       const serviceHTML = `
-      <div class="bg-accent p-6 rounded-lg text-center hover:bg-primary hover:text-white hover:shadow-lg transition">
-        <i class="${service.icon} text-4xl text-primary hover:text-white mb-4 transition-colors"></i>
-        <h3 class="text-xl font-semibold">${service.name}</h3>
-        <p class="mt-2 text-gray-400">${service.desc}</p>
+      <div class="bg-accent p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105">
+        <img
+          src="/images/services/${service.id}.jpg"
+          alt="${service.name}"
+          class="rounded-lg mb-4 w-full h-48 object-cover"
+        />
+        <h3 class="text-xl font-bold text-primary mb-2">${service.name}</h3>
+        <p class="text-gray-300 mb-4">${service.desc}</p>
         <button
-          class="open-modal px-4 py-2 bg-primary hover:bg-opacity-90 text-white rounded-lg font-bold"
+          class="open-modal px-4 py-2 bg-primary text-white rounded-lg font-bold hover:bg-opacity-90"
           data-service="${service.name}"
           data-whatsapp="I am interested in booking the ${service.name} service."
         >
