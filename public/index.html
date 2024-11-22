@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dev Andrew - Developer Portfolio</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Gsap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <link rel="stylesheet" href="/styles.css" />
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="/output.css" />
+  </head>
+
+  <body class="bg-background text-text font-sans">
+    <!-- Navbar -->
+    <header class="bg-accent sticky top-0 z-50">
+      <div
+        class="container mx-auto flex items-center justify-between py-4 px-6"
+      >
+        <a href="#hero" class="text-xl font-bold text-primaryCol">Dev Andrew</a>
+        <nav id="mobile-nav" class="hidden md:flex space-x-8">
+          <a href="#about" class="hover:text-primary">About</a>
+          <a href="#services" class="hover:text-primary">Services</a>
+          <a href="#projects" class="hover:text-primary">Projects</a>
+          <a href="#contact" class="hover:text-primary">Contact</a>
+        </nav>
+        <button id="mobile-menu" class="md:hidden text-primary">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      id="hero"
+      class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 py-16 px-6"
+    >
+      <div>
+        <h1 class="text-5xl font-bold text-gray-900 leading-tight">
+          Transforming Spaces in Kenya<br />
+          <span class="text-primary">Crafting Beauty & Functionality</span>
+        </h1>
+        <p class="mt-4 text-gray-700 text-lg">
+          We specialize in creating elegant, functional interiors tailored to
+          your needs and budget.
+        </p>
+        <a
+          href="#contact"
+          class="mt-6 px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-opacity-90 inline-block smooth-scroll"
+        >
+          Get a Free Consultation
+        </a>
+      </div>
+      <div>
+        <img
+          src="/images/profile.jpg"
+          alt="Hero Image"
+          class="rounded shadow-lg"
+          loading="lazy"
+        />
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-accent py-16">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-3xl font-bold text-primary mb-6 text-center md:text-left"
+        >
+          About Us
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <!-- Left Column: Project Image -->
+          <div class="flex items-center justify-center">
+            <img
+              src="/images/interior-project.jpg"
+              alt="Elegant Interior Design Project"
+              class="rounded-lg shadow-lg w-2/3 md:w-full"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Right Column: Text & Tabs -->
+          <div class="flex flex-col justify-center space-y-6">
+            <!-- Description -->
+            <p class="text-gray-300 text-lg">
+              We are a premier Interior Design company based in Kenya,
+              specializing in creating elegant, functional, and personalized
+              spaces. From homes to offices, we transform ideas into stunning
+              interiors that reflect your personality and vision.
+            </p>
+            <p class="text-gray-300 text-lg">
+              With a deep understanding of Kenyan culture and architecture, we
+              pride ourselves on sourcing the finest local materials and
+              crafting innovative solutions that meet your needs and budget.
+            </p>
+
+            <!-- Tab Buttons -->
+            <div class="flex space-x-4 justify-center md:justify-start">
+              <button
+                class="tab-button bg-primary hover:bg-opacity-90 text-white font-bold px-4 py-2 rounded transition"
+                data-target="skills"
+              >
+                Our Expertise
+              </button>
+              <button
+                class="tab-button font-bold px-4 py-2 rounded transition"
+                data-target="experience"
+              >
+                Why Choose Us
+              </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="mt-4">
+              <!-- Expertise Content -->
+              <div
+                id="skills"
+                class="tab-content transition-opacity duration-500"
+              >
+                <ul class="space-y-2">
+                  <li class="flex items-center">
+                    <i class="fas fa-check-circle text-primary mr-2"></i>
+                    <span class="text-gray-300">
+                      Expertise in Residential, Commercial, and Office Interiors
+                    </span>
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fas fa-check-circle text-primary mr-2"></i>
+                    <span class="text-gray-300">
+                      Mastery in Material Selection, Color Schemes, and Space
+                      Planning
+                    </span>
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fas fa-check-circle text-primary mr-2"></i>
+                    <span class="text-gray-300">
+                      End-to-End Project Management from Concept to Execution
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Why Choose Us Content -->
+              <div
+                id="experience"
+                class="tab-content hidden transition-opacity duration-500"
+              >
+                <ul class="space-y-2">
+                  <li class="flex items-center">
+                    <i class="fas fa-briefcase text-primary mr-2"></i>
+                    <span class="text-gray-300">
+                      Over 10 Years of Experience Transforming Kenyan Spaces
+                    </span>
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fas fa-briefcase text-primary mr-2"></i>
+                    <span class="text-gray-300">
+                      Worked with Top Kenyan Companies and Homeowners
+                    </span>
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fas fa-briefcase text-primary mr-2"></i>
+                    <span class="text-gray-300">
+                      Tailored Solutions Designed to Meet Your Unique Style and
+                      Budget
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Get a Free Quote Button -->
+            <div>
+              <a
+                href="#contact"
+                class="px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-opacity-90 inline-block"
+              >
+                Get a Free Quote
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-accent">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold text-primary mb-6 text-center">
+          Our Services
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="py-16 bg-gray-100 text-gray-900">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-primary mb-6 text-center">
+          Our Process
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div
+              class="w-16 h-16 bg-primary text-white flex items-center justify-center rounded-full mb-4"
+            >
+              <i class="fas fa-comments text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Step 1: Consultation</h3>
+            <p>
+              We start with understanding your vision and goals for the space.
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-16 h-16 bg-primary text-white flex items-center justify-center rounded-full mb-4"
+            >
+              <i class="fas fa-pencil-ruler text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Step 2: Design</h3>
+            <p>
+              We create custom design concepts and 3D renderings for your
+              review.
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-16 h-16 bg-primary text-white flex items-center justify-center rounded-full mb-4"
+            >
+              <i class="fas fa-tools text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Step 3: Execution</h3>
+            <p>
+              Our team brings the design to life, ensuring quality and
+              precision.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 bg-accent">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-primary mb-6 text-center">
+          Projects
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 bg-accent">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-primary mb-6 text-center">
+          Pricing
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Pricing cards will be dynamically populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-accent">
+      <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold text-primary mb-6">Testimonials</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+      </div>
+    </section>
+
+    <!-- FAQs Section -->
+    <section id="faqs" class="py-16 bg-accent">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold text-primary mb-6 text-center">FAQs</h2>
+        <div id="faqsAccordion" class="accordion"></div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-primary mb-6 text-center">
+          Contact Me
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Contact Form -->
+          <form class="js-contact-form bg-accent p-6 rounded">
+            <div class="mb-4">
+              <label for="name" class="block text-gray-300">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                class="w-full mt-1 p-2 bg-background text-gray-300 rounded"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="email" class="block text-gray-300">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                class="w-full mt-1 p-2 bg-background text-gray-300 rounded"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="message" class="block text-gray-300">Message</label>
+              <textarea
+                id="message"
+                rows="4"
+                name="message"
+                placeholder="Enter your message"
+                class="w-full mt-1 p-2 bg-background text-gray-300 rounded"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full px-4 py-2 bg-primary hover:bg-opacity-90 text-white font-bold rounded"
+            >
+              Send Message
+            </button>
+            <div class="spinner-container hidden mt-4 flex justify-center">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <p class="form-message mt-4 text-sm"></p>
+          </form>
+
+          <!-- Contact Info -->
+          <div class="bg-accent p-6 rounded text-gray-300">
+            <h3 class="text-xl font-semibold text-primary mb-4">
+              Get in Touch
+            </h3>
+            <div class="mb-4">
+              <i class="fas fa-envelope text-primary mr-3"></i>
+              <span
+                >Email:
+                <a
+                  href="mailto:devandrew66@gmail.com"
+                  class="hover:underline text-primaryCol"
+                  >devandrew66@gmail.com</a
+                ></span
+              >
+            </div>
+            <div class="mb-4">
+              <i class="fas fa-phone text-primary mr-3"></i>
+              <span
+                >Phone:
+                <a
+                  href="tel:+254725746263"
+                  class="hover:underline text-primaryCol"
+                  >+254 725 746263</a
+                ></span
+              >
+            </div>
+            <div class="mb-4">
+              <i class="fas fa-map-marker-alt text-primary mr-3"></i>
+              <span
+                >Location:
+                <span class="text-gray-400">Nairobi, Kenya</span></span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-accent py-4 text-center">
+      <p class="text-gray-400">© 2024 Omollo Andrew. All rights reserved.</p>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a
+      id="floatingWhatsApp"
+      href="#"
+      class="fixed bottom-4 right-4 bg-green-500 text-white py-3 px-6 rounded-lg shadow-lg flex items-center space-x-2 hover:bg-green-600 transition animate-shake"
+      data-service="General Inquiry"
+      data-whatsapp="Hello Andrew, I would like to discuss a project with you."
+    >
+      <i class="fab fa-whatsapp text-2xl"></i>
+      <span>Chat on WhatsApp</span>
+    </a>
+
+    <!-- Reusable WhatsApp Modal -->
+    <div
+      id="whatsappModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    >
+      <div class="bg-background rounded-lg p-6 w-full max-w-sm">
+        <h3 class="text-xl font-bold text-primary mb-4">Book Service</h3>
+        <p class="text-gray-300 mb-6">
+          Are you sure you want to book
+          <span id="modalServiceName" class="text-primary"></span>?
+        </p>
+        <div class="flex justify-end space-x-4">
+          <button
+            id="closeModal"
+            class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded"
+          >
+            Cancel
+          </button>
+          <a
+            id="confirmBooking"
+            href="javascript:void(0);"
+            class="px-4 py-2 bg-primary hover:bg-opacity-90 text-white rounded"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Confirm
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module" src="/scripts/index.js"></script>
+  </body>
+</html>

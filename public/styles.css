@@ -1,0 +1,9 @@
+.accordion-collapse {
+  transition: none !important; /* Disable fade-in/fade-out animations */
+  visibility: visible !important; /* Keep the content visible */
+}
+
+.accordion-item .accordion-button:not(.collapsed) {
+  background-color: #292626; /* Accent color */
+  color: #f8f6f6; /* Primary color */
+}
