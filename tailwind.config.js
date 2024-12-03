@@ -1,42 +1,28 @@
 module.exports = {
-  content: [
-    "./public/**/*.{html,js}", // Ensure all your HTML and JS files are scanned for classes
-    "./src/**/*.{html,js}", // If you have a `src` directory
-  ],
+  content: ["./public/**/*.{html,js}", "./src/**/*.{html,js}"],
   theme: {
     extend: {
       colors: {
-        primaryCol: "#ff004f",
-        primary: "#ff004f",
-        background: "#1a1a1a",
-        text: "#e0e0e0",
-        accent: "#262626",
+        idcPrimary: "#2c3e50", // Dark slate
+        idcAccent: "#ecf0f1", // Light gray
+        idcBackground: "#f8f9fa", // Off-white
+        idcText: "#34495e", // Text color
+        idcHighlight: "#f4d03f", // Light yellow highlight
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
-      },
-      spacing: {
-        72: "18rem",
-        84: "21rem",
-        96: "24rem",
+        idcSans: ["Poppins", "sans-serif"], // Modern and stylish
+        idcSerif: ["Playfair Display", "serif"], // Artistic headers
       },
       fontSize: {
-        xxs: "0.625rem",
-        hero: "4.5rem",
+        idcHero: "3rem",
+        idcSubHero: "1.25rem",
       },
-      keyframes: {
-        shake: {
-          "0%, 100%": { transform: "translateX(0)" },
-          "25%": { transform: "translateX(-5px)" },
-          "50%": { transform: "translateX(5px)" },
-          "75%": { transform: "translateX(-5px)" },
-        },
+      spacing: {
+        128: "32rem",
+        144: "36rem",
       },
-      animation: {
-        shake: "shake 1s ease-in-out infinite",
-      },
-      backgroundImage: {
-        "hero-gradient": "linear-gradient(to right, #ff004f, #262626)",
+      borderRadius: {
+        xl: "1.25rem",
       },
     },
   },

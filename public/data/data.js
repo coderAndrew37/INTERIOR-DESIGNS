@@ -4,42 +4,35 @@ export const services = [
     name: "Residential Interior Design",
     desc: "Transform your home into a stylish and functional haven, tailored to your personal taste.",
     icon: "fas fa-home",
-    image: "/images/services/residential.jpg",
+    image: "/images/services/residential.jpg", // Local image path
   },
   {
     id: "2",
     name: "Office Interior Design",
     desc: "Create modern, productive workspaces that inspire creativity and enhance efficiency.",
     icon: "fas fa-briefcase",
-    image: "/images/services/office.jpg",
+    image: "/images/services/office.jpg", // Local image path
   },
   {
     id: "3",
-    name: "Custom Furniture Design",
-    desc: "Craft unique furniture pieces that perfectly complement your space and style.",
-    icon: "fas fa-couch",
-    image: "/images/services/furniture.jpg",
-  },
-  {
-    id: "4",
     name: "Renovations",
     desc: "Revamp and refresh your spaces with expert renovation services tailored to your vision.",
     icon: "fas fa-sync-alt",
-    image: "/images/services/renovation.jpg",
+    image: "/images/services/renovation.jpg", // Local image path
   },
   {
-    id: "5",
+    id: "4",
     name: "Space Planning",
     desc: "Maximize the potential of your space with professional layout and planning expertise.",
     icon: "fas fa-ruler-combined",
-    image: "/images/services/space-planning.jpg",
+    image: "/images/services/space-planning.jpg", // Local image path
   },
   {
-    id: "6",
+    id: "5",
     name: "Lighting Design",
     desc: "Enhance your interiors with elegant and functional lighting solutions.",
     icon: "fas fa-lightbulb",
-    image: "/images/services/lighting.jpg",
+    image: "/images/services/lighting.jpg", // Local image path
   },
 ];
 
@@ -48,52 +41,52 @@ export const projects = [
     id: "1",
     title: "Modern Nairobi Apartment",
     desc: "A sleek and functional design for urban living in Nairobi.",
-    image: "/images/projects/nairobi-apartment.jpg",
+    image: "/images/projects/nairobi-apartment.jpg", // Local image path
   },
   {
     id: "2",
     title: "Coastal Vacation Home",
     desc: "A serene and luxurious retreat inspired by Kenyan coastlines.",
-    image: "/images/projects/coastal-home.jpg",
+    image: "/images/projects/coastal-home.jpg", // Local image path
   },
   {
     id: "3",
     title: "Nairobi Office Space",
     desc: "A collaborative office designed for creativity and productivity.",
-    image: "/images/projects/nairobi-office.jpg",
+    image: "/images/projects/nairobi-office.jpg", // Local image path
   },
   {
     id: "4",
     title: "Rustic Farmhouse",
     desc: "A cozy and rustic interior for a countryside farmhouse.",
-    image: "/images/projects/farmhouse.jpg",
+    image: "/images/projects/farmhouse.jpg", // Local image path
   },
   {
     id: "5",
     title: "Luxury Penthouse",
     desc: "An elegant and opulent penthouse overlooking Nairobi's skyline.",
-    image: "/images/projects/luxury-penthouse.jpg",
+    image: "/images/projects/luxury-penthouse.jpg", // Local image path
   },
 ];
 
 export const testimonials = [
   {
-    image: "/images/testimonials/client1.jpg",
+    image: "/images/testimonials/client1.jpg", // Local image path
     name: "Jane Wanjiru",
     message:
       "Their designs transformed my home into a space I love. Highly recommended!",
   },
   {
-    image: "/images/testimonials/client2.jpg",
+    image: "/images/testimonials/client2.jpg", // Local image path
     name: "Michael Otieno",
     message:
       "Our office now inspires creativity and productivity thanks to their expertise.",
   },
   {
-    image: "/images/testimonials/client3.jpg",
+    image: "/images/testimonials/client3.jpg", // Local image path
     name: "Lydia Nduta",
     message:
-      "The custom furniture they designed was exactly what I wanted. Excellent work!",
+      "The lighting solutions they provided completely changed my living space. Amazing work!",
   },
 ];
 
