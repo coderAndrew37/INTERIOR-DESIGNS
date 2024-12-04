@@ -17,21 +17,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Menu toggle functionality
+  // Navbar Elements
   const mobileMenuButton = document.getElementById("mobile-menu");
   const mobileNav = document.getElementById("mobile-nav");
 
+  // Menu toggle functionality with smooth transition
   mobileMenuButton.addEventListener("click", () => {
-    mobileNav.classList.toggle("hidden");
-    mobileNav.classList.toggle("block");
+    if (mobileNav.classList.contains("hidden")) {
+      mobileNav.classList.remove("hidden");
+      mobileNav.style.maxHeight = mobileNav.scrollHeight + "px";
+    } else {
+      mobileNav.style.maxHeight = "0px";
+      setTimeout(() => mobileNav.classList.add("hidden"), 300);
+    }
   });
 
-  // Collapsible Navbar Logic
+  // Prevent navbar items from disappearing on large screens
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768) {
+      mobileNav.classList.remove("hidden");
+      mobileNav.style.maxHeight = "none";
+    } else if (!mobileNav.classList.contains("hidden")) {
+      mobileNav.style.maxHeight = mobileNav.scrollHeight + "px";
+    }
+  });
+
+  // Close menu when a link is clicked (mobile only)
   const navLinks = document.querySelectorAll("#mobile-nav a");
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      mobileNav.classList.add("hidden");
-      mobileNav.classList.remove("block");
+      if (window.innerWidth < 768) {
+        mobileNav.style.maxHeight = "0px";
+        setTimeout(() => mobileNav.classList.add("hidden"), 300);
+      }
     });
   });
 });

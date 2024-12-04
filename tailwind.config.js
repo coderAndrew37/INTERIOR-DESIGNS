@@ -20,6 +20,10 @@ module.exports = {
       spacing: {
         128: "32rem",
         144: "36rem",
+        96: "24rem",
+      },
+      transitionTimingFunction: {
+        "in-out": "ease-in-out",
       },
       borderRadius: {
         xl: "1.25rem",
