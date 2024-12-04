@@ -1,5 +1,6 @@
 import "./fetchContent.js";
 import "./contact.js";
+import "./modal.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Smooth scroll effect
