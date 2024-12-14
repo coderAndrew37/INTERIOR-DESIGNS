@@ -65,7 +65,7 @@
     >
       <div>
         <h1 class="text-idcHero font-idcSerif leading-tight text-idcPrimary">
-          Welcome to Interiors By Tiffi
+          Welcome to Interiors By Tiffi Limited
         </h1>
         <p class="mt-4 text-idcText text-idcSubHero">
           Crafting tailored, beautiful, and functional interiors for Kenyan
@@ -168,6 +168,73 @@
               We guarantee professional workmanship and attention to detail.
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="py-16 bg-idcAccent">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-idcSerif text-idcPrimary mb-4">
+          Join Our Newsletter
+        </h2>
+        <p class="text-idcText text-lg mb-6">
+          Get exclusive interior design tips, trends, and updates straight to
+          your inbox!
+        </p>
+        <form
+          id="newsletterForm"
+          class="flex flex-col md:flex-row justify-center items-center gap-4"
+        >
+          <input
+            type="email"
+            id="newsletterEmail"
+            name="email"
+            placeholder="Enter your email address"
+            class="w-full md:w-1/2 p-3 rounded-lg text-idcText bg-idcBackground border border-idcHighlight focus:outline-none"
+            required
+          />
+          <button
+            type="submit"
+            class="px-6 py-3 bg-idcHighlight text-white font-bold rounded-lg hover:bg-opacity-90"
+          >
+            Subscribe
+          </button>
+        </form>
+        <p id="newsletterMessage" class="mt-4 text-sm"></p>
+      </div>
+    </section>
+
+    <!-- Lead Magnet Section -->
+    <section id="lead-magnet" class="py-16 bg-idcBackground">
+      <div
+        class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 items-center gap-8"
+      >
+        <!-- Lead Magnet Content -->
+        <div>
+          <h2 class="text-3xl font-idcSerif text-idcPrimary mb-4">
+            Free Interior Design Guide
+          </h2>
+          <p class="text-idcText text-lg mb-6">
+            Unlock the secrets to creating stunning interiors with our free
+            guide. Perfect for homeowners and aspiring designers!
+          </p>
+          <a
+            href="/downloads/design-guide.pdf"
+            class="px-6 py-3 bg-idcHighlight text-white font-bold rounded-lg hover:bg-opacity-90 inline-block"
+            download
+          >
+            Download Now
+          </a>
+        </div>
+        <!-- Lead Magnet Image -->
+        <div>
+          <img
+            src="/images/lead-magnet.jpg"
+            alt="Interior Design Guide"
+            class="rounded-lg shadow-lg"
+            loading="lazy"
+          />
         </div>
       </div>
     </section>
