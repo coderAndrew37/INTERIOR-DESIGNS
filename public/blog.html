@@ -19,35 +19,35 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/styles.css" />
   </head>
-  <body class="bg-background text-gray-300 font-sans">
+  <body class="bg-idcBackground text-idcText font-idcSans">
     <!-- Navbar -->
-    <nav class="bg-accent sticky top-0 z-50 shadow-md">
+    <nav class="bg-idcAccent sticky top-0 z-50 shadow-md">
       <div
         class="container mx-auto flex items-center justify-between py-4 px-6"
       >
-        <a href="/" class="text-xl font-bold text-primary">Interior Design</a>
-        <nav id="mobile-nav" class="hidden md:flex space-x-8">
-          <a href="/" class="hover:text-primary">Home</a>
-          <a href="#services" class="hover:text-primary">Services</a>
-          <a href="#projects" class="hover:text-primary">Portfolio</a>
-          <a href="#contact" class="hover:text-primary">Contact</a>
-        </nav>
-        <button id="mobile-menu" class="md:hidden text-primary">
+        <a href="/" class="text-2xl font-idcSerif text-idcPrimary">
+          Interior Design
+        </a>
+        <div id="mobile-nav" class="hidden md:flex space-x-8">
+          <a href="/" class="hover:text-idcHighlight">Home</a>
+          <a href="#services" class="hover:text-idcHighlight">Services</a>
+          <a href="#projects" class="hover:text-idcHighlight">Portfolio</a>
+          <a href="#contact" class="hover:text-idcHighlight">Contact</a>
+        </div>
+        <button id="mobile-menu" class="md:hidden text-idcPrimary">
           <i class="fas fa-bars text-xl"></i>
         </button>
       </div>
     </nav>
 
     <!-- Blog Content -->
-    <main class="container mx-auto mt-20 px-6">
-      <div id="blog-content" class="prose prose-lg text-gray-300">
-        <!-- Blog content dynamically populated by blog.js -->
-      </div>
+    <main class="container mx-auto mt-16 px-6">
+      <div id="blog-content" class="prose prose-lg text-idcText"></div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-center py-4 mt-10">
-      <p class="text-gray-400">
+    <footer class="bg-idcAccent text-center py-4 mt-10">
+      <p class="text-idcText">
         © 2024 Interior Design Kenya. All Rights Reserved.
       </p>
     </footer>

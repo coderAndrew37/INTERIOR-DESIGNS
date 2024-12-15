@@ -34,18 +34,20 @@ document.addEventListener("DOMContentLoaded", () => {
     .querySelector("meta[name='keywords']")
     ?.setAttribute("content", blog.metadata.keywords.join(", ") || "");
 
-  // Render the blog post content
+  // Update blog content dynamically
   document.getElementById("blog-content").innerHTML = `
   <h1 class="text-idcHero font-idcSerif text-idcPrimary mb-4">${blog.title}</h1>
-  <p class="text-gray-400 text-sm mb-4">
+  <p class="text-idcText text-sm mb-4">
     <i class="fas fa-calendar-alt"></i> ${new Date(blog.date).toDateString()}
   </p>
   <img 
     src="${blog.image}" 
     alt="${blog.title}" 
-    class="rounded-lg shadow-lg mb-6 w-full max-h-96 object-cover" 
+    class="rounded-xl shadow-lg mb-6 w-full max-h-96 object-cover" 
   />
-  <div class="prose prose-lg text-idcText font-idcSans">${blog.content}</div>
+  <div class="prose prose-lg text-idcText font-idcSans leading-relaxed">
+    ${blog.content}
+  </div>
   <h3 class="text-2xl font-idcSerif text-idcPrimary mt-10 mb-4">
     <i class="fas fa-comments"></i> Comments
   </h3>
@@ -55,10 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
         ? blog.comments
             .map(
               (comment) => `
-                <div class="comment mb-4 p-4 border rounded-lg shadow-md">
-                  <i class="fas fa-user-circle text-idcPrimary"></i>
-                  <strong class="text-idcText">${comment.user}</strong>
-                  <p class="mt-2">${comment.comment}</p>
+                <div class="comment mb-4 p-4 border rounded-lg shadow-md bg-idcAccent">
+                  <i class="fas fa-user-circle text-idcHighlight"></i>
+                  <strong class="text-idcPrimary">${comment.user}</strong>
+                  <p class="mt-2 text-idcText">${comment.comment}</p>
                 </div>`
             )
             .join("")
@@ -93,10 +95,11 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
     <button
       type="submit"
-      class="px-6 py-3 bg-idcHighlight text-white rounded-lg font-bold hover:bg-opacity-90"
+      class="px-6 py-3 bg-idcHighlight text-black rounded-lg font-bold hover:bg-opacity-90"
     >
       <i class="fas fa-paper-plane"></i> Submit
     </button>
+    <p class="form-message mt-4"></p> <!-- For displaying success/error messages -->
   </form>
 `;
 
@@ -112,8 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Add the new comment to the comments section
         const newCommentHTML = `
           <div class="comment mb-4 p-4 border rounded-lg shadow-md">
-            <i class="fas fa-user-circle text-primary"></i>
-            <strong class="text-gray-200">${username}</strong>
+            <i class="fas fa-user-circle text-yellow"></i>
+            <strong class="text-black">${username}</strong>
             <p class="mt-2">${userComment}</p>
           </div>`;
         document
