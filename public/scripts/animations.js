@@ -1,110 +1,94 @@
-// Register ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger);
+// animations.js
 
-// Hero Section Animation
-function animateHero() {
+// Initialize GSAP and ScrollTrigger
+document.addEventListener("DOMContentLoaded", () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Navbar Animation
+  gsap.from("header", {
+    duration: 1,
+    y: -100,
+    opacity: 0,
+    ease: "power2.out",
+  });
+
+  // Hero Section Animation
   gsap.from("#hero h1", {
     duration: 1.2,
+    x: -50,
     opacity: 0,
-    scale: 0.9,
-    ease: "power3.out",
+    ease: "power2.out",
   });
 
   gsap.from("#hero p", {
-    duration: 1.2,
-    delay: 0.3,
+    duration: 1.5,
+    delay: 0.5,
+    x: 50,
     opacity: 0,
-    y: 20,
+    ease: "power2.out",
+  });
+
+  gsap.from("#hero img", {
+    duration: 1.5,
+    delay: 0.8,
+    scale: 0.8,
+    opacity: 0,
     ease: "power3.out",
   });
 
-  gsap.from("#hero a", {
-    duration: 1.2,
-    delay: 0.6,
-    opacity: 0,
-    y: 20,
-    ease: "power3.out",
-  });
-}
-
-// General Section Animation
-function animateSections() {
+  // Section Animations - ScrollTrigger
   const sections = document.querySelectorAll("section");
-  sections.forEach((section, index) => {
+
+  sections.forEach((section) => {
     gsap.from(section, {
       scrollTrigger: {
         trigger: section,
-        start: "top 85%",
+        start: "top 80%",
         toggleActions: "play none none none",
       },
-      opacity: 0,
-      scale: 0.95,
-      duration: 1.2,
-      ease: "power3.out",
-    });
-  });
-}
-
-// Staggered Animations for Grids
-function animateGrids() {
-  const staggerElements = document.querySelectorAll(
-    "#services .grid, #projects .grid, #testimonials .grid"
-  );
-  staggerElements.forEach((grid) => {
-    const items = grid.querySelectorAll("div");
-    gsap.from(items, {
-      scrollTrigger: {
-        trigger: grid,
-        start: "top 90%",
-        toggleActions: "play none none none",
-      },
-      opacity: 0,
-      y: 20,
-      stagger: 0.3,
       duration: 1,
+      opacity: 0,
+      y: 50,
       ease: "power2.out",
     });
   });
-}
 
-// FAQs Accordion Animation
-function animateFAQs() {
-  gsap.from("#faqsAccordion .accordion-item", {
+  // Service Cards Animation
+  gsap.from("#services .grid > div", {
     scrollTrigger: {
-      trigger: "#faqsAccordion",
-      start: "top 85%",
-      toggleActions: "play none none none",
+      trigger: "#services",
+      start: "top 75%",
     },
+    stagger: 0.3,
     opacity: 0,
-    y: 10,
-    stagger: 0.2,
-    duration: 0.6,
+    scale: 0.8,
+    duration: 1,
+    ease: "elastic.out(1, 0.5)",
+  });
+
+  // Portfolio Animation
+  gsap.from("#projects .grid > div", {
+    scrollTrigger: {
+      trigger: "#projects",
+      start: "top 75%",
+    },
+    stagger: 0.3,
+    opacity: 0,
+    y: 30,
+    duration: 1,
     ease: "power2.out",
   });
-}
 
-// Reapply Animations for Dynamic Content
-function reapplyAnimations() {
-  animateSections();
-  animateGrids();
-  animateFAQs();
-}
+  // Button Hover Animations
+  const buttons = document.querySelectorAll("button, a");
 
-// Observer for Dynamic Content
-function observeDynamicContent() {
-  const observer = new MutationObserver(() => {
-    reapplyAnimations();
+  buttons.forEach((button) => {
+    gsap.set(button, { transformOrigin: "center" });
+    button.addEventListener("mouseenter", () => {
+      gsap.to(button, { scale: 1.1, duration: 0.2, ease: "power1.out" });
+    });
+    button.addEventListener("mouseleave", () => {
+      gsap.to(button, { scale: 1, duration: 0.2, ease: "power1.out" });
+    });
   });
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-  });
-}
-
-// Initialize All Animations
-export function initAnimations() {
-  animateHero();
-  reapplyAnimations();
-  observeDynamicContent();
-}
+});

@@ -36,67 +36,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Render the blog post content
   document.getElementById("blog-content").innerHTML = `
-    <h1 class="text-4xl font-bold text-primary mb-4">${blog.title}</h1>
-    <p class="text-gray-400 text-sm mb-4">
-      <i class="fas fa-calendar-alt"></i> ${new Date(blog.date).toDateString()}
-    </p>
-    <img src="${blog.image}" class="rounded-lg shadow-lg mb-6 w-full" alt="${
-    blog.title
-  }" />
-    <div class="prose prose-lg text-gray-300">${blog.content}</div>
-    <h3 class="text-2xl font-bold text-primary mt-10 mb-4">
-      <i class="fas fa-comments"></i> Comments
-    </h3>
-    <div id="comments-section">
-      ${
-        blog.comments.length > 0
-          ? blog.comments
-              .map(
-                (comment) => `
-                  <div class="comment mb-4 p-4 border rounded-lg shadow-md">
-                    <i class="fas fa-user-circle text-primary"></i>
-                    <strong class="text-gray-200">${comment.user}</strong>
-                    <p class="mt-2">${comment.comment}</p>
-                  </div>`
-              )
-              .join("")
-          : `<p class="text-gray-400">
-              <i class="fas fa-info-circle"></i> No comments yet. Be the first to share your thoughts!
-            </p>`
-      }
+  <h1 class="text-idcHero font-idcSerif text-idcPrimary mb-4">${blog.title}</h1>
+  <p class="text-gray-400 text-sm mb-4">
+    <i class="fas fa-calendar-alt"></i> ${new Date(blog.date).toDateString()}
+  </p>
+  <img 
+    src="${blog.image}" 
+    alt="${blog.title}" 
+    class="rounded-lg shadow-lg mb-6 w-full max-h-96 object-cover" 
+  />
+  <div class="prose prose-lg text-idcText font-idcSans">${blog.content}</div>
+  <h3 class="text-2xl font-idcSerif text-idcPrimary mt-10 mb-4">
+    <i class="fas fa-comments"></i> Comments
+  </h3>
+  <div id="comments-section">
+    ${
+      blog.comments.length > 0
+        ? blog.comments
+            .map(
+              (comment) => `
+                <div class="comment mb-4 p-4 border rounded-lg shadow-md">
+                  <i class="fas fa-user-circle text-idcPrimary"></i>
+                  <strong class="text-idcText">${comment.user}</strong>
+                  <p class="mt-2">${comment.comment}</p>
+                </div>`
+            )
+            .join("")
+        : `<p class="text-idcText">
+            <i class="fas fa-info-circle"></i> No comments yet. Be the first to share your thoughts!
+          </p>`
+    }
+  </div>
+  <form id="add-comment-form" class="mt-6 bg-idcAccent p-6 rounded-lg shadow-md">
+    <h4 class="text-xl font-idcSans text-idcPrimary mb-4">
+      <i class="fas fa-pen"></i> Add a Comment
+    </h4>
+    <div class="mb-4">
+      <label for="username" class="block text-idcText">Name</label>
+      <input
+        type="text"
+        id="username"
+        class="w-full mt-2 p-3 bg-idcBackground text-idcText rounded-lg"
+        placeholder="Enter your name"
+        required
+      />
     </div>
-    <form id="add-comment-form" class="mt-6 bg-accent p-6 rounded-lg shadow-md">
-      <h4 class="text-xl font-bold text-gray-300 mb-4">
-        <i class="fas fa-pen"></i> Add a Comment
-      </h4>
-      <div class="mb-4">
-        <label for="username" class="block text-gray-300">Name</label>
-        <input
-          type="text"
-          id="username"
-          class="w-full mt-2 p-3 bg-gray-800 text-gray-300 rounded-lg"
-          placeholder="Enter your name"
-          required
-        />
-      </div>
-      <div class="mb-4">
-        <label for="user-comment" class="block text-gray-300">Comment</label>
-        <textarea
-          id="user-comment"
-          class="w-full mt-2 p-3 bg-gray-800 text-gray-300 rounded-lg"
-          rows="4"
-          placeholder="Write your comment here..."
-          required
-        ></textarea>
-      </div>
-      <button
-        type="submit"
-        class="px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-opacity-90"
-      >
-        <i class="fas fa-paper-plane"></i> Submit
-      </button>
-    </form>
-  `;
+    <div class="mb-4">
+      <label for="user-comment" class="block text-idcText">Comment</label>
+      <textarea
+        id="user-comment"
+        class="w-full mt-2 p-3 bg-idcBackground text-idcText rounded-lg"
+        rows="4"
+        placeholder="Write your comment here..."
+        required
+      ></textarea>
+    </div>
+    <button
+      type="submit"
+      class="px-6 py-3 bg-idcHighlight text-white rounded-lg font-bold hover:bg-opacity-90"
+    >
+      <i class="fas fa-paper-plane"></i> Submit
+    </button>
+  </form>
+`;
 
   // Handle the Add Comment form submission
   document
