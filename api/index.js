@@ -17,6 +17,8 @@ if (process.env.NODE_ENV !== "production") {
 
 // Routes
 app.use("/api/contact", require("./routes/contact.js"));
+app.use("/api/newsletter", require("./routes/newsletter.js"));
+app.use("/api/leads", require("./routes/leads.js"));
 
 // Export the app for serverless deployment
 module.exports = app;
