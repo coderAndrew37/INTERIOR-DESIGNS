@@ -1,7 +1,4 @@
-const API_BASE_URL =
-  window.location.hostname === "localhost"
-    ? "http://localhost:3000/api/contact" // Local environment
-    : "https://your-vercel-deployment.vercel.app/api/contact"; // Production environment
+import { baseUrl } from "./constants.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.querySelector(".js-contact-form");
@@ -37,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const response = await fetch(API_BASE_URL, {
+        const response = await fetch(`${baseUrl}/api/contacts`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

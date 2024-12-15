@@ -18,7 +18,9 @@
     "joi": "^17.13.3",
     "mongoose": "^8.8.2",
     "nodemailer": "^6.9.16",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "winston": "^3.17.0",
+    "winston-mongodb": "^6.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
