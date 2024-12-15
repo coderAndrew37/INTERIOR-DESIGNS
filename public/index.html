@@ -73,7 +73,7 @@
         </p>
         <a
           href="#services"
-          class="mt-6 px-6 py-3 bg-idcHighlight text-white rounded-lg font-bold hover:bg-opacity-90 inline-block smooth-scroll"
+          class="mt-6 px-6 py-3 bg-idcHighlight text-black rounded-lg font-bold hover:bg-opacity-90 inline-block smooth-scroll"
         >
           Explore Our Services
         </a>
@@ -115,7 +115,7 @@
             </p>
             <a
               href="/about.html"
-              class="px-6 py-3 bg-idcHighlight text-white rounded-lg font-bold hover:bg-opacity-90 inline-block"
+              class="px-6 py-3 bg-idcHighlight text-black rounded-lg font-bold hover:bg-opacity-90 inline-block"
             >
               Read More About Us
             </a>
@@ -196,7 +196,7 @@
           />
           <button
             type="submit"
-            class="px-6 py-3 bg-idcHighlight text-white font-bold rounded-lg hover:bg-opacity-90"
+            class="px-6 py-3 bg-idcHighlight text-black font-bold rounded-lg hover:bg-opacity-90"
           >
             Subscribe
           </button>
@@ -219,13 +219,23 @@
             Unlock the secrets to creating stunning interiors with our free
             guide. Perfect for homeowners and aspiring designers!
           </p>
-          <a
-            href="/downloads/design-guide.pdf"
-            class="px-6 py-3 bg-idcHighlight text-white font-bold rounded-lg hover:bg-opacity-90 inline-block"
-            download
+          <button
+            id="leadMagnetButton"
+            class="px-6 py-3 bg-idcHighlight text-black font-bold rounded-lg hover:bg-opacity-90 inline-block"
           >
-            Download Now
-          </a>
+            Get the Guide
+          </button>
+          <!-- Success/Error Message (Main Page) -->
+          <p
+            id="leadMagnetMainMessage"
+            class="mt-4 text-sm hidden"
+            <!--
+            Initially
+            hidden
+            --
+          >
+            >
+          </p>
         </div>
         <!-- Lead Magnet Image -->
         <div>
@@ -235,6 +245,40 @@
             class="rounded-lg shadow-lg"
             loading="lazy"
           />
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div
+        id="leadMagnetModal"
+        class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      >
+        <div class="bg-idcBackground rounded-lg p-6 w-full max-w-sm">
+          <h3 class="text-xl font-bold text-idcPrimary mb-4">
+            Enter Your Email
+          </h3>
+          <p class="text-idcText mb-4">We'll email you the free guide.</p>
+          <form id="leadMagnetForm" class="space-y-4">
+            <input
+              type="email"
+              id="leadMagnetEmail"
+              placeholder="Enter your email address"
+              class="w-full p-3 rounded-lg border border-idcHighlight focus:outline-none"
+              required
+            />
+            <button
+              type="submit"
+              class="w-full px-4 py-2 bg-idcHighlight text-black font-bold rounded-lg hover:bg-opacity-90"
+            >
+              Send Me the Guide
+            </button>
+          </form>
+          <button
+            id="leadMagnetClose"
+            class="w-full mt-4 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500"
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </section>
@@ -317,7 +361,7 @@
             </div>
             <button
               type="submit"
-              class="w-full px-4 py-2 bg-idcHighlight hover:bg-opacity-90 text-white font-bold rounded"
+              class="w-full px-4 py-2 bg-idcHighlight hover:bg-opacity-90 text-black font-bold rounded"
             >
               Send Message
             </button>
@@ -378,7 +422,7 @@
     <a
       id="floatingWhatsApp"
       href="#"
-      class="fixed bottom-4 right-4 bg-[#25D366] text-white py-3 px-6 rounded-lg shadow-lg flex items-center space-x-2 transition hover:bg-opacity-90 animate-shake"
+      class="fixed bottom-4 right-4 bg-[#25D366] text-black py-3 px-6 rounded-lg shadow-lg flex items-center space-x-2 transition hover:bg-opacity-90 animate-shake"
       data-service="General Inquiry"
       data-whatsapp="Hello Tiffi, I would like to discuss a project with you."
     >
@@ -401,14 +445,14 @@
         <div class="flex justify-end space-x-4">
           <button
             id="cancelModal"
-            class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded"
+            class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-black rounded"
           >
             Cancel
           </button>
           <a
             id="confirmBooking"
             href="#"
-            class="px-4 py-2 bg-idcHighlight hover:bg-opacity-90 text-white rounded"
+            class="px-4 py-2 bg-idcHighlight hover:bg-opacity-90 text-black rounded"
             target="_blank"
             rel="noopener noreferrer"
           >

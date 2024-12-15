@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ).toDateString()}</p>
           <a
             href="/blog.html?id=${blog.id}"
-            class="px-4 py-2 bg-idcHighlight text-white rounded-lg font-bold hover:bg-opacity-90"
+            class="px-4 py-2 bg-idcHighlight text-black rounded-lg font-bold hover:bg-opacity-90"
           >
             Read More
           </a>
@@ -35,10 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (testimonialsContainer) {
     testimonials.forEach((testimonial) => {
       const testimonialHTML = `
-        <div class="bg-idcAccent p-6 rounded-lg shadow-lg hover:bg-idcHighlight hover:text-white transition">
+        <div class="bg-idcAccent p-6 rounded-lg shadow-lg hover:bg-idcHighlight hover:text-black transition">
           <img src="${testimonial.image}" alt="${testimonial.name}" class="w-16 h-16 rounded-full mx-auto mb-4" loading="lazy">
           <p class="text-idcText mb-4">"${testimonial.message}"</p>
-          <p class="text-idcHighlight font-bold hover:text-white">– ${testimonial.name}</p>
+          <p class="text-idcHighlight font-bold hover:text-black">– ${testimonial.name}</p>
         </div>
       `;
       testimonialsContainer.innerHTML += testimonialHTML;
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <a
             href="${project.link}"
             target="_blank"
-            class="px-4 py-2 bg-idcHighlight text-white rounded-lg font-bold hover:bg-opacity-90"
+            class="px-4 py-2 bg-idcHighlight text-black rounded-lg font-bold hover:bg-opacity-90"
           >
             View Details
           </a>
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <h3 class="text-xl font-bold text-idcPrimary mb-2">${service.name}</h3>
           <p class="text-idcText mb-4">${service.desc}</p>
           <button
-            class="open-modal px-4 py-2 bg-idcHighlight text-white rounded-lg font-bold hover:bg-opacity-90"
+            class="open-modal px-4 py-2 bg-idcHighlight text-black rounded-lg font-bold hover:bg-opacity-90"
             data-service="${service.name}"
             data-whatsapp="I am interested in booking the ${service.name} service."
           >

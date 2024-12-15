@@ -2,6 +2,7 @@ import "./fetchContent.js";
 import "./contact.js";
 import "./modal.js";
 import "./newsletter.js";
+import "./leads.js";
 document.addEventListener("DOMContentLoaded", () => {
   // Smooth scroll effect
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
