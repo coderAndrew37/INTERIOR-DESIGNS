@@ -11,7 +11,7 @@ const openModal = (serviceName, whatsappMessage) => {
 
   // Set the modal text and WhatsApp URL
   modalServiceName.textContent = serviceName || "General Inquiry";
-  const whatsappURL = `https://wa.me/254725746263?text=${encodeURIComponent(
+  const whatsappURL = `https://wa.me/254725790947?text=${encodeURIComponent(
     whatsappMessage || ""
   )}`;
   confirmBooking.href = whatsappURL;
