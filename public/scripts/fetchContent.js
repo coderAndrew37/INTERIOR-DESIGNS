@@ -50,23 +50,22 @@ document.addEventListener("DOMContentLoaded", () => {
   if (projectsContainer) {
     projects.forEach((project) => {
       const projectHTML = `
-        <div class="bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105">
-          <img
-            src="${project.image}"
-            alt="${project.title}"
-            class="rounded-lg mb-4"
-          />
-          <h3 class="text-xl font-bold text-idcPrimary mb-2">${project.title}</h3>
-          <p class="text-idcText mb-4">${project.desc}</p>
-          <a
-            href="${project.link}"
-            target="_blank"
-            class="px-4 py-2 bg-idcHighlight text-black rounded-lg font-bold hover:bg-opacity-90"
-          >
-            View Details
-          </a>
-        </div>
-      `;
+  <div class="bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105">
+    <img
+      src="${project.image}"
+      alt="${project.title}"
+      class="rounded-lg mb-4"
+    />
+    <h3 class="text-xl font-bold text-idcPrimary mb-2">${project.title}</h3>
+    <p class="text-idcText mb-4">${project.desc}</p>
+    <a
+    class="px-4 py-2 bg-idcHighlight text-black rounded-lg font-bold hover:bg-opacity-90"
+      href="/portfolio-details.html?id=${project.id}">
+      View Details
+    </a>
+  </div>
+`;
+
       projectsContainer.innerHTML += projectHTML;
     });
   }

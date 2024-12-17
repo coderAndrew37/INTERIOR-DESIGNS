@@ -39,33 +39,84 @@ export const services = [
 export const projects = [
   {
     id: "1",
-    title: "Modern Nairobi Apartment",
+    title: "Kingeero Rita Echuria",
     desc: "A sleek and functional design for urban living in Nairobi.",
-    image: "/images/projects/nairobi-apartment.jpg", // Local image path
+    image: "/images/kingeero/After/after1.jpg", // Featured image
+    before: ["/images/kingeero/Before/before_1.jpg"],
+    after: [
+      "/images/kingeero/After/after1.jpg",
+      "/images/kingeero/After/after2.jpg",
+      "/images/kingeero/After/after3.jpg",
+      "/images/kingeero/After/after4.jpg",
+      "/images/kingeero/After/after5.jpg",
+      "/images/kingeero/After/after6.jpg",
+    ],
   },
   {
     id: "2",
-    title: "Coastal Vacation Home",
+    title: "Embakasi Home",
     desc: "A serene and luxurious retreat inspired by Kenyan coastlines.",
-    image: "/images/projects/coastal-home.jpg", // Local image path
+    image: "/images/Embakasi/After/after6.jpg", // Featured image
+    before: [
+      "/images/Embakasi/Before/before1.jpg",
+      "/images/Embakasi/Before/before2.jpg",
+      "/images/Embakasi/Before/before3.jpg",
+    ],
+    after: [
+      "/images/Embakasi/After/after1.jpg",
+      "/images/Embakasi/After/after2.jpg",
+      "/images/Embakasi/After/after3.jpg",
+      "/images/Embakasi/After/after4.jpg",
+      "/images/Embakasi/After/after5.jpg",
+      "/images/Embakasi/After/after6.jpg",
+    ],
   },
   {
     id: "3",
-    title: "Nairobi Office Space",
-    desc: "A collaborative office designed for creativity and productivity.",
-    image: "/images/projects/nairobi-office.jpg", // Local image path
+    title: "KWS Amboseli National Park",
+    desc: "A tranquil and serene retreat in the heart of Amboseli National Park.",
+    image: "/images/Amboseli/before3.jpg", // Featured image
+    before: [
+      "/images/Amboseli/before1.jpg",
+      "/images/Amboseli/before2.jpg",
+      "/images/Amboseli/before3.jpg",
+    ],
+    after: [
+      "/images/Amboseli/after1.jpg",
+      "/images/Amboseli/after2.jpg",
+      "/images/Amboseli/after3.jpg",
+      "/images/Amboseli/after4.jpg",
+      "/images/Amboseli/after5.jpg",
+      "/images/Amboseli/after6.jpg",
+    ],
   },
   {
     id: "4",
     title: "Rustic Farmhouse",
     desc: "A cozy and rustic interior for a countryside farmhouse.",
-    image: "/images/projects/farmhouse.jpg", // Local image path
+    image: "/images/projects/farmhouse.jpg", // Featured image
+    before: [
+      "/images/projects/farmhouse-before1.jpg",
+      "/images/projects/farmhouse-before2.jpg",
+    ],
+    after: [
+      "/images/projects/farmhouse-after1.jpg",
+      "/images/projects/farmhouse-after2.jpg",
+    ],
   },
   {
     id: "5",
     title: "Luxury Penthouse",
     desc: "An elegant and opulent penthouse overlooking Nairobi's skyline.",
-    image: "/images/projects/luxury-penthouse.jpg", // Local image path
+    image: "/images/projects/luxury-penthouse.jpg", // Featured image
+    before: [
+      "/images/projects/luxury-penthouse-before1.jpg",
+      "/images/projects/luxury-penthouse-before2.jpg",
+    ],
+    after: [
+      "/images/projects/luxury-penthouse-after1.jpg",
+      "/images/projects/luxury-penthouse-after2.jpg",
+    ],
   },
 ];
 
