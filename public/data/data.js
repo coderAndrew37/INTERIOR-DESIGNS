@@ -173,7 +173,7 @@ export const blogs = [
   {
     id: "1",
     title: "How to Turn Your House into a Home",
-    image: "/images/blogs/blog_1.jpg",
+    image: "/images/residential.jpg",
     description: "Simple hacks for adding warmth and character to your space.",
     date: "2024-11-01",
     content: `
@@ -211,7 +211,7 @@ export const blogs = [
   {
     id: "2",
     title: "Top Interior Design Trends for 2024",
-    image: "/images/blogs/blog_2.jpg",
+    image: "/images/galla-6.jpg",
     description:
       "Explore the styles and trends that will define interiors in the upcoming year.",
     date: "2024-11-10",
@@ -254,7 +254,7 @@ export const blogs = [
   {
     id: "3",
     title: "Lighting Design: The Secret to a Perfect Room",
-    image: "/images/blogs/blog_3.jpg",
+    image: "/images/galla-5.jpg",
     description:
       "Learn how to use lighting to set the mood and enhance your interior design.",
     date: "2024-11-16",

@@ -1,6 +1,6 @@
 // fetchContent.js
 import { testimonials, projects, services, faqs, blogs } from "../data/data.js";
-
+import { formatCurrency } from "./utils/currency.js";
 document.addEventListener("DOMContentLoaded", () => {
   // Blogs Section
   const blogsContainer = document.querySelector("#blogs .grid");
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const serviceHTML = `
         <div class="bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105">
           <img
-            src="/images/services/${service.id}.jpg"
+            src="${service.image}"
             alt="${service.name}"
             class="rounded-lg mb-4 w-full h-48 object-cover"
           />
@@ -129,4 +129,74 @@ document.addEventListener("DOMContentLoaded", () => {
       servicesContainer.innerHTML += serviceHTML;
     });
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const featuredProductsContainer = document.querySelector(
+    "#featured-products .grid"
+  );
+
+  async function fetchFeaturedProducts() {
+    try {
+      const response = await fetch("/api/products?limit=6"); // Fetch 6 featured products
+      const data = await response.json();
+
+      if (data.products && data.products.length > 0) {
+        renderFeaturedProducts(data.products);
+      } else {
+        featuredProductsContainer.innerHTML = `
+          <p class="text-center text-lg text-idcText">
+            No featured products available at the moment.
+          </p>`;
+      }
+    } catch (error) {
+      console.error("Error fetching featured products:", error);
+      featuredProductsContainer.innerHTML = `
+        <p class="text-center text-lg text-idcText text-red-600">
+          Failed to load products. Please try again later.
+        </p>`;
+    }
+  }
+
+  function renderFeaturedProducts(products) {
+    featuredProductsContainer.innerHTML = products
+      .map((product) => generateProductHTML(product))
+      .join("");
+  }
+
+  function generateProductHTML(product) {
+    return `
+      <div class="bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform hover:scale-105">
+        <img
+          class="w-full h-48 object-cover rounded-lg mb-4"
+          src="${product.image}"
+          alt="${product.name}"
+        />
+        <h3 class="text-lg font-bold text-idcPrimary limit-text-to-2-lines mb-2">
+          ${product.name}
+        </h3>
+        <div class="flex items-center mb-4">
+          <img
+            class="w-20 h-5"
+            src="images/ratings/rating-${product.rating.stars * 10}.png"
+            alt="${product.rating.stars} stars"
+          />
+          <span class="ml-2 text-sm text-idcText">
+            (${product.rating.count} reviews)
+          </span>
+        </div>
+        <p class="text-xl font-semibold text-idcHighlight">
+          Ksh ${formatCurrency(product.priceCents)}
+        </p>
+        <button
+          class="w-full mt-4 px-4 py-2 bg-idcHighlight text-black font-bold rounded-lg hover:bg-opacity-90 js-add-to-cart"
+          data-product-id="${product._id}"
+        >
+          Add to Cart
+        </button>
+      </div>
+    `;
+  }
+
+  fetchFeaturedProducts();
 });
