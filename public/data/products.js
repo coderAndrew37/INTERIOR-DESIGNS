@@ -3,39 +3,33 @@ import { baseUrl as baseURL } from "../scripts/constants.js";
 // Array to store products
 export let products = [];
 
-// Asynchronous function to fetch products from the API with pagination support
+// Fetch and render products
 export async function loadProducts(page = 1) {
   const apiUrl = `${baseURL}/api/products?page=${page}`;
 
   try {
-    const response = await fetch(apiUrl, {
-      method: "GET",
-      credentials: "include",
-    });
+    const response = await fetch(apiUrl);
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
     const data = await response.json();
 
-    // Ensure we have an array of products
+    // Ensure products array
     if (!data.products || !Array.isArray(data.products)) {
       throw new TypeError(
-        "API response is missing or products is not an array."
+        "API response is invalid or products is not an array."
       );
     }
 
-    // Populate `products` array based on the API response
-    products = data.products.map((productDetails) =>
-      productDetails.type === "clothing"
-        ? new Clothing(productDetails)
-        : new Product(productDetails)
+    products = data.products.map(
+      (productDetails) => new Product(productDetails)
     );
 
     return {
-      products: products,
-      totalPages: data.totalPages, // Receive totalPages from API response
+      products,
+      totalPages: data.totalPages,
       currentPage: data.currentPage,
       totalProducts: data.totalProducts,
     };
@@ -45,7 +39,7 @@ export async function loadProducts(page = 1) {
   }
 }
 
-// Helper function to format the product price in Kenyan Shillings
+// Helper to format prices
 export function formatCurrency(priceCents) {
   return `KSH ${(priceCents / 100).toLocaleString("en-KE", {
     minimumFractionDigits: 2,
@@ -53,7 +47,7 @@ export function formatCurrency(priceCents) {
   })}`;
 }
 
-// Product class definition
+// Product class
 export class Product {
   constructor(productDetails) {
     this.id = productDetails._id;
@@ -63,7 +57,7 @@ export class Product {
     this.priceCents = productDetails.priceCents;
   }
 
-  // Get URL for star rating image
+  // Get rating stars image URL
   getStarUrl() {
     return `/images/ratings/rating-${this.rating.stars * 10}.png`;
   }
@@ -71,23 +65,5 @@ export class Product {
   // Get formatted price
   getPrice() {
     return formatCurrency(this.priceCents);
-  }
-
-  // Additional info HTML (empty by default)
-  extraInfoHtml() {
-    return ``;
-  }
-}
-
-// Clothing subclass extending Product for products with a size chart
-export class Clothing extends Product {
-  constructor(productDetails) {
-    super(productDetails); // Call parent constructor
-    this.sizeChartLink = productDetails.sizeChartLink; // Add specific property
-  }
-
-  // Override extraInfoHtml method to include size chart link
-  extraInfoHtml() {
-    return `<a href="${this.sizeChartLink}" target="_blank">Size Chart</a>`;
   }
 }

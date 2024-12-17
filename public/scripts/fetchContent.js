@@ -129,16 +129,14 @@ document.addEventListener("DOMContentLoaded", () => {
       servicesContainer.innerHTML += serviceHTML;
     });
   }
-});
 
-document.addEventListener("DOMContentLoaded", () => {
   const featuredProductsContainer = document.querySelector(
     "#featured-products .grid"
   );
 
   async function fetchFeaturedProducts() {
     try {
-      const response = await fetch("/api/products?limit=6"); // Fetch 6 featured products
+      const response = await fetch("/api/products?limit=12"); // Fetch 6 featured products
       const data = await response.json();
 
       if (data.products && data.products.length > 0) {
