@@ -75,7 +75,7 @@ export function renderPaymentSummary(
     <span>KSH ${formatCurrency(totalCents)}</span>
   </div>
   <button
-    class="w-full bg-idcHighlight text-idcText font-semibold py-2 px-4 rounded-lg hover:bg-yellow-500 mt-4"
+    class="place-order-button w-full bg-idcHighlight text-idcText font-semibold py-2 px-4 rounded-lg hover:bg-yellow-500 mt-4"
   >
     Place Your Order
   </button>
