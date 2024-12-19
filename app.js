@@ -9,6 +9,9 @@ const cors = require("cors");
 const app = express();
 app.use(express.json()); // Add this middleware to parse JSON
 
+const cookieParser = require("cookie-parser");
+app.use(cookieParser()); // Add this line
+
 const allowedOrigins = process.env.CORS_ORIGIN
   ? process.env.CORS_ORIGIN.split(",")
   : "*"; // Default to '*' for all origins if not set

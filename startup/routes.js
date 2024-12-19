@@ -12,7 +12,7 @@ module.exports = function (app) {
   app.use("/api/leads", leads); // Added the leads route
   app.use("/api/comments", comments); // Added the comments route
   app.use("/api/products", products); // Added the products route
-  app.use("/api/auth", auth);
+  app.use("/api/users", auth);
   app.use("/api/cart", cart);
   app.use("/api/orders", orders);
 };

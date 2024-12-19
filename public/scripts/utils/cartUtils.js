@@ -8,6 +8,7 @@ export async function isAuthenticated() {
       method: "GET",
       credentials: "include",
     });
+
     if (response.ok) {
       const data = await response.json();
       return data.authenticated;
@@ -15,7 +16,7 @@ export async function isAuthenticated() {
   } catch (error) {
     console.error("Authentication check failed:", error);
   }
-  return false;
+  return false; // Default to false if there's an error
 }
 
 // Initialize Add to Cart listeners
@@ -23,57 +24,68 @@ export function initAddToCartListeners() {
   const buttons = document.querySelectorAll(".js-add-to-cart");
 
   buttons.forEach((button) => {
-    // Remove any existing listeners
+    // Remove any existing listeners and replace with a new button
     const newButton = button.cloneNode(true);
     button.replaceWith(newButton);
 
     newButton.addEventListener("click", async (event) => {
-      const button = event.currentTarget;
-      button.disabled = true;
+      const productId = newButton.dataset.productId;
 
-      const productId = button.dataset.productId;
       if (!productId) {
         console.error("Missing productId for Add to Cart button.");
-        button.disabled = false;
         return;
       }
-
+      // Check authentication
       const isUserAuthenticated = await isAuthenticated();
       if (!isUserAuthenticated) {
-        const proceedToLogin = confirm(
-          "You must log in to add items to your cart. Would you like to log in now?"
-        );
-        if (proceedToLogin) {
-          window.location.href = "/login.html";
-        } else {
-          alert("You cannot add items to the cart without logging in.");
-        }
-        button.disabled = false;
+        // Redirect to login page
+        alert("You must be logged in to add items to your cart.");
+        window.location.href = "/login.html";
         return;
       }
 
-      await handleAddToCart(productId, button); // Handle adding to cart
+      // Proceed with adding to cart
+      await handleAddToCart(productId, button);
     });
   });
 }
 
+// Handle adding a product to the cart
 async function handleAddToCart(productId, button) {
   try {
-    await addToCart(productId, 1);
-    updateCartQuantity();
+    button.disabled = true;
+    button.textContent = "Adding...";
 
-    // Show sweet "Added to Cart" message
+    await addToCart(productId, 1); // Add the product to the cart
+    await updateCartQuantity(); // Update the cart icon in the navbar
+
+    // Show "Added to Cart" message
     const addedMessage = button.parentElement.querySelector(".added-to-cart");
     if (addedMessage) {
       addedMessage.style.opacity = "1";
       setTimeout(() => {
         addedMessage.style.opacity = "0";
       }, 2000);
+    } else {
+      console.log("Product successfully added to cart.");
     }
   } catch (error) {
     console.error("Error adding product to cart:", error);
-    alert("Failed to add item to cart.");
+    alert("Failed to add the product to the cart. Please try again.");
   } finally {
     button.disabled = false;
+    button.textContent = "Add to Cart";
+  }
+}
+
+// Show login redirect prompt for unauthenticated users
+function showLoginRedirectPrompt() {
+  const proceedToLogin = confirm(
+    "You must log in to add items to your cart. Would you like to log in now?"
+  );
+  if (proceedToLogin) {
+    window.location.href = "/login.html";
+  } else {
+    alert("You cannot add items to the cart without logging in.");
   }
 }

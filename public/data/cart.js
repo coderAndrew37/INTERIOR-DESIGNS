@@ -7,6 +7,8 @@ export async function updateCartQuantity() {
       credentials: "include", // Ensure authenticated requests
     });
 
+    console.log("Get Cart API Response:", response);
+
     if (!response.ok) {
       console.error("Failed to fetch cart data");
       return;
@@ -37,19 +39,23 @@ export async function updateCartQuantity() {
 // Add product to the cart using backend API
 export async function addToCart(productId, quantity = 1) {
   try {
-    // Send a POST request to add the product to the backend-managed cart
     const response = await fetch(`${baseUrl}/api/cart/add-to-cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ productId, quantity }),
-      credentials: "include", // Include credentials for authenticated requests
+      credentials: "include",
     });
 
     if (!response.ok) {
       const data = await response.json();
-      alert(data.message || "Failed to add product to cart.");
+      if (response.status === 401 && data.redirect) {
+        alert(data.message || "Unauthorized access. Redirecting to login.");
+        window.location.href = data.redirect;
+      } else {
+        alert(data.message || "Failed to add product to cart.");
+      }
       return;
     }
 

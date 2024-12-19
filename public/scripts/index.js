@@ -4,7 +4,16 @@ import "./modal.js";
 import "./newsletter.js";
 import "./leads.js";
 import "./animations.js";
+import "./authButton.js";
+import { updateCartQuantity } from "../data/cart.js";
+import { initAddToCartListeners } from "./utils/cartUtils.js";
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Update cart quantity on page load
+  updateCartQuantity();
+
+  // Initialize Add-to-Cart buttons
+  initAddToCartListeners();
   // Smooth scroll effect
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
