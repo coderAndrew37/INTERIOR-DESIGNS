@@ -23,8 +23,8 @@ async function fetchTrackingDetails(orderId, productId) {
       (item) => item.productId._id === productId
     );
     if (!product) {
-      document.querySelector(".main").innerHTML =
-        "<p>Product not found in this order.</p>";
+      document.querySelector("main").innerHTML =
+        "<p class='text-red-600'>Product not found in this order.</p>";
       return;
     }
 
@@ -32,8 +32,8 @@ async function fetchTrackingDetails(orderId, productId) {
     renderTrackingDetails(order, product);
   } catch (error) {
     console.error("Error fetching tracking details:", error);
-    document.querySelector(".main").innerHTML =
-      "<p>Error loading tracking details. Please try again later.</p>";
+    document.querySelector("main").innerHTML =
+      "<p class='text-red-600'>Error loading tracking details. Please try again later.</p>";
   }
 }
 
@@ -59,23 +59,15 @@ function renderTrackingDetails(order, product) {
   // Update product image
   document.querySelector(".product-image").src = product.productId.image;
 
-  // Progress bar logic based on order status
-  const progressLabels = document.querySelectorAll(".progress-label");
-  progressLabels.forEach((label) => label.classList.remove("current-status"));
+  // Update progress bar logic
+  const progressPercentage =
+    {
+      Preparing: "33%",
+      Shipped: "66%",
+      Delivered: "100%",
+    }[order.status] || "0%";
 
-  switch (order.status) {
-    case "Preparing":
-      progressLabels[0].classList.add("current-status");
-      break;
-    case "Shipped":
-      progressLabels[1].classList.add("current-status");
-      break;
-    case "Delivered":
-      progressLabels[2].classList.add("current-status");
-      break;
-    default:
-      console.warn("Unknown order status:", order.status);
-  }
+  document.querySelector(".progress-bar").style.width = progressPercentage;
 }
 
 /**
@@ -101,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchTrackingDetails(orderId, productId);
   } catch (error) {
     console.error("Error:", error.message);
-    document.querySelector(".main").innerHTML =
-      "<p>Invalid tracking link. Please check the URL and try again.</p>";
+    document.querySelector("main").innerHTML =
+      "<p class='text-red-600'>Invalid tracking link. Please check the URL and try again.</p>";
   }
 });

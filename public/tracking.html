@@ -1,86 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Tracking</title>
-
-    <!-- This code is needed for responsive design to work.
-      (Responsive design = make the website look good on
-      smaller screen sizes like a phone or a tablet). -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Load a font called Roboto from Google Fonts. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Here are the CSS files for this page. -->
-    <link rel="stylesheet" href="/styles/shared/general.css" />
-    <link rel="stylesheet" href="/styles/shared/amazon-header.css" />
-    <link rel="stylesheet" href="/styles/pages/tracking.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Tracking</title>
+    <link rel="stylesheet" href="/output.css" />
   </head>
-  <body>
-    <div class="amazon-header">
-      <div class="amazon-header-left-section">
-        <a href="/" class="header-link">
-          <img class="amazon-logo" src="images/amazon-logo-white.png" />
-          <img
-            class="amazon-mobile-logo"
-            src="images/amazon-mobile-logo-white.png"
-          />
+  <body class="bg-idcBackground font-idcSans text-idcText">
+    <!-- Header -->
+    <header
+      class="bg-idcPrimary text-white p-4 flex items-center justify-between"
+    >
+      <a href="/" class="flex items-center space-x-2">
+        <img
+          src="images/amazon-logo-white.png"
+          alt="Logo"
+          class="h-8 hidden sm:block"
+        />
+        <img
+          src="images/amazon-mobile-logo-white.png"
+          alt="Mobile Logo"
+          class="h-8 sm:hidden"
+        />
+      </a>
+      <div class="flex items-center space-x-4">
+        <a href="/orders.html" class="text-sm">Returns & Orders</a>
+        <a href="/checkout.html" class="relative">
+          <img src="images/icons/cart-icon.png" alt="Cart" class="h-6" />
+          <span
+            class="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+            >3</span
+          >
         </a>
       </div>
+    </header>
 
-      <div class="amazon-header-middle-section">
-        <input class="search-bar" type="text" placeholder="Search" />
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto p-6 mt-6 bg-white rounded-lg shadow">
+      <!-- Back to Orders Link -->
+      <a href="/orders.html" class="text-idcPrimary underline mb-4 inline-block"
+        >View all orders</a
+      >
 
-        <button class="search-button">
-          <img class="search-icon" src="images/icons/search-icon.png" />
-        </button>
-      </div>
+      <!-- Delivery Date -->
+      <h1 class="text-2xl font-bold mb-6">
+        <span class="delivery-date">Arriving on Wednesday, July 26</span>
+      </h1>
 
-      <div class="amazon-header-right-section">
-        <a class="orders-link header-link" href="/orders.html">
-          <span class="returns-text">Returns</span>
-          <span class="orders-text">& Orders</span>
-        </a>
-
-        <a class="cart-link header-link" href="/checkout.html">
-          <img class="cart-icon" src="/images/icons/cart-icon.png" />
-          <div class="cart-quantity">3</div>
-          <div class="cart-text">Cart</div>
-        </a>
-      </div>
-    </div>
-
-    <div class="main">
-      <div class="order-tracking">
-        <a class="back-to-orders-link link-primary" href="/orders.html">
-          View all orders
-        </a>
-
-        <div class="delivery-date"></div>
-
-        <div class="product-info"></div>
-
-        <div class="product-info"></div>
-
-        <img class="product-image" src="" />
-
-        <div class="progress-labels-container">
-          <div class="progress-label">Preparing</div>
-          <div class="progress-label current-status">Shipped</div>
-          <div class="progress-label">Delivered</div>
-        </div>
-
-        <div class="progress-bar-container">
-          <div class="progress-bar"></div>
+      <!-- Product Details -->
+      <div class="flex items-center space-x-6">
+        <img
+          src="images/product-placeholder.png"
+          alt="Product"
+          class="w-36 h-36 rounded"
+        />
+        <div>
+          <h2 class="text-xl font-bold product-info">Product Name</h2>
+          <p class="text-gray-600 product-info">Quantity: 1</p>
         </div>
       </div>
-    </div>
 
-    <script src="/scripts/tracking.js" type="module"></script>
+      <!-- Progress Bar -->
+      <div class="mt-8">
+        <div class="flex justify-between text-lg font-medium mb-2">
+          <span>Preparing</span>
+          <span class="text-green-600 font-bold">Shipped</span>
+          <span>Delivered</span>
+        </div>
+        <div class="relative h-4 bg-gray-200 rounded-full overflow-hidden">
+          <div
+            class="absolute top-0 left-0 h-full bg-green-600 rounded-full"
+            style="width: 50%"
+          ></div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
