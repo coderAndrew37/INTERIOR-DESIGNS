@@ -1,3 +1,4 @@
+import { checkAuthentication } from "./utils/authUtils.js";
 import { baseUrl } from "./constants.js";
 
 /**
@@ -88,6 +89,7 @@ function getQueryParams() {
 
 // Initialize the tracking page when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
+  checkAuthentication();
   try {
     const { orderId, productId } = getQueryParams();
     fetchTrackingDetails(orderId, productId);

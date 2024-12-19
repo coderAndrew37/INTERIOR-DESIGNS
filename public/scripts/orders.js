@@ -1,25 +1,6 @@
+import { checkAuthentication } from "./utils/authUtils.js";
 import { addToCart, updateCartQuantity } from "../data/cart.js";
 import { baseUrl } from "./constants.js";
-
-// Check authentication
-async function checkAuthentication() {
-  try {
-    const response = await fetch(`${baseUrl}/api/users/is-authenticated`, {
-      method: "GET",
-      credentials: "include",
-    });
-
-    if (!response.ok) throw new Error("Not authenticated");
-
-    const data = await response.json();
-    if (!data.authenticated) {
-      window.location.href = "/login.html";
-    }
-  } catch (error) {
-    console.error("Authentication check failed:", error);
-    window.location.href = "/login.html";
-  }
-}
 
 // Fetch orders
 async function fetchOrders() {

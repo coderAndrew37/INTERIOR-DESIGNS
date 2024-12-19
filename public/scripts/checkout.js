@@ -1,3 +1,4 @@
+import { checkAuthentication } from "./utils/authUtils.js";
 import { renderOrderSummary } from "./renderOrderSummary.js";
 import { updateCartQuantity } from "../data/cart.js";
 
@@ -205,6 +206,7 @@ document
   });
 
 document.addEventListener("DOMContentLoaded", async () => {
+  checkAuthentication();
   await fetchCartItems();
   await renderOrderSummary();
   updateCartQuantity();
