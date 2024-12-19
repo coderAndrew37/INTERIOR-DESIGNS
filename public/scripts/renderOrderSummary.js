@@ -2,11 +2,9 @@ import { baseUrl } from "./constants.js";
 import { formatCurrency } from "./utils/currency.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { renderPaymentSummary } from "./renderPaymentSummary.js";
-import { updateCartQuantity } from "../data/cart.js";
 
 const today = dayjs();
 
-// Fetch cart and product data
 async function fetchCartAndProducts() {
   try {
     const cartResponse = await fetch(`${baseUrl}/api/cart/get-cart`, {
@@ -35,7 +33,6 @@ async function fetchCartAndProducts() {
   }
 }
 
-// Generate HTML for delivery options
 function deliveryOptionsHTML(
   productId,
   deliveryOptions,
@@ -49,11 +46,11 @@ function deliveryOptionsHTML(
       const price =
         option.priceCents === 0
           ? "FREE"
-          : `KSH ${formatCurrency(option.priceCents)}`;
+          : ` ${formatCurrency(option.priceCents)}`;
       const checked = option.id === selectedOptionId ? "checked" : "";
 
       return `
-        <label class="flex items-center gap-2">
+        <label class="flex items-center gap-2 text-green-600 font-semibold">
           <input
             type="radio"
             name="delivery-option-${productId}"
@@ -70,7 +67,20 @@ function deliveryOptionsHTML(
     .join("");
 }
 
-// Update delivery date dynamically
+function updateHeaderCartQuantity(cart) {
+  const cartQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+  const cartQuantityElement = document.querySelector(".js-cart-quantity");
+
+  if (cartQuantityElement) {
+    cartQuantityElement.textContent = cartQuantity;
+    if (cartQuantity > 0) {
+      cartQuantityElement.classList.remove("hidden");
+    } else {
+      cartQuantityElement.classList.add("hidden");
+    }
+  }
+}
+
 function updateDeliveryDate(productId, deliveryDays) {
   const deliveryDateElem = document.querySelector(
     `.js-delivery-date-${productId}`
@@ -83,7 +93,6 @@ function updateDeliveryDate(productId, deliveryDays) {
   }
 }
 
-// Render the order summary
 export async function renderOrderSummary() {
   const { cart, deliveryOptions, products } = await fetchCartAndProducts();
 
@@ -91,6 +100,7 @@ export async function renderOrderSummary() {
     document.querySelector(".js-order-summary").innerHTML =
       "<p>Your cart is empty.</p>";
     renderPaymentSummary([], []); // Render empty summary
+    updateHeaderCartQuantity([]); // Update header
     return;
   }
 
@@ -101,7 +111,7 @@ export async function renderOrderSummary() {
 
     orderSummaryHTML += `
       <div class="border rounded-lg p-4 shadow-md mb-4">
-        <div class="text-idcPrimary font-semibold mb-2">
+        <div class="text-idcPrimary font-semibold mb-2 text-green-600">
           Delivery date: <span class="js-delivery-date-${product._id}">
             ${today.add(7, "days").format("dddd, MMMM D")}
           </span>
@@ -114,7 +124,7 @@ export async function renderOrderSummary() {
           />
           <div class="col-span-2 space-y-2">
             <div class="font-bold text-lg">${product.name}</div>
-            <div class="text-red-600 font-semibold">KSH ${formatCurrency(
+            <div class="text-red-600 font-semibold"> ${formatCurrency(
               product.priceCents
             )}</div>
             <div class="text-gray-500">
@@ -131,7 +141,7 @@ export async function renderOrderSummary() {
                 }).join("")}
               </select>
               <button
-                class="ml-2 text-idcPrimary underline js-delete-quantity-link"
+                class="ml-2 px-4 py-2 bg-red-600 text-white font-bold rounded-lg js-delete-quantity-link hover:bg-red-700 active:bg-red-800"
                 data-product-id="${product._id}"
               >
                 Delete
@@ -149,18 +159,16 @@ export async function renderOrderSummary() {
 
   document.querySelector(".js-order-summary").innerHTML = orderSummaryHTML;
 
-  // Attach event listeners
   attachCartEventListeners(cart, products, deliveryOptions);
   renderPaymentSummary(cart, products, deliveryOptions); // Update totals
+  updateHeaderCartQuantity(cart); // Update header
 }
 
-// Attach event listeners for cart actions
 function attachCartEventListeners(cart, products, deliveryOptions) {
   document.querySelectorAll(".js-quantity-select").forEach((select) => {
     select.addEventListener("change", async (event) => {
       const productId = event.target.dataset.productId;
       const newQuantity = parseInt(event.target.value, 10);
-
       try {
         await fetch(`${baseUrl}/api/cart/update-cart`, {
           method: "PUT",
@@ -173,7 +181,6 @@ function attachCartEventListeners(cart, products, deliveryOptions) {
         renderOrderSummary();
       } catch (error) {
         console.error("Error updating quantity:", error);
-        alert("Failed to update quantity. Please try again.");
       }
     });
   });
@@ -181,7 +188,6 @@ function attachCartEventListeners(cart, products, deliveryOptions) {
   document.querySelectorAll(".js-delete-quantity-link").forEach((button) => {
     button.addEventListener("click", async (event) => {
       const productId = button.dataset.productId;
-
       try {
         await fetch(`${baseUrl}/api/cart/remove-from-cart/${productId}`, {
           method: "DELETE",
@@ -190,7 +196,6 @@ function attachCartEventListeners(cart, products, deliveryOptions) {
         renderOrderSummary();
       } catch (error) {
         console.error("Error deleting item:", error);
-        alert("Failed to delete item. Please try again.");
       }
     });
   });
