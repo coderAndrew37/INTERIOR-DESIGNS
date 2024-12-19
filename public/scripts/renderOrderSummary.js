@@ -160,16 +160,38 @@ function attachCartEventListeners(cart, products, deliveryOptions) {
     select.addEventListener("change", async (event) => {
       const productId = event.target.dataset.productId;
       const newQuantity = parseInt(event.target.value, 10);
-      await updateCartQuantity(productId, newQuantity);
-      renderOrderSummary();
+
+      try {
+        await fetch(`${baseUrl}/api/cart/update-cart`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId, quantity: newQuantity }),
+          credentials: "include",
+        });
+        renderOrderSummary();
+      } catch (error) {
+        console.error("Error updating quantity:", error);
+        alert("Failed to update quantity. Please try again.");
+      }
     });
   });
 
   document.querySelectorAll(".js-delete-quantity-link").forEach((button) => {
     button.addEventListener("click", async (event) => {
-      const productId = event.target.dataset.productId;
-      await updateCartQuantity(productId, 0);
-      renderOrderSummary();
+      const productId = button.dataset.productId;
+
+      try {
+        await fetch(`${baseUrl}/api/cart/remove-from-cart/${productId}`, {
+          method: "DELETE",
+          credentials: "include",
+        });
+        renderOrderSummary();
+      } catch (error) {
+        console.error("Error deleting item:", error);
+        alert("Failed to delete item. Please try again.");
+      }
     });
   });
 
