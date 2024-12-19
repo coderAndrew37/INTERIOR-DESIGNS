@@ -115,6 +115,26 @@ function showSuccessAlert() {
   });
 }
 
+// Close the modal when clicking outside or pressing the close button
+function setupModalCloseBehavior() {
+  const modal = document.getElementById("orderDetailsModal");
+  const closeButton = document.querySelector(".close-button");
+
+  // Close modal on outside click
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // Close modal on clicking the close button
+  if (closeButton) {
+    closeButton.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+}
+
 document
   .getElementById("orderDetailsForm")
   .addEventListener("submit", async (e) => {
@@ -196,4 +216,5 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("orderDetailsModal").style.display = "flex";
     }
   });
+  setupModalCloseBehavior();
 });
