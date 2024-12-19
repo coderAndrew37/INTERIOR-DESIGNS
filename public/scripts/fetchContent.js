@@ -1,6 +1,7 @@
 // fetchContent.js
 import { testimonials, projects, services, faqs, blogs } from "../data/data.js";
 import { formatCurrency } from "./utils/currency.js";
+import { initAddToCartListeners } from "./utils/cartUtils.js";
 document.addEventListener("DOMContentLoaded", () => {
   // Blogs Section
   const blogsContainer = document.querySelector("#blogs .grid");
@@ -160,6 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
     featuredProductsContainer.innerHTML = products
       .map((product) => generateProductHTML(product))
       .join("");
+    // Initialize Add-to-Cart buttons
+    initAddToCartListeners(); // Attach listeners after rendering
   }
 
   function generateProductHTML(product) {
