@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function generateProductHTML(product) {
     return `
-    <div class="bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform hover:scale-105">
+    <div class="product-container bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform hover:scale-105">
       <img
         class="w-full h-48 object-cover rounded-lg mb-4"
         src="${product.image}"
@@ -189,6 +189,9 @@ document.addEventListener("DOMContentLoaded", () => {
       <p class="text-xl font-semibold text-idcHighlight">
         ${formatCurrency(product.priceCents)}
       </p>
+      <div class="added-to-cart hidden text-green-600 text-center font-bold mb-4">
+        Added to Cart!
+      </div>
       <button
         class="js-add-to-cart w-full mt-4 px-4 py-2 bg-idcHighlight text-black font-bold rounded-lg hover:bg-opacity-90"
         data-product-id="${product._id}"

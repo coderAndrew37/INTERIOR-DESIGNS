@@ -60,14 +60,15 @@ async function handleAddToCart(productId, button) {
     await updateCartQuantity(); // Update the cart icon in the navbar
 
     // Show "Added to Cart" message
-    const addedMessage = button.parentElement.querySelector(".added-to-cart");
-    if (addedMessage) {
-      addedMessage.style.opacity = "1";
-      setTimeout(() => {
-        addedMessage.style.opacity = "0";
-      }, 2000);
-    } else {
-      console.log("Product successfully added to cart.");
+    const productContainer = button.closest(".product-container");
+    if (productContainer) {
+      const addedMessage = productContainer.querySelector(".added-to-cart");
+      if (addedMessage) {
+        addedMessage.classList.remove("hidden");
+        setTimeout(() => {
+          addedMessage.classList.add("hidden");
+        }, 2000);
+      }
     }
   } catch (error) {
     console.error("Error adding product to cart:", error);

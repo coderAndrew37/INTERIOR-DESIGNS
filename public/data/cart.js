@@ -7,8 +7,6 @@ export async function updateCartQuantity() {
       credentials: "include", // Ensure authenticated requests
     });
 
-    console.log("Get Cart API Response:", response);
-
     if (!response.ok) {
       console.error("Failed to fetch cart data");
       return;
@@ -20,16 +18,15 @@ export async function updateCartQuantity() {
     // Calculate total quantity of items in the cart
     const cartQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
-    // Update cart quantity display in the header and checkout links
+    // Update cart quantity display in the header
     const cartQuantityElement = document.querySelector(".js-cart-quantity");
-    const checkoutHeaderLink = document.querySelector(".return-to-home-link");
-
     if (cartQuantityElement) {
       cartQuantityElement.textContent = cartQuantity;
-    }
-
-    if (checkoutHeaderLink) {
-      checkoutHeaderLink.textContent = `Checkout (${cartQuantity} items)`;
+      if (cartQuantity > 0) {
+        cartQuantityElement.classList.remove("hidden"); // Show the quantity
+      } else {
+        cartQuantityElement.classList.add("hidden"); // Hide if zero
+      }
     }
   } catch (error) {
     console.error("Error fetching cart data:", error);
