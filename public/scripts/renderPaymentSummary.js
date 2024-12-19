@@ -53,41 +53,33 @@ export function renderPaymentSummary(
   const totalCents = totalBeforeTaxCents + estimatedTaxCents;
 
   const paymentSummaryHTML = `
-    <div class="payment-summary-title">Order Summary</div>
-    <div class="payment-summary-row">
-        <div>Items (${cart.length}):</div>
-        <div class="payment-summary-money">Ksh ${formatCurrency(
-          productTotalCents
-        )}</div>
-    </div>
-    <div class="payment-summary-row">
-        <div>Shipping & handling:</div>
-        <div class="payment-summary-money">Ksh ${formatCurrency(
-          shippingTotalCents
-        )}</div>
-    </div>
-    <div class="payment-summary-row subtotal-row">
-        <div>Total before tax:</div>
-        <div class="payment-summary-money">Ksh ${formatCurrency(
-          totalBeforeTaxCents
-        )}</div>
-    </div>
-    <div class="payment-summary-row">
-        <div>Estimated tax (${TAX_RATE * 100}%):</div>
-        <div class="payment-summary-money">Ksh ${formatCurrency(
-          estimatedTaxCents
-        )}</div>
-    </div>
-    <div class="payment-summary-row total-row">
-        <div>Order total:</div>
-        <div class="payment-summary-money">Ksh ${formatCurrency(
-          totalCents
-        )}</div>
-    </div>
-    <button class="place-order-button button-primary js-place-order-button">
-      Place your order
-    </button>
-  `;
+  <div class="font-bold text-lg mb-4">Order Summary</div>
+  <div class="flex justify-between text-base mb-2">
+    <span>Items (${cart.length}):</span>
+    <span>KSH ${formatCurrency(productTotalCents)}</span>
+  </div>
+  <div class="flex justify-between text-base mb-2">
+    <span>Shipping & Handling:</span>
+    <span>KSH ${formatCurrency(shippingTotalCents)}</span>
+  </div>
+  <div class="flex justify-between text-base font-medium border-t pt-2">
+    <span>Total before tax:</span>
+    <span>KSH ${formatCurrency(totalBeforeTaxCents)}</span>
+  </div>
+  <div class="flex justify-between text-base">
+    <span>Estimated tax (${TAX_RATE * 100}%):</span>
+    <span>KSH ${formatCurrency(estimatedTaxCents)}</span>
+  </div>
+  <div class="flex justify-between text-lg font-bold text-red-600 border-t pt-4">
+    <span>Order Total:</span>
+    <span>KSH ${formatCurrency(totalCents)}</span>
+  </div>
+  <button
+    class="w-full bg-idcHighlight text-idcText font-semibold py-2 px-4 rounded-lg hover:bg-yellow-500 mt-4"
+  >
+    Place Your Order
+  </button>
+`;
 
   document.querySelector(".js-payment-summary").innerHTML = paymentSummaryHTML;
 

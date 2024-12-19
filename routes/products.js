@@ -1,6 +1,7 @@
 const express = require("express");
 const { Product, validateProduct } = require("../models/product");
 const router = express.Router();
+const mongoose = require("mongoose");
 
 // Fetch products with pagination
 router.get("/", async (req, res) => {
