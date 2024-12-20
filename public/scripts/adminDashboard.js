@@ -3,7 +3,10 @@ import { baseUrl } from "./constants.js";
 /**
  * Fetch all orders and calculate stats.
  */
-async function fetchOrdersAndStats() {
+/**
+ * Fetch orders and update dashboard dynamically.
+ */
+async function fetchAndUpdateDashboard() {
   try {
     const response = await fetch(`${baseUrl}/api/admin/orders`, {
       method: "GET",
@@ -16,16 +19,24 @@ async function fetchOrdersAndStats() {
 
     const { orders } = await response.json();
 
-    // Render orders and calculate stats
+    // Update stats, orders table, and chart
     renderOrders(orders);
     calculateAndRenderStats(orders);
   } catch (error) {
-    console.error("Error fetching orders:", error);
-    document.querySelector(
-      ".js-orders-table"
-    ).innerHTML = `<tr><td colspan="4" class="text-center text-red-600">Error loading orders.</td></tr>`;
+    console.error("Error fetching dashboard data:", error);
   }
 }
+
+/**
+ * Poll for updates every 10 seconds.
+ */
+function startPolling() {
+  fetchAndUpdateDashboard(); // Initial load
+  setInterval(fetchAndUpdateDashboard, 10000); // Poll every 10 seconds
+}
+
+// Start polling when the DOM is ready
+document.addEventListener("DOMContentLoaded", startPolling);
 
 /**
  * Render orders in the table.
@@ -111,35 +122,43 @@ document.addEventListener("change", async (event) => {
  * @param {Array} orders - Array of order objects.
  */
 function calculateAndRenderStats(orders) {
-  // Calculate stats
+  // Filter orders by status
+  const deliveredOrders = orders.filter(
+    (order) => order.status === "Delivered"
+  );
+
+  // Calculate total revenue
+  const totalRevenue = deliveredOrders.reduce(
+    (sum, order) => sum + order.totalCents,
+    0
+  );
+
+  // Update stats in the DOM
+  document.querySelector(".js-total-revenue").textContent = `KSH ${(
+    totalRevenue / 100
+  ).toLocaleString("en-KE", { minimumFractionDigits: 2 })}`;
+
   const totalOrders = orders.length;
-  const totalRevenue = orders.reduce((sum, order) => sum + order.totalCents, 0);
   const preparingOrders = orders.filter(
     (order) => order.status === "Preparing"
   ).length;
   const shippedOrders = orders.filter(
     (order) => order.status === "Shipped"
   ).length;
-  const deliveredOrders = orders.filter(
-    (order) => order.status === "Delivered"
-  ).length;
   const cancelledOrders = orders.filter(
     (order) => order.status === "Cancelled"
   ).length;
 
-  // Update stats in the DOM
   document.querySelector(".js-total-orders").textContent = totalOrders;
-  document.querySelector(".js-total-revenue").textContent = `KSH ${(
-    totalRevenue / 100
-  ).toLocaleString("en-KE", { minimumFractionDigits: 2 })}`;
   document.querySelector(".js-preparing-orders").textContent = preparingOrders;
-  document.querySelector(".js-delivered-orders").textContent = deliveredOrders;
+  document.querySelector(".js-delivered-orders").textContent =
+    deliveredOrders.length;
 
   // Render chart
   renderChart({
     preparingOrders,
     shippedOrders,
-    deliveredOrders,
+    deliveredOrders: deliveredOrders.length,
     cancelledOrders,
   });
 }
@@ -302,5 +321,60 @@ document.getElementById("exportOrders").addEventListener("click", async () => {
   }
 });
 
-// Fetch orders and stats on page load
-document.addEventListener("DOMContentLoaded", fetchOrdersAndStats);
+/**
+ * Fetch orders based on search query.
+ * @param {string} query - Search term (Order ID, Customer Name, or Email).
+ */
+async function fetchFilteredOrders(query = "") {
+  try {
+    const url = query
+      ? `${baseUrl}/api/admin/orders?search=${encodeURIComponent(query)}`
+      : `${baseUrl}/api/admin/orders`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch filtered orders.");
+    }
+
+    const { orders } = await response.json();
+
+    // Update the orders table and stats
+    renderOrders(orders);
+    calculateAndRenderStats(orders);
+  } catch (error) {
+    console.error("Error fetching filtered orders:", error);
+    document.querySelector(
+      ".js-orders-table"
+    ).innerHTML = `<tr><td colspan="4" class="text-center text-red-600">Error loading orders.</td></tr>`;
+  }
+}
+
+/**
+ * Attach search input listener.
+ */
+function setupSearch() {
+  const searchInput = document.getElementById("searchOrders");
+  const clearButton = document.getElementById("clearSearch");
+
+  // Handle input event to fetch filtered orders
+  searchInput.addEventListener("input", (event) => {
+    const query = event.target.value.trim();
+    fetchFilteredOrders(query);
+  });
+
+  // Clear the search bar and fetch all orders
+  clearButton.addEventListener("click", () => {
+    searchInput.value = "";
+    fetchFilteredOrders();
+  });
+}
+
+// Initialize dashboard on DOM load
+document.addEventListener("DOMContentLoaded", () => {
+  setupSearch();
+  startPolling(); // Keep the existing polling logic
+});

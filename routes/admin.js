@@ -14,11 +14,22 @@ const router = express.Router();
  */
 router.get("/orders", authMiddleware, adminMiddleware, async (req, res) => {
   try {
-    const orders = await Order.find()
+    const search = req.query.search?.trim() || "";
+
+    const query = search
+      ? {
+          $or: [
+            { _id: { $regex: search, $options: "i" } }, // Match Order ID
+            { name: { $regex: search, $options: "i" } }, // Match Customer Name
+            { email: { $regex: search, $options: "i" } }, // Match Email
+          ],
+        }
+      : {};
+
+    const orders = await Order.find(query)
       .populate("items.productId", "name image priceCents")
       .sort({ datePlaced: -1 });
 
-    // Wrap orders in an object to match frontend expectations
     res.status(200).json({ orders });
   } catch (error) {
     console.error("Error fetching orders for admin:", error.message);
