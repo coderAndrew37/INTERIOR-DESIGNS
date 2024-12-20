@@ -1,8 +1,8 @@
 import { baseUrl } from "./constants.js";
 
-/**
- * Fetch all orders and calculate stats.
- */
+// Global variable to track the chart instance
+let chartInstance;
+
 /**
  * Fetch orders and update dashboard dynamically.
  */
@@ -34,9 +34,6 @@ function startPolling() {
   fetchAndUpdateDashboard(); // Initial load
   setInterval(fetchAndUpdateDashboard, 10000); // Poll every 10 seconds
 }
-
-// Start polling when the DOM is ready
-document.addEventListener("DOMContentLoaded", startPolling);
 
 /**
  * Render orders in the table.
@@ -90,7 +87,9 @@ function renderOrders(orders) {
     .join("");
 }
 
-// Event listener for updating order status
+/**
+ * Event listener for updating order status dynamically.
+ */
 document.addEventListener("change", async (event) => {
   if (event.target.classList.contains("status-dropdown")) {
     const orderId = event.target.dataset.orderId;
@@ -108,7 +107,8 @@ document.addEventListener("change", async (event) => {
         throw new Error("Failed to update order status.");
       }
 
-      // Show a success message
+      // Refresh the dashboard
+      fetchAndUpdateDashboard();
       alert("Order status updated successfully!");
     } catch (error) {
       console.error("Error updating order status:", error);
@@ -122,21 +122,13 @@ document.addEventListener("change", async (event) => {
  * @param {Array} orders - Array of order objects.
  */
 function calculateAndRenderStats(orders) {
-  // Filter orders by status
   const deliveredOrders = orders.filter(
     (order) => order.status === "Delivered"
   );
-
-  // Calculate total revenue
   const totalRevenue = deliveredOrders.reduce(
     (sum, order) => sum + order.totalCents,
     0
   );
-
-  // Update stats in the DOM
-  document.querySelector(".js-total-revenue").textContent = `KSH ${(
-    totalRevenue / 100
-  ).toLocaleString("en-KE", { minimumFractionDigits: 2 })}`;
 
   const totalOrders = orders.length;
   const preparingOrders = orders.filter(
@@ -149,12 +141,14 @@ function calculateAndRenderStats(orders) {
     (order) => order.status === "Cancelled"
   ).length;
 
+  document.querySelector(".js-total-revenue").textContent = `KSH ${(
+    totalRevenue / 100
+  ).toLocaleString("en-KE", { minimumFractionDigits: 2 })}`;
   document.querySelector(".js-total-orders").textContent = totalOrders;
   document.querySelector(".js-preparing-orders").textContent = preparingOrders;
   document.querySelector(".js-delivered-orders").textContent =
     deliveredOrders.length;
 
-  // Render chart
   renderChart({
     preparingOrders,
     shippedOrders,
@@ -164,19 +158,22 @@ function calculateAndRenderStats(orders) {
 }
 
 /**
- * Render a chart showing the distribution of order statuses.
- * @param {Object} stats - Statistics object with order counts.
+ * Render chart with updated data.
+ * @param {Object} stats - Order statistics.
  */
 function renderChart(stats) {
   const ctx = document.getElementById("orderStatusChart").getContext("2d");
 
-  new Chart(ctx, {
+  if (chartInstance) {
+    chartInstance.destroy(); // Destroy the existing chart to avoid canvas reuse errors
+  }
+
+  chartInstance = new Chart(ctx, {
     type: "doughnut",
     data: {
       labels: ["Preparing", "Shipped", "Delivered", "Cancelled"],
       datasets: [
         {
-          label: "Order Status Distribution",
           data: [
             stats.preparingOrders,
             stats.shippedOrders,
@@ -246,7 +243,6 @@ async function openOrderDetailsModal(orderId) {
       </ul>
     `;
 
-    // Show modal
     document.getElementById("orderDetailsModal").classList.remove("hidden");
   } catch (error) {
     console.error("Error fetching order details:", error);
@@ -274,13 +270,11 @@ function exportOrdersToCSV(orders) {
     (order.totalCents / 100).toFixed(2),
   ]);
 
-  // Create CSV content
   const csvContent = [
     headers.join(","),
     ...rows.map((row) => row.join(",")),
   ].join("\n");
 
-  // Trigger download
   const blob = new Blob([csvContent], { type: "text/csv" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -290,10 +284,10 @@ function exportOrdersToCSV(orders) {
   URL.revokeObjectURL(url);
 }
 
-// Add event listener for closing the modal
+// Close the modal
 document.getElementById("closeModal").addEventListener("click", closeModal);
 
-// Attach click event to table rows for opening the modal
+// Open the modal for order details
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("js-view-order")) {
     const orderId = event.target.dataset.orderId;
@@ -342,7 +336,6 @@ async function fetchFilteredOrders(query = "") {
 
     const { orders } = await response.json();
 
-    // Update the orders table and stats
     renderOrders(orders);
     calculateAndRenderStats(orders);
   } catch (error) {
@@ -360,13 +353,11 @@ function setupSearch() {
   const searchInput = document.getElementById("searchOrders");
   const clearButton = document.getElementById("clearSearch");
 
-  // Handle input event to fetch filtered orders
   searchInput.addEventListener("input", (event) => {
     const query = event.target.value.trim();
     fetchFilteredOrders(query);
   });
 
-  // Clear the search bar and fetch all orders
   clearButton.addEventListener("click", () => {
     searchInput.value = "";
     fetchFilteredOrders();
@@ -376,5 +367,5 @@ function setupSearch() {
 // Initialize dashboard on DOM load
 document.addEventListener("DOMContentLoaded", () => {
   setupSearch();
-  startPolling(); // Keep the existing polling logic
+  startPolling();
 });
