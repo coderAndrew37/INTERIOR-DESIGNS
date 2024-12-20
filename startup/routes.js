@@ -6,6 +6,7 @@ const products = require("../routes/products.js");
 const auth = require("../routes/auth.js");
 const cart = require("../routes/cart.js");
 const orders = require("../routes/orders.js");
+const admin = require("../routes/admin.js");
 module.exports = function (app) {
   app.use("/api/contacts", contacts);
   app.use("/api/newsletter", newsletter); // Added the newsletter route
@@ -15,4 +16,5 @@ module.exports = function (app) {
   app.use("/api/users", auth);
   app.use("/api/cart", cart);
   app.use("/api/orders", orders);
+  app.use("/api/admin", admin);
 };

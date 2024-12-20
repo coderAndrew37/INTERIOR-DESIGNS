@@ -7,9 +7,9 @@ const orderItemSchema = new mongoose.Schema({
     ref: "Product",
     required: true,
   },
-  name: { type: String, required: true }, // Add name field here
+  name: { type: String, required: true },
   quantity: { type: Number, required: true },
-  priceCents: { type: Number, required: true }, // Store price at time of purchase
+  priceCents: { type: Number, required: true },
 });
 
 const orderSchema = new mongoose.Schema({
@@ -17,6 +17,11 @@ const orderSchema = new mongoose.Schema({
   items: [orderItemSchema],
   totalCents: { type: Number, required: true },
   datePlaced: { type: Date, default: Date.now },
+  status: {
+    type: String,
+    enum: ["Preparing", "Shipped", "Delivered", "Cancelled"],
+    default: "Preparing", // Default to Preparing
+  },
   name: { type: String, required: true },
   email: { type: String, required: true },
   phone: { type: String, required: true },
@@ -26,7 +31,6 @@ const orderSchema = new mongoose.Schema({
 
 const Order = mongoose.model("Order", orderSchema);
 
-// Joi validation schema for orders
 function validateOrder(order) {
   const schema = Joi.object({
     userId: Joi.string()
