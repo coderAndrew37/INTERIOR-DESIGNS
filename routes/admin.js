@@ -71,7 +71,7 @@ router.put(
     const { orderId } = req.params;
     const { status } = req.body;
 
-    // Validate status
+    // Validate the new state
     if (!["Preparing", "Shipped", "Delivered", "Cancelled"].includes(status)) {
       return res.status(400).json({ message: "Invalid status value." });
     }
@@ -83,11 +83,11 @@ router.put(
         return res.status(404).json({ message: "Order not found." });
       }
 
-      // Update status
+      // Update the state
       order.status = status;
       await order.save();
 
-      // Notify the user via email
+      // Notify the user about the state change (Optional)
       await sendStateChangeEmail(order.email, order, status);
 
       res.status(200).json({ message: "Order status updated successfully." });

@@ -46,7 +46,25 @@ function renderOrders(orders) {
       <tr>
         <td class="px-4 py-2 text-sm text-idcText font-mono">${order._id}</td>
         <td class="px-4 py-2 text-sm text-idcText">${order.name}</td>
-        <td class="px-4 py-2 text-sm text-idcText">${order.status}</td>
+        <td class="px-4 py-2 text-sm text-idcText">
+          <select
+            data-order-id="${order._id}"
+            class="status-dropdown bg-idcAccent rounded px-2 py-1"
+          >
+            <option value="Preparing" ${
+              order.status === "Preparing" ? "selected" : ""
+            }>Preparing</option>
+            <option value="Shipped" ${
+              order.status === "Shipped" ? "selected" : ""
+            }>Shipped</option>
+            <option value="Delivered" ${
+              order.status === "Delivered" ? "selected" : ""
+            }>Delivered</option>
+            <option value="Cancelled" ${
+              order.status === "Cancelled" ? "selected" : ""
+            }>Cancelled</option>
+          </select>
+        </td>
         <td class="px-4 py-2">
           <button
             data-order-id="${order._id}"
@@ -60,6 +78,33 @@ function renderOrders(orders) {
     )
     .join("");
 }
+
+// Event listener for updating order status
+document.addEventListener("change", async (event) => {
+  if (event.target.classList.contains("status-dropdown")) {
+    const orderId = event.target.dataset.orderId;
+    const newStatus = event.target.value;
+
+    try {
+      const response = await fetch(`${baseUrl}/api/admin/orders/${orderId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update order status.");
+      }
+
+      // Show a success message
+      alert("Order status updated successfully!");
+    } catch (error) {
+      console.error("Error updating order status:", error);
+      alert("Failed to update order status. Please try again.");
+    }
+  }
+});
 
 /**
  * Calculate and render statistics, including charts.
