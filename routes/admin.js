@@ -4,7 +4,7 @@ const { Parser } = require("json2csv");
 const authMiddleware = require("../middleware/auth.js");
 const adminMiddleware = require("../middleware/isAdmin.js");
 const { Order } = require("../models/order.js");
-const sendStateChangeEmail = require("../services/emailService.js");
+const { sendStateChangeEmail } = require("../services/emailService.js");
 
 const router = express.Router();
 
@@ -80,19 +80,37 @@ router.put(
       const order = await Order.findById(orderId);
 
       if (!order) {
+        console.error(`Order not found: ${orderId}`);
         return res.status(404).json({ message: "Order not found." });
       }
 
-      // Update the state
+      // Check if the email exists
+      if (!order.email) {
+        console.error(`Missing email for order: ${orderId}`);
+        return res
+          .status(500)
+          .json({ message: "Order does not have an associated email." });
+      }
+
+      // Update the status
       order.status = status;
       await order.save();
 
-      // Notify the user about the state change (Optional)
-      await sendStateChangeEmail(order.email, order, status);
+      // Send status change email
+      try {
+        await sendStateChangeEmail(order.email, order, status);
+      } catch (emailError) {
+        console.error(
+          `Failed to send email for order: ${orderId}, Error: ${emailError.message}`
+        );
+        return res
+          .status(500)
+          .json({ message: "Order updated but email sending failed." });
+      }
 
       res.status(200).json({ message: "Order status updated successfully." });
     } catch (error) {
-      console.error("Error updating order status:", error.message);
+      console.error(`Error updating order status for ${orderId}:`, error);
       res.status(500).json({ message: "Internal server error." });
     }
   }

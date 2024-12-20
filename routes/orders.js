@@ -4,7 +4,8 @@ const authMiddleware = require("../middleware/auth.js");
 const adminMiddleware = require("../middleware/isAdmin.js");
 const { Order, validateOrder } = require("../models/order.js");
 const { Product } = require("../models/product.js"); // Use destructuring here
-const sendOrderConfirmationEmail = require("../services/emailService.js");
+const { sendOrderConfirmationEmail } = require("../services/emailService.js");
+
 console.log("Product model:", Product); // This should now display the model object in the console
 const router = express.Router();
 
@@ -12,6 +13,8 @@ const router = express.Router();
 router.post("/", authMiddleware, async (req, res) => {
   const userId = req.user.userId;
   const { items, name, email, phone, address, paymentMethod } = req.body;
+
+  // Validate order data
   const { error } = validateOrder({
     userId,
     items,
@@ -29,23 +32,23 @@ router.post("/", authMiddleware, async (req, res) => {
     const orderItems = [];
 
     for (const item of items) {
-      // Fetch product to get complete details (name, price, etc.)
       const product = await Product.findById(item.productId);
       if (!product) {
         return res.status(404).json({ message: "Product not found." });
       }
+
       const itemTotal = product.priceCents * item.quantity;
       totalCents += itemTotal;
 
-      // Add product details to each item
       orderItems.push({
         productId: product._id,
-        name: product.name, // Include name for email display
+        name: product.name,
         quantity: item.quantity,
         priceCents: product.priceCents,
       });
     }
 
+    // Create the order
     const order = new Order({
       userId,
       items: orderItems,
@@ -55,12 +58,13 @@ router.post("/", authMiddleware, async (req, res) => {
       phone,
       address,
       paymentMethod,
+      status: "Preparing", // Default status
     });
+
     await order.save();
 
-    // Send email and SMS notifications
+    // Send confirmation email
     await sendOrderConfirmationEmail(email, order);
-    //await sendOrderConfirmationSMS(phone, order);
 
     res.status(201).json({ message: "Order placed successfully", order });
   } catch (error) {
