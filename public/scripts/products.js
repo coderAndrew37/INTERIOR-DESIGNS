@@ -2,25 +2,79 @@
 import { formatCurrency } from "./utils/currency.js";
 import { initAddToCartListeners } from "./utils/cartUtils.js";
 import "./authButton.js";
-import {
-  initializeCart,
-  initializeSmoothScroll,
-  initializeNavbar,
-} from "./shared.js";
+import { initializeCart, initializeSmoothScroll } from "./shared.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  initializeCart(); // Cart-related functionality
-  initializeSmoothScroll(); // Smooth scrolling for anchor links
-  initializeNavbar(); // Navbar toggle and resizing
+  initializeCart();
+  initializeSmoothScroll();
+
   const productsContainer = document.querySelector("#products .grid");
+  const searchInput = document.getElementById("search-input");
+  const suggestionList = document.getElementById("suggestion-list");
+  const searchButton = document.getElementById("search-button");
+  let debounceTimeout;
 
   if (productsContainer) {
-    fetchProducts();
+    const searchParams = new URLSearchParams(window.location.search);
+    const searchQuery = searchParams.get("search");
+    if (searchQuery) {
+      fetchProducts(searchQuery);
+    } else {
+      fetchProducts();
+    }
   }
 
-  async function fetchProducts() {
+  searchInput.addEventListener("input", () => {
+    clearTimeout(debounceTimeout);
+    const query = searchInput.value.trim();
+    if (query.length > 1) {
+      debounceTimeout = setTimeout(() => fetchSuggestions(query), 300);
+    } else {
+      suggestionList.innerHTML = "";
+      suggestionList.classList.add("hidden");
+    }
+  });
+
+  searchButton.addEventListener("click", () => {
+    const query = searchInput.value.trim();
+    if (query) {
+      fetchProducts(query);
+    }
+  });
+
+  async function fetchSuggestions(query) {
     try {
-      const response = await fetch("/api/products?limit=12");
+      const response = await fetch(`/api/products/suggestions?q=${query}`);
+      const suggestions = await response.json();
+
+      suggestionList.innerHTML = suggestions
+        .map(
+          (item) =>
+            `<li class="px-4 py-2 text-idcText bg-idcBackground hover:bg-idcAccent hover:text-white cursor-pointer border-b last:border-0 border-idcText/20 rounded transition-all">
+              ${item.name}
+            </li>`
+        )
+        .join("");
+      suggestionList.classList.remove("hidden");
+
+      suggestionList.querySelectorAll("li").forEach((li) => {
+        li.addEventListener("click", () => {
+          searchInput.value = li.textContent.trim();
+          suggestionList.classList.add("hidden");
+          fetchProducts(searchInput.value);
+        });
+      });
+    } catch (error) {
+      console.error("Error fetching suggestions:", error);
+    }
+  }
+
+  async function fetchProducts(query = "") {
+    try {
+      const url = query
+        ? `/api/products/search?q=${query}`
+        : "/api/products?limit=12";
+      const response = await fetch(url);
       const data = await response.json();
 
       if (data.products && data.products.length > 0) {
@@ -28,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         productsContainer.innerHTML = `
           <p class="text-center text-lg text-idcText">
-            No products available at the moment.
+            No products found for "${query}".
           </p>`;
       }
     } catch (error) {
@@ -44,7 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
     productsContainer.innerHTML = products
       .map((product) => generateProductHTML(product))
       .join("");
-    // Initialize Add-to-Cart buttons
     initAddToCartListeners();
   }
 
