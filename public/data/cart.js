@@ -57,7 +57,6 @@ export async function addToCart(productId, quantity = 1) {
     }
 
     const data = await response.json();
-    console.log("Product added to cart:", data);
 
     // Update the cart quantity in the UI
     updateCartQuantity();
@@ -85,8 +84,6 @@ export async function removeFromCart(productId) {
       return;
     }
 
-    console.log("Product removed from cart.");
-
     // Update the cart quantity in the UI after removal
     updateCartQuantity();
   } catch (error) {
@@ -108,8 +105,6 @@ export async function clearCart() {
       alert(data.message || "Failed to clear the cart.");
       return;
     }
-
-    console.log("Cart cleared.");
 
     // Update the cart quantity in the UI after clearing
     updateCartQuantity();

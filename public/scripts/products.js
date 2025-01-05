@@ -3,6 +3,7 @@ import { initAddToCartListeners } from "./utils/cartUtils.js";
 import { initializeCart, initializeSmoothScroll } from "./shared.js";
 import "./authButton.js";
 
+// Initialize Add-to-Cart buttons
 document.addEventListener("DOMContentLoaded", () => {
   initializeCart();
   initializeSmoothScroll();
@@ -15,10 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadMoreButton = document.getElementById("load-more");
 
   let currentPage = 1;
+  let isFetching = false;
 
   // Show skeletons
   function showSkeletons(count = 6) {
-    productsContainer.innerHTML = ""; // Clear products
     for (let i = 0; i < count; i++) {
       const skeleton = skeletonTemplate.cloneNode(true);
       skeleton.style.display = "block";
@@ -32,8 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function fetchProducts(query = "", page = 1) {
+    if (isFetching) return; // Prevent duplicate requests
+    isFetching = true;
+    loadMoreButton.disabled = true;
+
     try {
-      showSkeletons();
+      showSkeletons(6); // Show 6 skeletons
       const url = query
         ? `/api/products/search?q=${query}&page=${page}`
         : `/api/products?page=${page}`;
@@ -41,18 +46,26 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.json();
 
       hideSkeletons();
+      isFetching = false;
 
       if (data.products && data.products.length > 0) {
         renderProducts(data.products);
+        loadMoreButton.style.display =
+          data.currentPage < data.totalPages ? "inline-block" : "none";
       } else if (page === 1) {
         productsContainer.innerHTML = `<p class="text-center text-lg text-idcText">
           No products found for "${query}".
         </p>`;
+        loadMoreButton.style.display = "none";
       } else {
-        loadMoreButton.style.display = "none"; // Hide Load More
+        loadMoreButton.style.display = "none";
       }
     } catch (error) {
       console.error("Error fetching products:", error);
+      hideSkeletons();
+      isFetching = false;
+    } finally {
+      loadMoreButton.disabled = false;
     }
   }
 
