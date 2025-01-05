@@ -1,4 +1,3 @@
-// passwordToggle.js
 document.addEventListener("DOMContentLoaded", () => {
   // Select all toggle buttons
   const toggleButtons = document.querySelectorAll("[id^='togglePassword']");

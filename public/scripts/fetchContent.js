@@ -1,7 +1,5 @@
-// fetchContent.js
 import { testimonials, projects, services, faqs, blogs } from "../data/data.js";
-import { formatCurrency } from "./utils/currency.js";
-import { initAddToCartListeners } from "./utils/cartUtils.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   // Blogs Section
   const blogsContainer = document.querySelector("#blogs .grid");
@@ -51,22 +49,21 @@ document.addEventListener("DOMContentLoaded", () => {
   if (projectsContainer) {
     projects.forEach((project) => {
       const projectHTML = `
-  <div class="bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105">
-    <img
-      src="${project.image}"
-      alt="${project.title}"
-      class="rounded-lg mb-4"
-    />
-    <h3 class="text-xl font-bold text-idcPrimary mb-2">${project.title}</h3>
-    <p class="text-idcText mb-4">${project.desc}</p>
-    <a
-    class="px-4 py-2 bg-idcHighlight text-black rounded-lg font-bold hover:bg-opacity-90"
-      href="/portfolio-details.html?id=${project.id}">
-      View Details
-    </a>
-  </div>
-`;
-
+        <div class="bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105">
+          <img
+            src="${project.image}"
+            alt="${project.title}"
+            class="rounded-lg mb-4"
+          />
+          <h3 class="text-xl font-bold text-idcPrimary mb-2">${project.title}</h3>
+          <p class="text-idcText mb-4">${project.desc}</p>
+          <a
+            class="px-4 py-2 bg-idcHighlight text-black rounded-lg font-bold hover:bg-opacity-90"
+            href="/portfolio-details.html?id=${project.id}">
+            View Details
+          </a>
+        </div>
+      `;
       projectsContainer.innerHTML += projectHTML;
     });
   }
@@ -76,31 +73,37 @@ document.addEventListener("DOMContentLoaded", () => {
   if (accordion) {
     faqs.forEach((faq, index) => {
       const faqHTML = `
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="heading${index}">
-            <button
-              class="accordion-button ${index === 0 ? "" : "collapsed"}"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapse${index}"
-              aria-expanded="${index === 0 ? "true" : "false"}"
-              aria-controls="collapse${index}"
-            >
-              ${faq.question}
-            </button>
-          </h2>
-          <div
-            id="collapse${index}"
-            class="accordion-collapse collapse ${index === 0 ? "show" : ""}"
-            aria-labelledby="heading${index}"
-            data-bs-parent="#faqsAccordion"
+      <div class="group">
+        <button
+          class="w-full text-left bg-idcBackground text-idcText py-4 px-6 rounded-lg flex justify-between items-center"
+          type="button"
+          aria-expanded="${index === 0 ? "true" : "false"}"
+        >
+          <span class="font-bold">${faq.question}</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 transform transition-transform ${
+              index === 0 ? "rotate-180" : ""
+            }"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <div class="accordion-body">
-              ${faq.answer}
-            </div>
-          </div>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 15l7-7 7 7"
+            />
+          </svg>
+        </button>
+        <div
+          class="hidden group-focus-within:block bg-white text-idcText px-6 py-4 rounded-lg"
+        >
+          ${faq.answer}
         </div>
-      `;
+      </div>
+    `;
       accordion.innerHTML += faqHTML;
     });
   }
@@ -130,77 +133,4 @@ document.addEventListener("DOMContentLoaded", () => {
       servicesContainer.innerHTML += serviceHTML;
     });
   }
-
-  const featuredProductsContainer = document.querySelector(
-    "#featured-products .grid"
-  );
-
-  async function fetchFeaturedProducts() {
-    try {
-      const response = await fetch("/api/products?limit=12"); // Fetch 6 featured products
-      const data = await response.json();
-
-      if (data.products && data.products.length > 0) {
-        renderFeaturedProducts(data.products);
-      } else {
-        featuredProductsContainer.innerHTML = `
-          <p class="text-center text-lg text-idcText">
-            No featured products available at the moment.
-          </p>`;
-      }
-    } catch (error) {
-      console.error("Error fetching featured products:", error);
-      featuredProductsContainer.innerHTML = `
-        <p class="text-center text-lg text-idcText text-red-600">
-          Failed to load products. Please try again later.
-        </p>`;
-    }
-  }
-
-  function renderFeaturedProducts(products) {
-    featuredProductsContainer.innerHTML = products
-      .map((product) => generateProductHTML(product))
-      .join("");
-    // Initialize Add-to-Cart buttons
-    initAddToCartListeners(); // Attach listeners after rendering
-  }
-
-  function generateProductHTML(product) {
-    return `
-    <div class="product-container bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform hover:scale-105">
-      <img
-        class="w-full h-48 object-cover rounded-lg mb-4"
-        src="${product.image}"
-        alt="${product.name}"
-      />
-      <h3 class="text-lg font-bold text-idcPrimary limit-text-to-2-lines mb-2">
-        ${product.name}
-      </h3>
-      <div class="flex items-center mb-4">
-        <img
-          class="w-20 h-5"
-          src="images/ratings/rating-${product.rating.stars}.png"
-          alt="${product.rating.stars} stars"
-        />
-        <span class="ml-2 text-sm text-idcText">
-          (${product.rating.count} reviews)
-        </span>
-      </div>
-      <p class="text-xl font-semibold text-idcHighlight">
-        ${formatCurrency(product.priceCents)}
-      </p>
-      <div class="added-to-cart hidden text-green-600 text-center font-bold mb-4">
-        Added to Cart!
-      </div>
-      <button
-        class="js-add-to-cart w-full mt-4 px-4 py-2 bg-idcHighlight text-black font-bold rounded-lg hover:bg-opacity-90"
-        data-product-id="${product._id}"
-      >
-        Add to Cart
-      </button>
-    </div>
-  `;
-  }
-
-  fetchFeaturedProducts();
 });

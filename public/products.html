@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products | Interior Design Kenya</title>
+    <link rel="stylesheet" href="/output.css" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="bg-idcBackground text-idcText font-idcSans">
+    <!-- Navbar -->
+    <header class="bg-idcAccent sticky top-0 z-50">
+      <div
+        class="container mx-auto flex items-center justify-between py-4 px-6"
+      >
+        <a href="/" class="text-xl font-bold text-idcPrimary"
+          >Interior Design</a
+        >
+        <nav id="mobile-nav" class="hidden md:flex space-x-8">
+          <a href="#about" class="hover:text-idcHighlight">About</a>
+          <a href="#services" class="hover:text-idcHighlight">Services</a>
+          <a href="/products.html" class="hover:text-idcHighlight">Products</a>
+          <a href="#projects" class="hover:text-idcHighlight">Portfolio</a>
+          <a href="#contact" class="hover:text-idcHighlight">Contact</a>
+        </nav>
+        <div class="flex items-center space-x-4">
+          <a href="/checkout.html" class="relative">
+            <i class="fas fa-shopping-cart text-idcPrimary text-xl"></i>
+            <span
+              id="cart-count"
+              class="js-cart-quantity absolute top-0 right-0 bg-idcHighlight text-black text-sm rounded-full px-2 py-1 hidden"
+            >
+              0
+            </span>
+          </a>
+          <button
+            class="js-auth-button px-4 py-2 rounded-lg text-white"
+          ></button>
+          <button id="mobile-menu" class="md:hidden">
+            <i class="fas fa-bars text-idcPrimary text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16 bg-idcBackground">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-idcSerif text-idcPrimary mb-6 text-center">
+          Our Products
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Products dynamically populated here -->
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-idcBackground text-center py-4">
+      <p class="text-idcText">
+        © 2024 Interior Design Kenya. All Rights Reserved.
+      </p>
+    </footer>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script type="module" src="/scripts/products.js"></script>
+  </body>
+</html>
