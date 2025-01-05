@@ -1,137 +1,131 @@
-// products.js
 import { formatCurrency } from "./utils/currency.js";
 import { initAddToCartListeners } from "./utils/cartUtils.js";
-import "./authButton.js";
 import { initializeCart, initializeSmoothScroll } from "./shared.js";
+import "./authButton.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeCart();
   initializeSmoothScroll();
 
   const productsContainer = document.querySelector("#products .grid");
-  const searchInput = document.getElementById("search-input");
-  const suggestionList = document.getElementById("suggestion-list");
-  const searchButton = document.getElementById("search-button");
-  let debounceTimeout;
+  const skeletonTemplate = document.querySelector(".skeleton");
+  const notificationContainer = document.getElementById(
+    "notification-container"
+  );
+  const loadMoreButton = document.getElementById("load-more");
 
-  if (productsContainer) {
-    const searchParams = new URLSearchParams(window.location.search);
-    const searchQuery = searchParams.get("search");
-    if (searchQuery) {
-      fetchProducts(searchQuery);
-    } else {
-      fetchProducts();
+  let currentPage = 1;
+
+  // Show skeletons
+  function showSkeletons(count = 6) {
+    productsContainer.innerHTML = ""; // Clear products
+    for (let i = 0; i < count; i++) {
+      const skeleton = skeletonTemplate.cloneNode(true);
+      skeleton.style.display = "block";
+      productsContainer.appendChild(skeleton);
     }
   }
 
-  searchInput.addEventListener("input", () => {
-    clearTimeout(debounceTimeout);
-    const query = searchInput.value.trim();
-    if (query.length > 1) {
-      debounceTimeout = setTimeout(() => fetchSuggestions(query), 300);
-    } else {
-      suggestionList.innerHTML = "";
-      suggestionList.classList.add("hidden");
-    }
-  });
-
-  searchButton.addEventListener("click", () => {
-    const query = searchInput.value.trim();
-    if (query) {
-      fetchProducts(query);
-    }
-  });
-
-  async function fetchSuggestions(query) {
-    try {
-      const response = await fetch(`/api/products/suggestions?q=${query}`);
-      const suggestions = await response.json();
-
-      suggestionList.innerHTML = suggestions
-        .map(
-          (item) =>
-            `<li class="px-4 py-2 text-idcText bg-idcBackground hover:bg-idcAccent hover:text-white cursor-pointer border-b last:border-0 border-idcText/20 rounded transition-all">
-              ${item.name}
-            </li>`
-        )
-        .join("");
-      suggestionList.classList.remove("hidden");
-
-      suggestionList.querySelectorAll("li").forEach((li) => {
-        li.addEventListener("click", () => {
-          searchInput.value = li.textContent.trim();
-          suggestionList.classList.add("hidden");
-          fetchProducts(searchInput.value);
-        });
-      });
-    } catch (error) {
-      console.error("Error fetching suggestions:", error);
-    }
+  // Hide skeletons
+  function hideSkeletons() {
+    document.querySelectorAll(".skeleton").forEach((el) => el.remove());
   }
 
-  async function fetchProducts(query = "") {
+  async function fetchProducts(query = "", page = 1) {
     try {
+      showSkeletons();
       const url = query
-        ? `/api/products/search?q=${query}`
-        : "/api/products?limit=12";
+        ? `/api/products/search?q=${query}&page=${page}`
+        : `/api/products?page=${page}`;
       const response = await fetch(url);
       const data = await response.json();
 
+      hideSkeletons();
+
       if (data.products && data.products.length > 0) {
         renderProducts(data.products);
+      } else if (page === 1) {
+        productsContainer.innerHTML = `<p class="text-center text-lg text-idcText">
+          No products found for "${query}".
+        </p>`;
       } else {
-        productsContainer.innerHTML = `
-          <p class="text-center text-lg text-idcText">
-            No products found for "${query}".
-          </p>`;
+        loadMoreButton.style.display = "none"; // Hide Load More
       }
     } catch (error) {
       console.error("Error fetching products:", error);
-      productsContainer.innerHTML = `
-        <p class="text-center text-lg text-idcText text-red-600">
-          Failed to load products. Please try again later.
-        </p>`;
     }
   }
 
   function renderProducts(products) {
-    productsContainer.innerHTML = products
+    const productsHTML = products
       .map((product) => generateProductHTML(product))
       .join("");
+    productsContainer.insertAdjacentHTML("beforeend", productsHTML);
     initAddToCartListeners();
   }
 
   function generateProductHTML(product) {
     return `
-      <div class="product-container bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform hover:scale-105">
+      <div class="product-container bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl">
         <img
           class="w-full h-48 object-cover rounded-lg mb-4"
           src="${product.image}"
           alt="${product.name}"
         />
-        <h3 class="text-lg font-bold text-idcPrimary limit-text-to-2-lines mb-2">
-          ${product.name}
-        </h3>
-        <div class="flex items-center mb-4">
-          <img
-            class="w-20 h-5"
-            src="images/ratings/rating-${product.rating.stars}.png"
-            alt="${product.rating.stars} stars"
-          />
-          <span class="ml-2 text-sm text-idcText">
-            (${product.rating.count} reviews)
-          </span>
+        <h3 class="text-lg font-bold text-idcPrimary limit-text-to-2-lines mb-2">${
+          product.name
+        }</h3>
+        <p class="text-xl font-semibold text-idcHighlight">${formatCurrency(
+          product.priceCents
+        )}</p>
+        <div class="flex items-center mt-2">
+          <label for="quantity-${product._id}" class="mr-2">Qty:</label>
+          <select id="quantity-${product._id}" class="w-16">
+            ${Array.from(
+              { length: 10 },
+              (_, i) => `<option value="${i + 1}">${i + 1}</option>`
+            ).join("")}
+          </select>
         </div>
-        <p class="text-xl font-semibold text-idcHighlight">
-          ${formatCurrency(product.priceCents)}
-        </p>
         <button
-          class="js-add-to-cart w-full mt-4 px-4 py-2 bg-idcHighlight text-black font-bold rounded-lg hover:bg-opacity-90"
-          data-product-id="${product._id}"
-        >
+          class="js-add-to-cart w-full mt-4 px-4 py-2 bg-idcHighlight text-black font-bold rounded-lg"
+          data-product-id="${product._id}">
           Add to Cart
         </button>
-      </div>
-    `;
+      </div>`;
   }
+
+  function showNotification(message) {
+    const notification = document.createElement("div");
+    notification.className =
+      "bg-green-500 text-white px-4 py-2 rounded shadow-lg mb-4";
+    notification.textContent = message;
+    notificationContainer.appendChild(notification);
+    notificationContainer.classList.remove("hidden");
+
+    setTimeout(() => {
+      notification.remove();
+      if (!notificationContainer.children.length) {
+        notificationContainer.classList.add("hidden");
+      }
+    }, 3000);
+  }
+
+  loadMoreButton.addEventListener("click", () => {
+    currentPage++;
+    fetchProducts("", currentPage);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("js-add-to-cart")) {
+      const productId = e.target.dataset.productId;
+      const quantity = document.getElementById(`quantity-${productId}`).value;
+
+      // Simulate adding to cart
+      showNotification(`Added ${quantity} item(s) to the cart.`);
+    }
+  });
+
+  // Initial fetch
+  fetchProducts();
 });

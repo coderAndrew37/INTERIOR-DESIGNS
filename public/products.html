@@ -56,6 +56,11 @@
       </div>
     </header>
 
+    <!-- Notification Section -->
+    <div id="notification-container" class="fixed top-4 right-4 z-50 hidden">
+      <!-- Toast notifications dynamically injected here -->
+    </div>
+
     <!-- Products Section -->
     <section id="products" class="py-16 bg-idcBackground">
       <div class="container mx-auto px-6">
@@ -63,7 +68,19 @@
           Our Products
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Products dynamically populated here -->
+          <!-- Skeleton placeholders -->
+          <div
+            class="skeleton bg-idcAccent p-6 rounded-lg shadow-lg"
+            style="display: none"
+          ></div>
+        </div>
+        <div class="text-center mt-8">
+          <button
+            id="load-more"
+            class="px-4 py-2 bg-idcHighlight text-black rounded-lg hover:bg-opacity-90"
+          >
+            Load More
+          </button>
         </div>
       </div>
     </section>
