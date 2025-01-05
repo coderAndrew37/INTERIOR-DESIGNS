@@ -90,34 +90,6 @@ export const projects = [
       "/images/Amboseli/after6.jpg",
     ],
   },
-  {
-    id: "4",
-    title: "Rustic Farmhouse",
-    desc: "A cozy and rustic interior for a countryside farmhouse.",
-    image: "/images/projects/farmhouse.jpg", // Featured image
-    before: [
-      "/images/projects/farmhouse-before1.jpg",
-      "/images/projects/farmhouse-before2.jpg",
-    ],
-    after: [
-      "/images/projects/farmhouse-after1.jpg",
-      "/images/projects/farmhouse-after2.jpg",
-    ],
-  },
-  {
-    id: "5",
-    title: "Luxury Penthouse",
-    desc: "An elegant and opulent penthouse overlooking Nairobi's skyline.",
-    image: "/images/projects/luxury-penthouse.jpg", // Featured image
-    before: [
-      "/images/projects/luxury-penthouse-before1.jpg",
-      "/images/projects/luxury-penthouse-before2.jpg",
-    ],
-    after: [
-      "/images/projects/luxury-penthouse-after1.jpg",
-      "/images/projects/luxury-penthouse-after2.jpg",
-    ],
-  },
 ];
 
 export const testimonials = [

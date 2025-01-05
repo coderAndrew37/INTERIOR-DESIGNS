@@ -17,3 +17,17 @@
   transition: max-height 0.3s ease-in-out;
   overflow: hidden; /* Prevents content from overflowing during animation */
 }
+
+#projects .grid img {
+  height: 200px; /* Set a uniform height */
+  width: 100%; /* Ensure the image spans the full width */
+  object-fit: cover; /* Crop the image to fill the space */
+  object-position: center; /* Center the image within the space */
+  border-radius: 0.5rem; /* Match the existing rounded corners */
+}
+
+@media (max-width: 768px) {
+  #projects .grid img {
+    height: 150px; /* Reduce height for smaller screens */
+  }
+}
