@@ -24,14 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
       description: "Comfortable and luxurious pillows for every need.",
     },
     {
-      name: "curtains and sheers",
+      name: "Decor",
       fullScreenImage: "/images/curtains-fullscreen.jpg",
-      description: "Elegant curtains to match your style.",
+      description: "Elevate your home with beautiful decor pieces.",
     },
     {
-      name: "others",
-      fullScreenImage: "/images/others-fullscreen.jpg",
-      description: "Explore a variety of other products.",
+      name: "Bath",
+      fullScreenImage: "/images/bath-fullscreen.jpg",
+      description: "Indulge in the perfect bathroom experience.",
     },
   ];
 

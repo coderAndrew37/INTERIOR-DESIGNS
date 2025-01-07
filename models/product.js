@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ["beddings", "furniture", "pillows", "curtains and sheers", "others"],
+    enum: ["beddings", "furniture", "pillows", "decor", "bath"],
   },
 });
 
@@ -38,13 +38,7 @@ function validateProduct(product) {
     type: Joi.string().valid("product").optional(),
     keywords: Joi.array().items(Joi.string()).optional(),
     category: Joi.string()
-      .valid(
-        "beddings",
-        "furniture",
-        "pillows",
-        "curtains and sheers",
-        "others"
-      )
+      .valid("beddings", "furniture", "pillows", "decor", "bath")
       .required(),
   });
 
