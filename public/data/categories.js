@@ -15,7 +15,7 @@ export const categories = [
     name: "pillows",
     fullScreenImage: "/images/pillows-fullscreen.jpg",
     description: "Comfortable and luxurious pillows for every need.",
-    icon: "fas fa-pillow",
+    icon: "",
   },
   {
     name: "decor",
