@@ -28,3 +28,4 @@
 2025-01-06T18:08:02.207Z [ERROR]: Could not connect to MongoDB read ECONNRESET
 2025-01-07T09:45:02.976Z [ERROR]: Could not connect to MongoDB querySrv ETIMEOUT _mongodb._tcp.test.gvdcm.mongodb.net
 2025-01-07T11:35:21.835Z [ERROR]: Could not connect to MongoDB querySrv ETIMEOUT _mongodb._tcp.test.gvdcm.mongodb.net
+2025-01-07T13:28:02.702Z [ERROR]: Could not connect to MongoDB queryTxt ETIMEOUT test.gvdcm.mongodb.net
