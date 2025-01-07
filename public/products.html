@@ -16,60 +16,51 @@
   </head>
   <body class="bg-idcBackground text-idcText font-idcSans">
     <!-- Navbar -->
-    <header class="bg-idcAccent sticky top-0 z-50">
+    <nav class="bg-idcAccent sticky top-0 z-50 shadow-lg">
       <div
-        class="container mx-auto flex flex-wrap items-center justify-between gap-y-4 py-4 px-6"
+        class="container mx-auto flex items-center justify-between py-4 px-6"
       >
-        <a href="/" class="text-2xl font-bold text-idcPrimary flex-grow-0"
+        <a href="/" class="text-2xl font-bold text-idcPrimary"
           >Interior Design</a
         >
 
+        <!-- Search Bar -->
         <div class="flex items-center w-full lg:w-auto flex-grow max-w-2xl">
           <input
             type="text"
             id="search-input"
             placeholder="Search products..."
-            class="w-full h-12 py-2 px-4 rounded-l-md text-idcText bg-idcBackground border border-idcHighlight focus:outline-none focus:ring-2 focus:ring-idcHighlight"
+            class="w-full h-10 py-2 px-4 rounded-l-lg text-idcText bg-idcBackground border border-idcHighlight focus:outline-none focus:ring-2 focus:ring-idcHighlight"
           />
           <button
             id="search-button"
-            class="h-12 px-5 bg-idcHighlight text-black font-semibold rounded-r-md hover:bg-opacity-90"
+            class="h-10 px-5 bg-idcHighlight text-black font-semibold rounded-r-lg hover:bg-opacity-90"
           >
             Search
           </button>
         </div>
 
-        <div class="relative w-full lg:w-auto mt-2 lg:mt-0">
-          <ul
-            id="suggestion-list"
-            class="absolute top-full mt-1 w-full bg-white shadow-lg rounded-lg hidden z-10 max-h-48 overflow-y-auto"
-          ></ul>
-        </div>
-
-        <div class="flex items-center space-x-4">
+        <!-- Cart and Login -->
+        <div class="relative flex items-center space-x-4">
           <a href="/checkout.html" class="relative">
             <i class="fas fa-shopping-cart text-idcPrimary text-2xl"></i>
             <span
               id="cart-count"
-              class="js-cart-quantity absolute top-0 right-0 bg-idcHighlight text-black text-xs rounded-full px-2 py-1 hidden"
+              class="absolute top-0 right-0 bg-idcHighlight text-black text-xs rounded-full px-2 py-1 hidden"
+              >0</span
             >
-              0
-            </span>
           </a>
-          <button class="js-auth-button px-4 py-2 rounded-md text-white">
+          <button
+            class="js-auth-button px-4 py-2 bg-idcHighlight text-black font-semibold rounded hover:bg-opacity-90"
+          >
             Login
           </button>
         </div>
       </div>
-    </header>
+    </nav>
 
-    <!-- Notification Section -->
-    <div id="notification-container" class="fixed top-4 right-4 z-50 hidden">
-      <!-- Toast notifications dynamically injected here -->
-    </div>
-
-    <!-- Category Filter -->
-    <nav class="categories-nav bg-idcAccent sticky top-0 z-50 overflow-x-auto">
+    <!-- Categories Navigation -->
+    <nav class="categories-nav bg-idcAccent overflow-x-auto">
       <ul class="flex space-x-6 px-4 py-2">
         <li class="category-item active" data-category="beddings">Beddings</li>
         <li class="category-item" data-category="furniture">Furniture</li>
@@ -81,6 +72,10 @@
       </ul>
     </nav>
 
+    <!-- Notification Section -->
+    <div id="notification-container" class="fixed top-4 right-4 z-50 hidden">
+      <!-- Toast notifications dynamically injected here -->
+    </div>
     <!-- Enhanced Hero Section -->
     <section id="hero-carousel" class="swiper-container w-full h-screen">
       <div class="swiper-wrapper">

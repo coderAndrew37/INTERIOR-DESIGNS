@@ -155,3 +155,33 @@
 .swiper-button-next {
   color: white;
 }
+
+/* Navigation Buttons */
+.prev-button,
+.next-button {
+  background-color: #f3f3f3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.prev-button:hover,
+.next-button:hover {
+  background-color: #f0c040;
+}
+
+/* Responsive Product Grid */
+.horizontal-scroll-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .horizontal-scroll-container {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .horizontal-scroll-container {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
