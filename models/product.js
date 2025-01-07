@@ -13,8 +13,13 @@ const productSchema = new mongoose.Schema({
   name: { type: String, required: true, minlength: 3, maxlength: 100 },
   rating: { type: ratingSchema, required: true },
   priceCents: { type: Number, required: true, min: 0 },
-  type: { type: String, default: "product" }, // 'product' is the default type
-  keywords: Array, // Optional, can store product-related keywords
+  type: { type: String, default: "product" },
+  keywords: Array,
+  category: {
+    type: String,
+    required: true,
+    enum: ["beddings", "furniture", "pillows", "curtains and sheers", "others"],
+  },
 });
 
 // Mongoose model
@@ -32,6 +37,15 @@ function validateProduct(product) {
     priceCents: Joi.number().min(0).required(),
     type: Joi.string().valid("product").optional(),
     keywords: Joi.array().items(Joi.string()).optional(),
+    category: Joi.string()
+      .valid(
+        "beddings",
+        "furniture",
+        "pillows",
+        "curtains and sheers",
+        "others"
+      )
+      .required(),
   });
 
   return schema.validate(product);

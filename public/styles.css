@@ -31,3 +31,127 @@
     height: 150px; /* Reduce height for smaller screens */
   }
 }
+
+/* Hero Section */
+#hero-carousel {
+  position: relative;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-slide img {
+  min-width: 100%;
+  height: 100%;
+}
+
+#prev-slide,
+#next-slide {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+/* Horizontal Scroll Section */
+.horizontal-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Full-Screen Image */
+.full-screen-image {
+  height: 100vh;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.spinner {
+  border: 2px solid transparent;
+  border-top: 2px solid #000;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Scroll Snapping */
+.horizontal-scroll-container {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+}
+
+.product-container {
+  scroll-snap-align: start;
+}
+
+/* Categories Nav */
+.categories-nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f8f8f8;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+  overflow-x: auto;
+}
+
+.category-item {
+  cursor: pointer;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: #555;
+  white-space: nowrap;
+}
+
+.category-item.active {
+  color: #000;
+  border-bottom: 2px solid #000;
+}
+
+/* Hero Section */
+.overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.overlay h1 {
+  font-size: 3rem;
+}
+
+.overlay p {
+  font-size: 1.25rem;
+}
+
+/* Swiper Buttons */
+.swiper-button-prev,
+.swiper-button-next {
+  color: white;
+}

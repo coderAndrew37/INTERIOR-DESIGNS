@@ -668,3 +668,32 @@
 2025-01-05T13:47:58.914Z [INFO]: Connected to MongoDB
 2025-01-05T13:48:07.892Z [INFO]: Server running on port 8000
 2025-01-05T13:48:12.176Z [INFO]: Connected to MongoDB
+2025-01-05T18:54:06.536Z [INFO]: Server running on port 8000
+2025-01-05T18:54:19.514Z [INFO]: Connected to MongoDB
+2025-01-06T06:40:20.107Z [INFO]: Server running on port 8000
+2025-01-06T06:40:22.219Z [INFO]: Connected to MongoDB
+2025-01-06T07:09:14.022Z [INFO]: Server running on port 8000
+2025-01-06T07:09:15.749Z [INFO]: Connected to MongoDB
+2025-01-06T15:50:07.199Z [INFO]: Server running on port 8000
+2025-01-06T15:50:08.439Z [INFO]: Connected to MongoDB
+2025-01-06T17:18:21.017Z [INFO]: Server running on port 8000
+2025-01-06T17:18:52.139Z [ERROR]: Could not connect to MongoDB Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-01-06T18:07:32.717Z [INFO]: Server running on port 8000
+2025-01-06T18:08:02.207Z [ERROR]: Could not connect to MongoDB read ECONNRESET
+2025-01-06T18:08:22.074Z [INFO]: Server running on port 8000
+2025-01-07T09:43:22.971Z [INFO]: Server running on port 8000
+2025-01-07T09:44:06.570Z [INFO]: Server running on port 8000
+2025-01-07T09:44:39.685Z [INFO]: Server running on port 8000
+2025-01-07T09:45:02.976Z [ERROR]: Could not connect to MongoDB querySrv ETIMEOUT _mongodb._tcp.test.gvdcm.mongodb.net
+2025-01-07T09:45:44.406Z [INFO]: Server running on port 8000
+2025-01-07T09:45:45.489Z [INFO]: Connected to MongoDB
+2025-01-07T10:08:45.922Z [INFO]: Server running on port 8000
+2025-01-07T10:08:47.979Z [INFO]: Connected to MongoDB
+2025-01-07T10:09:16.575Z [INFO]: Server running on port 8000
+2025-01-07T10:09:19.918Z [INFO]: Connected to MongoDB
+2025-01-07T10:10:33.771Z [INFO]: Server running on port 8000
+2025-01-07T10:10:35.669Z [INFO]: Connected to MongoDB
+2025-01-07T10:12:55.474Z [INFO]: Server running on port 8000
+2025-01-07T10:12:56.882Z [INFO]: Connected to MongoDB
+2025-01-07T10:22:18.740Z [INFO]: Server running on port 8000
+2025-01-07T10:22:19.913Z [INFO]: Connected to MongoDB

@@ -5,28 +5,50 @@ const mongoose = require("mongoose");
 
 // Fetch products with pagination
 router.get("/", async (req, res) => {
-  const page = parseInt(req.query.page, 10) || 1; // Default to page 1
-  const limit = parseInt(req.query.limit, 10) || 15; // Default to 15 items per page
+  const { page = 1, limit = 15, category } = req.query;
 
   try {
-    // Count total products
-    const totalProducts = await Product.countDocuments();
-    const totalPages = Math.ceil(totalProducts / limit);
-
-    // Retrieve products with pagination
-    const products = await Product.find()
+    const filter = category ? { category } : {};
+    const totalProducts = await Product.countDocuments(filter);
+    const products = await Product.find(filter)
       .skip((page - 1) * limit)
       .limit(limit);
 
     res.json({
       products,
-      currentPage: page,
-      totalPages,
+      currentPage: Number(page),
+      totalPages: Math.ceil(totalProducts / limit),
       totalProducts,
     });
   } catch (error) {
     console.error("Error fetching products:", error);
     res.status(500).json({ error: "Failed to fetch products" });
+  }
+});
+
+router.get("/search", async (req, res) => {
+  const { q, page = 1, limit = 10, category } = req.query;
+
+  try {
+    const filter = {
+      name: { $regex: q, $options: "i" },
+      ...(category && { category }),
+    };
+
+    const totalProducts = await Product.countDocuments(filter);
+    const products = await Product.find(filter)
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    res.json({
+      products,
+      currentPage: Number(page),
+      totalPages: Math.ceil(totalProducts / limit),
+      totalProducts,
+    });
+  } catch (error) {
+    console.error("Error during product search:", error);
+    res.status(500).json({ error: "Server error during search" });
   }
 });
 
@@ -67,43 +89,6 @@ router.post("/", async (req, res) => {
     res.status(500).json({ message: "Failed to add product" });
   }
 });
-
-// Search products
-router.get("/search", async (req, res) => {
-  const query = req.query.q;
-  const page = parseInt(req.query.page, 10) || 1;
-  const limit = parseInt(req.query.limit, 10) || 10;
-
-  if (!query) {
-    return res.status(400).json({ message: "Query is required" });
-  }
-
-  try {
-    const products = await Product.find({
-      name: { $regex: query, $options: "i" },
-    })
-      .skip((page - 1) * limit)
-      .limit(limit)
-      .select("name image rating priceCents");
-
-    const totalProducts = await Product.countDocuments({
-      name: { $regex: query, $options: "i" },
-    });
-    const totalPages = Math.ceil(totalProducts / limit);
-
-    res.json({
-      products,
-      currentPage: page,
-      totalPages,
-      totalProducts,
-    });
-  } catch (error) {
-    console.error("Error during product search:", error);
-    res.status(500).json({ error: "Server error during search" });
-  }
-});
-
-module.exports = router;
 
 // Add a new route in API for suggestions
 router.get("/suggestions", async (req, res) => {

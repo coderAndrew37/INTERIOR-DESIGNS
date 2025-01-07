@@ -6,6 +6,13 @@
     <title>Products | Interior Design Kenya</title>
     <link rel="stylesheet" href="/output.css" />
     <link rel="stylesheet" href="/styles.css" />
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   </head>
   <body class="bg-idcBackground text-idcText font-idcSans">
     <!-- Navbar -->
@@ -61,36 +68,107 @@
       <!-- Toast notifications dynamically injected here -->
     </div>
 
-    <!-- Products Section -->
-    <section id="products" class="py-16 bg-idcBackground">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-idcSerif text-idcPrimary mb-6 text-center">
-          Our Products
-        </h2>
-        <!-- Grid for products and skeletons -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Skeletons to mimic product containers -->
+    <!-- Category Filter -->
+    <nav class="categories-nav bg-idcAccent sticky top-0 z-50 overflow-x-auto">
+      <ul class="flex space-x-6 px-4 py-2">
+        <li class="category-item active" data-category="beddings">Beddings</li>
+        <li class="category-item" data-category="furniture">Furniture</li>
+        <li class="category-item" data-category="pillows">Pillows</li>
+        <li class="category-item" data-category="curtains">
+          Curtains & Sheers
+        </li>
+        <li class="category-item" data-category="others">Others</li>
+      </ul>
+    </nav>
+
+    <!-- Enhanced Hero Section -->
+    <section id="hero-carousel" class="swiper-container w-full h-screen">
+      <div class="swiper-wrapper">
+        <!-- Hero Slides -->
+        <div class="swiper-slide relative">
+          <img
+            src="/images/image1.jpg"
+            alt="Hero Image 1"
+            class="w-full h-full object-cover"
+          />
           <div
-            class="skeleton bg-idcAccent p-6 rounded-lg shadow-lg"
-            style="display: none"
+            class="overlay absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white p-4"
           >
-            <div class="w-full h-48 bg-gray-300 rounded-lg mb-4"></div>
-            <div class="h-6 bg-gray-300 rounded mb-2 w-3/4"></div>
-            <div class="h-6 bg-gray-300 rounded mb-4 w-1/2"></div>
-            <div class="h-6 bg-gray-300 rounded w-1/3"></div>
+            <h1 class="text-4xl font-bold mb-4">Explore Beddings</h1>
+            <p class="mb-6">Discover premium quality beddings for your home.</p>
+            <div class="flex space-x-4">
+              <a
+                href="/beddings.html"
+                class="bg-idcHighlight text-black px-4 py-2 rounded-md font-semibold"
+                >Shop Now</a
+              >
+              <a
+                href="/about.html"
+                class="bg-white text-black px-4 py-2 rounded-md font-semibold"
+                >Learn More</a
+              >
+            </div>
           </div>
         </div>
-        <!-- Load More button -->
-        <div class="text-center mt-8">
-          <button
-            id="load-more"
-            class="px-4 py-2 bg-idcHighlight text-black rounded-lg hover:bg-opacity-90"
+        <div class="swiper-slide relative">
+          <img
+            src="/images/image2.jpg"
+            alt="Hero Image 2"
+            class="w-full h-full object-cover"
+          />
+          <div
+            class="overlay absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white p-4"
           >
-            Load More
-          </button>
+            <h1 class="text-4xl font-bold mb-4">Stylish Furniture</h1>
+            <p class="mb-6">Upgrade your space with our exclusive furniture.</p>
+            <div class="flex space-x-4">
+              <a
+                href="/furniture.html"
+                class="bg-idcHighlight text-black px-4 py-2 rounded-md font-semibold"
+                >Shop Now</a
+              >
+              <a
+                href="/about.html"
+                class="bg-white text-black px-4 py-2 rounded-md font-semibold"
+                >Learn More</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide relative">
+          <img
+            src="/images/image3.jpg"
+            alt="Hero Image 3"
+            class="w-full h-full object-cover"
+          />
+          <div
+            class="overlay absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white p-4"
+          >
+            <h1 class="text-4xl font-bold mb-4">Elegant Curtains</h1>
+            <p class="mb-6">Find curtains that bring your vision to life.</p>
+            <div class="flex space-x-4">
+              <a
+                href="/curtains.html"
+                class="bg-idcHighlight text-black px-4 py-2 rounded-md font-semibold"
+                >Shop Now</a
+              >
+              <a
+                href="/about.html"
+                class="bg-white text-black px-4 py-2 rounded-md font-semibold"
+                >Learn More</a
+              >
+            </div>
+          </div>
         </div>
       </div>
+      <!-- Swiper Pagination & Navigation -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </section>
+
+    <!-- Categories Container -->
+    <div id="categories-container"></div>
 
     <footer class="bg-idcBackground text-center py-4">
       <p class="text-idcText">

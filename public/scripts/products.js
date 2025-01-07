@@ -3,34 +3,158 @@ import { initAddToCartListeners } from "./utils/cartUtils.js";
 import { initializeCart, initializeSmoothScroll } from "./shared.js";
 import "./authButton.js";
 
-// Initialize Add-to-Cart buttons
 document.addEventListener("DOMContentLoaded", () => {
   initializeCart();
   initializeSmoothScroll();
 
-  const productsContainer = document.querySelector("#products .grid");
-  const skeletonTemplate = document.querySelector(".skeleton");
-  const notificationContainer = document.getElementById(
-    "notification-container"
-  );
-  const loadMoreButton = document.getElementById("load-more");
+  const categories = [
+    {
+      name: "beddings",
+      fullScreenImage: "/images/beddings-fullscreen.jpg",
+      description: "Discover premium beddings for your home.",
+    },
+    {
+      name: "furniture",
+      fullScreenImage: "/images/furniture-fullscreen.jpg",
+      description: "Upgrade your space with stylish furniture.",
+    },
+    {
+      name: "pillows",
+      fullScreenImage: "/images/pillows-fullscreen.jpg",
+      description: "Comfortable and luxurious pillows for every need.",
+    },
+    {
+      name: "curtains and sheers",
+      fullScreenImage: "/images/curtains-fullscreen.jpg",
+      description: "Elegant curtains to match your style.",
+    },
+    {
+      name: "others",
+      fullScreenImage: "/images/others-fullscreen.jpg",
+      description: "Explore a variety of other products.",
+    },
+  ];
 
-  let currentPage = 1;
-  let isFetching = false;
+  const categoriesContainer = document.querySelector("#categories-container");
 
-  // Show skeletons
-  function showSkeletons(count = 6) {
-    for (let i = 0; i < count; i++) {
-      const skeleton = skeletonTemplate.cloneNode(true);
-      skeleton.style.display = "block";
-      productsContainer.appendChild(skeleton);
+  // Hero Carousel with Swiper.js
+  new Swiper(".swiper-container", {
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+
+  // Horizontal Scroll for Categories
+  function enableDragScroll(container) {
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    container.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      container.classList.add("dragging");
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener("mouseleave", () => {
+      isDragging = false;
+      container.classList.remove("dragging");
+    });
+
+    container.addEventListener("mouseup", () => {
+      isDragging = false;
+      container.classList.remove("dragging");
+    });
+
+    container.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 2; // Adjust scroll speed
+      container.scrollLeft = scrollLeft - walk;
+    });
+  }
+
+  // Fetch and Render Categories
+  categories.forEach(async (category) => {
+    // Generate Section HTML
+    const sectionHTML = `
+      <section class="category-section my-16" data-category="${category.name}">
+        <h2 class="text-3xl font-bold mb-4 capitalize">${category.name}</h2>
+        <p class="mb-4 text-lg">${category.description}</p>
+        <div class="horizontal-scroll-container flex overflow-x-auto gap-4 snap-x">
+          <!-- Products dynamically inserted here -->
+        </div>
+        <button class="view-more-button mt-4 text-idcHighlight">View More</button>
+      </section>
+      <div
+        class="full-screen-image w-full h-screen bg-cover bg-center my-16"
+        style="background-image: url('${category.fullScreenImage}');"
+      ></div>
+    `;
+    categoriesContainer.insertAdjacentHTML("beforeend", sectionHTML);
+
+    // Fetch and Render Products for the Category
+    const container = document.querySelector(
+      `.category-section[data-category="${category.name}"] .horizontal-scroll-container`
+    );
+
+    try {
+      const response = await fetch(
+        `/api/products?category=${category.name}&limit=10`
+      );
+      const { products } = await response.json();
+
+      products.forEach((product) => {
+        const productHTML = `
+          <div class="product-container bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl snap-start">
+            <img
+              src="${product.image}"
+              alt="${product.name}"
+              class="w-full h-48 object-cover rounded-lg mb-4"
+            />
+            <h3 class="text-lg font-bold text-idcPrimary limit-text-to-2-lines mb-2">${
+              product.name
+            }</h3>
+            <p class="text-xl font-semibold text-idcHighlight">${formatCurrency(
+              product.priceCents
+            )}</p>
+            <button
+              class="js-add-to-cart w-full mt-4 px-4 py-2 bg-idcHighlight text-black font-bold rounded-lg"
+              data-product-id="${product._id}">
+              Add to Cart
+            </button>
+          </div>
+        `;
+        container.insertAdjacentHTML("beforeend", productHTML);
+      });
+
+      enableDragScroll(container);
+      initAddToCartListeners();
+    } catch (error) {
+      console.error(
+        `Error fetching products for category ${category.name}:`,
+        error
+      );
     }
-  }
+  });
 
-  // Hide skeletons
-  function hideSkeletons() {
-    document.querySelectorAll(".skeleton").forEach((el) => el.remove());
-  }
+  // Search Functionality
+  const searchInput = document.getElementById("search-input");
+  const searchButton = document.getElementById("search-button");
+  const loadMoreButton = document.getElementById("load-more");
+  let currentPage = 1;
 
   async function fetchProducts(query = "", page = 1) {
     if (isFetching) return; // Prevent duplicate requests
@@ -38,22 +162,18 @@ document.addEventListener("DOMContentLoaded", () => {
     loadMoreButton.disabled = true;
 
     try {
-      showSkeletons(6); // Show 6 skeletons
       const url = query
         ? `/api/products/search?q=${query}&page=${page}`
         : `/api/products?page=${page}`;
       const response = await fetch(url);
       const data = await response.json();
 
-      hideSkeletons();
-      isFetching = false;
-
       if (data.products && data.products.length > 0) {
         renderProducts(data.products);
         loadMoreButton.style.display =
           data.currentPage < data.totalPages ? "inline-block" : "none";
       } else if (page === 1) {
-        productsContainer.innerHTML = `<p class="text-center text-lg text-idcText">
+        categoriesContainer.innerHTML = `<p class="text-center text-lg text-idcText">
           No products found for "${query}".
         </p>`;
         loadMoreButton.style.display = "none";
@@ -62,83 +182,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } catch (error) {
       console.error("Error fetching products:", error);
-      hideSkeletons();
-      isFetching = false;
     } finally {
+      isFetching = false;
       loadMoreButton.disabled = false;
     }
   }
 
-  function renderProducts(products) {
-    const productsHTML = products
-      .map((product) => generateProductHTML(product))
-      .join("");
-    productsContainer.insertAdjacentHTML("beforeend", productsHTML);
-    initAddToCartListeners();
-  }
-
-  function generateProductHTML(product) {
-    return `
-      <div class="product-container bg-idcAccent p-6 rounded-lg shadow-lg hover:shadow-xl">
-        <img
-          class="w-full h-48 object-cover rounded-lg mb-4"
-          src="${product.image}"
-          alt="${product.name}"
-        />
-        <h3 class="text-lg font-bold text-idcPrimary limit-text-to-2-lines mb-2">${
-          product.name
-        }</h3>
-        <p class="text-xl font-semibold text-idcHighlight">${formatCurrency(
-          product.priceCents
-        )}</p>
-        <div class="flex items-center mt-2">
-          <label for="quantity-${product._id}" class="mr-2">Qty:</label>
-          <select id="quantity-${product._id}" class="w-16">
-            ${Array.from(
-              { length: 10 },
-              (_, i) => `<option value="${i + 1}">${i + 1}</option>`
-            ).join("")}
-          </select>
-        </div>
-        <button
-          class="js-add-to-cart w-full mt-4 px-4 py-2 bg-idcHighlight text-black font-bold rounded-lg"
-          data-product-id="${product._id}">
-          Add to Cart
-        </button>
-      </div>`;
-  }
-
-  function showNotification(message) {
-    const notification = document.createElement("div");
-    notification.className =
-      "bg-green-500 text-white px-4 py-2 rounded shadow-lg mb-4";
-    notification.textContent = message;
-    notificationContainer.appendChild(notification);
-    notificationContainer.classList.remove("hidden");
-
-    setTimeout(() => {
-      notification.remove();
-      if (!notificationContainer.children.length) {
-        notificationContainer.classList.add("hidden");
-      }
-    }, 3000);
-  }
+  searchButton.addEventListener("click", () => {
+    const query = searchInput.value.trim();
+    if (query) {
+      categoriesContainer.innerHTML = ""; // Clear current products
+      fetchProducts(query);
+    }
+  });
 
   loadMoreButton.addEventListener("click", () => {
     currentPage++;
     fetchProducts("", currentPage);
   });
-
-  document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("js-add-to-cart")) {
-      const productId = e.target.dataset.productId;
-      const quantity = document.getElementById(`quantity-${productId}`).value;
-
-      // Simulate adding to cart
-      showNotification(`Added ${quantity} item(s) to the cart.`);
-    }
-  });
-
-  // Initial fetch
-  fetchProducts();
 });
