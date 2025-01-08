@@ -5,12 +5,18 @@ export function renderCategories(categories, categoriesContainer) {
   categories.forEach((category) => {
     const sectionHTML = `
       <section class="category-section my-16" data-category="${category.name}">
-        <div class="full-screen-image w-full h-96 bg-cover bg-center mb-6" 
-             style="background-image: url('${category.fullScreenImage}');"></div>
-        <div class="text-center mb-6">
-          <i class="${category.icon} text-idcHighlight text-4xl"></i>
-          <h2 class="text-3xl font-bold mt-2">${category.name}</h2>
-          <p class="text-lg text-idcText italic">${category.description}</p>
+        <!-- Full-Screen Image with Overlay -->
+        <div 
+          class="relative full-screen-image w-full h-96 sm:h-72 xs:h-48 bg-cover bg-center mb-6"
+          style="background-image: url('${category.fullScreenImage}');"
+        >
+          <div 
+            class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white p-4"
+          >
+            <i class="${category.icon} text-idcHighlight text-4xl mb-2"></i>
+            <h2 class="text-3xl font-bold">${category.name}</h2>
+            <p class="text-lg italic">${category.description}</p>
+          </div>
         </div>
         <div class="products-wrapper grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
           <!-- Product Cards Rendered Dynamically Here -->
@@ -52,6 +58,7 @@ export function renderCategories(categories, categoriesContainer) {
                 src="${product.image}"
                 alt="${product.name}"
                 class="w-full h-48 object-cover rounded-lg mb-4"
+                loading="lazy"
               />
               <h3 class="text-lg font-bold text-idcPrimary limit-text-to-2-lines mb-2">
                 ${product.name}
