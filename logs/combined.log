@@ -940,3 +940,17 @@
 2025-01-28T08:18:16.193Z [INFO]: Connected to MongoDB
 2025-01-28T08:23:25.440Z [INFO]: Server running on port 8000
 2025-01-28T08:23:28.409Z [INFO]: Connected to MongoDB
+2025-01-28T08:37:30.951Z [INFO]: Server running on port 8000
+2025-01-28T08:37:32.571Z [INFO]: Connected to MongoDB
+2025-01-28T08:38:10.866Z [INFO]: Server running on port 8000
+2025-01-28T08:38:11.989Z [INFO]: Connected to MongoDB
+2025-01-28T08:40:50.523Z [INFO]: Server running on port 8000
+2025-01-28T08:41:01.424Z [INFO]: Server running on port 8000
+2025-01-28T08:41:02.432Z [INFO]: Connected to MongoDB
+2025-01-28T08:41:18.759Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html'
+2025-01-28T08:41:22.683Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html'
+2025-01-28T08:41:31.560Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html'
+2025-01-28T08:41:31.568Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html'
+2025-01-28T08:41:31.573Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html'
+2025-01-28T08:41:31.579Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html'
+2025-01-28T08:41:38.300Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html'
