@@ -226,7 +226,7 @@ export const blogs = [
   {
     id: "3",
     title: "Lighting Design: The Secret to a Perfect Room",
-    image: "/images/galla-5.jpg",
+    image: "/images/products/l-shape-sofa.jpg",
     description:
       "Learn how to use lighting to set the mood and enhance your interior design.",
     date: "2024-11-16",

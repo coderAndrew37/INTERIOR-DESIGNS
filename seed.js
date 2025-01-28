@@ -75,16 +75,7 @@ const products = [
     keywords: ["rwanda", "baskets", "decor"],
     category: "decor",
   },
-  {
-    image: "/images/products/throw-pillow.jpg",
-    name: "Throw Pillow Standard Size",
-    rating: { stars: 4.2, count: 75 },
-    priceCents: 150000,
-    hasPrice: true,
-    type: "product",
-    keywords: ["pillow", "throw", "bedding", "decor"],
-    category: "pillows",
-  },
+
   {
     image: "/images/products/bed-pillow.jpg",
     name: "Normal Bed Pillow",
@@ -95,26 +86,30 @@ const products = [
     keywords: ["pillow", "bed", "bedding"],
     category: "pillows",
   },
-  {
-    image: "/images/products/big-towel.jpg",
-    name: "Big Towel",
-    rating: { stars: 4.5, count: 60 },
-    priceCents: 200000,
-    hasPrice: true,
-    type: "product",
-    keywords: ["towel", "big", "bath"],
-    category: "bath",
-  },
+
   {
     image: "/images/products/bathrobe.jpg",
     name: "Bathrobe",
     rating: { stars: 4.7, count: 80 },
-    priceCents: 250000,
-    hasPrice: true,
+    priceCents: 0,
+    hasPrice: false,
     type: "product",
     keywords: ["bathrobe", "bath", "comfort"],
     category: "bath",
   },
+
+  //adding bath towels set
+  {
+    image: "/images/products/bath-towels-set.jpg",
+    name: "Bath Towels Set",
+    rating: { stars: 4.7, count: 80 },
+    priceCents: 0,
+    hasPrice: false,
+    type: "product",
+    keywords: ["towels", "bath", "comfort"],
+    category: "bath",
+  },
+
   {
     image: "/images/products/blankets.jpg",
     name: "Throw Blankets",
@@ -165,22 +160,25 @@ const products = [
     keywords: ["duvet", "colored", "bedding", "4x6"],
     category: "beddings",
   },
-  {
-    image: "/images/products/mattress-protector.jpg",
-    name: "Mattress Protector 6x6",
-    rating: { stars: 4.2, count: 70 },
-    priceCents: 350000,
-    hasPrice: true,
-    type: "product",
-    keywords: ["mattress protector", "6x6", "bedding"],
-    category: "beddings",
-  },
+
   {
     image: "/images/products/pillow-and-case.jpeg",
     name: "Throw Pillows and Case",
     rating: { stars: 4, count: 110 },
     priceCents: 150000,
     hasPrice: true,
+    type: "product",
+    keywords: ["pillows", "decor", "home"],
+    category: "pillows",
+  },
+
+  //adding pillows set
+  {
+    image: "/images/products/pillow-set.jpg",
+    name: "Pillows Set",
+    rating: { stars: 4.5, count: 120 },
+    priceCents: 0,
+    hasPrice: false,
     type: "product",
     keywords: ["pillows", "decor", "home"],
     category: "pillows",
@@ -195,16 +193,7 @@ const products = [
     keywords: ["mirrors", "decor", "home"],
     category: "decor",
   },
-  {
-    image: "/images/products/towel-bathrobe.jpg",
-    name: "Towel Bathrobe",
-    rating: { stars: 4.7, count: 80 },
-    priceCents: 250000,
-    hasPrice: true,
-    type: "product",
-    keywords: ["bathrobe", "bath", "comfort"],
-    category: "bath",
-  },
+
   {
     image: "/images/products/wooden-chair.jpg",
     name: "Wooden Chair",
@@ -225,16 +214,7 @@ const products = [
     keywords: ["coffee table", "living room", "furniture"],
     category: "furniture",
   },
-  {
-    image: "/images/products/sofa-couch.jpg",
-    name: "Sofa Couch",
-    rating: { stars: 4.8, count: 80 },
-    priceCents: 0,
-    hasPrice: false,
-    type: "product",
-    keywords: ["sofa", "couch", "living room", "furniture"],
-    category: "furniture",
-  },
+
   {
     image: "/images/products/dining-table.jpg",
     name: "Dining Table",
@@ -263,6 +243,51 @@ const products = [
     hasPrice: false,
     type: "product",
     keywords: ["wardrobe", "furniture", "storage"],
+    category: "furniture",
+  },
+  //adding l-shape sofa
+  {
+    image: "/images/products/l-shape-sofa.jpg",
+    name: "L-Shape Sofa",
+    rating: { stars: 4.8, count: 80 },
+    priceCents: 0,
+    hasPrice: false,
+    type: "product",
+    keywords: ["sofa", "couch", "living room", "furniture"],
+    category: "furniture",
+  },
+  //adding sofa set
+  {
+    image: "/images/products/sofa-set.jpg",
+    name: "Modern Sofa Set",
+    rating: { stars: 4.8, count: 80 },
+    priceCents: 0,
+    hasPrice: false,
+    type: "product",
+    keywords: ["sofa", "couch", "living room", "furniture"],
+    category: "furniture",
+  },
+  //adding semi recliner
+  {
+    image: "/images/products/semi-recliner.jpg",
+    name: "Semi Recliner",
+    rating: { stars: 4.8, count: 80 },
+    priceCents: 0,
+    hasPrice: false,
+    type: "product",
+    keywords: ["sofa", "couch", "living room", "furniture"],
+    category: "furniture",
+  },
+
+  // adding bedroom setup
+  {
+    image: "/images/products/bedroom-setup.jpg",
+    name: "Bedroom Setup",
+    rating: { stars: 4.8, count: 80 },
+    priceCents: 0,
+    hasPrice: false,
+    type: "product",
+    keywords: ["bedroom", "furniture", "storage"],
     category: "furniture",
   },
 ];
