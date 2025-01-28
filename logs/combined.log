@@ -954,3 +954,23 @@
 2025-01-28T08:41:31.573Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html'
 2025-01-28T08:41:31.579Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html'
 2025-01-28T08:41:38.300Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html'
+2025-01-28T08:43:57.390Z [INFO]: Server running on port 8000
+2025-01-28T08:43:58.862Z [INFO]: Connected to MongoDB
+2025-01-28T08:44:04.088Z [INFO]: Server running on port 8000
+2025-01-28T08:44:05.031Z [INFO]: Connected to MongoDB
+2025-01-28T08:44:18.265Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\unauthorized.html' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\unauthorized.html'
+2025-01-28T08:44:18.408Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404.html'
+2025-01-28T08:45:00.447Z [INFO]: Server running on port 8000
+2025-01-28T08:45:01.950Z [INFO]: Connected to MongoDB
+2025-01-28T08:45:07.743Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404'
+2025-01-28T08:45:12.556Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\unauthorized' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\unauthorized'
+2025-01-28T08:45:26.767Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404'
+2025-01-28T08:45:31.998Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404'
+2025-01-28T08:46:17.741Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404'
+2025-01-28T08:47:13.662Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404'
+2025-01-28T08:47:16.423Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\404'
+2025-01-28T08:47:22.105Z [ERROR]: ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\unauthorized' ENOENT: no such file or directory, stat 'C:\Users\Andrew\Desktop\Web development\INTERIOR-DESIGNS\unauthorized'
+2025-01-28T08:49:45.910Z [INFO]: Server running on port 8000
+2025-01-28T08:49:47.674Z [INFO]: Connected to MongoDB
+2025-01-28T08:50:03.539Z [INFO]: Server running on port 8000
+2025-01-28T08:50:04.498Z [INFO]: Connected to MongoDB

@@ -33,10 +33,15 @@ app.use(
   })
 );
 
-// Middleware to remove .html extension and serve static files
+// Middleware to block direct access to /admin
+app.use("/admin", (req, res) => {
+  res.status(403).sendFile(path.join(__dirname, "public", "unauthorized.html"));
+});
+
+// Middleware to remove .html extensions from routes
 app.use((req, res, next) => {
   if (req.url.endsWith(".html")) {
-    const newUrl = req.url.slice(0, -5); // Remove '.html'
+    const newUrl = req.url.slice(0, -5);
     res.redirect(301, newUrl);
   } else {
     next();
@@ -53,11 +58,11 @@ require("./startup/routes.js")(app);
 
 // Catch-all for undefined routes
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "404.html"));
+  res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
 });
 
 // Custom error handler
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));
