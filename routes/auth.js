@@ -127,11 +127,14 @@ router.post("/refresh", (req, res) => {
   const refreshToken = req.cookies.refresh_token;
 
   if (!refreshToken) {
+    console.log("No refresh token received");
     return res.status(401).json({ message: "No refresh token provided" });
   }
 
   try {
     const decoded = jwt.verify(refreshToken, jwtRefreshSecret);
+    console.log("Refresh token decoded:", decoded);
+
     const newAccessToken = generateAccessToken(decoded.userId);
 
     res.cookie("access_token", newAccessToken, {
@@ -141,8 +144,9 @@ router.post("/refresh", (req, res) => {
       maxAge: 45 * 60 * 1000, // 45 minutes
     });
 
-    res.json({ token: newAccessToken });
+    res.status(200).json({ token: newAccessToken });
   } catch (error) {
+    console.error("Error verifying refresh token:", error);
     res.status(403).json({ message: "Invalid or expired refresh token." });
   }
 });

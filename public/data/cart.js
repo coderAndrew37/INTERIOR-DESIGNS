@@ -1,11 +1,15 @@
 import { baseUrl } from "../scripts/constants.js";
+import { makeAuthenticatedRequest } from "../scripts/utils/tokenUtils.js";
+// Update cart quantity in the UI
 export async function updateCartQuantity() {
   try {
     // Fetch the user's cart data from the backend
-    const response = await fetch(`${baseUrl}/api/cart/get-cart`, {
-      method: "GET",
-      credentials: "include", // Ensure authenticated requests
-    });
+    const response = await makeAuthenticatedRequest(
+      `${baseUrl}/api/cart/get-cart`,
+      {
+        method: "GET",
+      }
+    );
 
     if (!response.ok) {
       console.error("Failed to fetch cart data");
@@ -36,14 +40,16 @@ export async function updateCartQuantity() {
 // Add product to the cart using backend API
 export async function addToCart(productId, quantity = 1) {
   try {
-    const response = await fetch(`${baseUrl}/api/cart/add-to-cart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ productId, quantity }),
-      credentials: "include",
-    });
+    const response = await makeAuthenticatedRequest(
+      `${baseUrl}/api/cart/add-to-cart`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId, quantity }),
+      }
+    );
 
     if (!response.ok) {
       const data = await response.json();
@@ -69,14 +75,16 @@ export async function addToCart(productId, quantity = 1) {
 // Remove an item from the cart using backend API
 export async function removeFromCart(productId) {
   try {
-    const response = await fetch(`${baseUrl}/api/cart/remove-from-cart`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ productId }),
-      credentials: "include", // Include credentials for authenticated requests
-    });
+    const response = await makeAuthenticatedRequest(
+      `${baseUrl}/api/cart/remove-from-cart`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId }),
+      }
+    );
 
     if (!response.ok) {
       const data = await response.json();
@@ -95,10 +103,12 @@ export async function removeFromCart(productId) {
 // Clear all items from the cart using backend API
 export async function clearCart() {
   try {
-    const response = await fetch(`${baseUrl}/api/cart/clear-cart`, {
-      method: "DELETE",
-      credentials: "include", // Include credentials for authenticated requests
-    });
+    const response = await makeAuthenticatedRequest(
+      `${baseUrl}/api/cart/clear-cart`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (!response.ok) {
       const data = await response.json();

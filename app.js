@@ -8,6 +8,7 @@ const logger = require("./startup/logger");
 const errorHandler = require("./startup/errorHandler.js");
 const authMiddleware = require("./middleware/auth");
 const adminMiddleware = require("./middleware/isAdmin");
+const routes = require("./startup/routes"); // Import routes.js
 
 const app = express();
 app.use(express.json());
@@ -55,11 +56,8 @@ app.get("/admin/dashboard", authMiddleware, adminMiddleware, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
-// API routes
-const authRoutes = require("./routes/auth");
-const adminRoutes = require("./routes/admin");
-app.use("/api/users", authRoutes);
-app.use("/api/admin", authMiddleware, adminMiddleware, adminRoutes);
+// Initialize routes
+routes(app); // Call the routes.js file here
 
 // Catch-all for undefined routes
 app.use((req, res) => {
