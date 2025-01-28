@@ -1,4 +1,3 @@
-// login.js
 import { baseUrl } from "./constants.js";
 
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
@@ -20,7 +19,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     if (response.ok) {
       if (data.isAdmin) {
         // Redirect to admin panel
-        window.location.href = "/admin.html";
+        window.location.href = "/admin/dashboard.html";
       } else {
         // Redirect to homepage
         window.location.href = "/";
