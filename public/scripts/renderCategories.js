@@ -5,7 +5,7 @@ export function renderCategories(categories, categoriesContainer) {
   categories.forEach((category) => {
     const sectionHTML = `
       <section class="category-section my-16" data-category="${category.name}">
-        <div class="products-wrapper grid gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 mb-6">
+        <div class="products-wrapper grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           <!-- Product Cards Rendered Dynamically Here -->
         </div>
         <div 

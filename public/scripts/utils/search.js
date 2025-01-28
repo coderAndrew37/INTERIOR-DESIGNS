@@ -19,6 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await response.json();
       renderProducts(data.products);
+
+      // Smooth scroll to the products container
+      const categoriesContainer = document.getElementById(
+        "categories-container"
+      );
+      if (categoriesContainer) {
+        categoriesContainer.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     } catch (error) {
       console.error("Error fetching products:", error);
     }

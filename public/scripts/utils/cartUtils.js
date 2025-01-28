@@ -24,28 +24,27 @@ export function initAddToCartListeners() {
   const buttons = document.querySelectorAll(".js-add-to-cart");
 
   buttons.forEach((button) => {
-    // Remove any existing listeners and replace with a new button
+    // Clone and replace to remove existing listeners
     const newButton = button.cloneNode(true);
     button.replaceWith(newButton);
 
-    newButton.addEventListener("click", async (event) => {
+    newButton.addEventListener("click", async () => {
       const productId = newButton.dataset.productId;
 
       if (!productId) {
         console.error("Missing productId for Add to Cart button.");
         return;
       }
+
       // Check authentication
       const isUserAuthenticated = await isAuthenticated();
       if (!isUserAuthenticated) {
-        // Redirect to login page
-        alert("You must be logged in to add items to your cart.");
-        window.location.href = "/login.html";
+        showLoginRedirectPrompt(); // Prompt user to log in
         return;
       }
 
-      // Proceed with adding to cart
-      await handleAddToCart(productId, button);
+      // Add to cart with loading spinner and feedback
+      await handleAddToCart(productId, newButton);
     });
   });
 }
@@ -53,33 +52,66 @@ export function initAddToCartListeners() {
 // Handle adding a product to the cart
 async function handleAddToCart(productId, button) {
   try {
+    // Show loading spinner and disable button
     button.disabled = true;
-    button.textContent = "Adding...";
+    button.innerHTML = `
+      <span class="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></span>
+      Adding...
+    `;
 
+    // Simulate API calls
     await addToCart(productId, 1); // Add the product to the cart
     await updateCartQuantity(); // Update the cart icon in the navbar
 
-    // Show "Added to Cart" message
-    const productContainer = button.closest(".product-container");
-    if (productContainer) {
-      const addedMessage = productContainer.querySelector(".added-to-cart");
-      if (addedMessage) {
-        addedMessage.classList.remove("hidden");
-        setTimeout(() => {
-          addedMessage.classList.add("hidden");
-        }, 2000);
-      }
-    }
+    // Show success feedback
+    showSuccessMessage(button);
   } catch (error) {
     console.error("Error adding product to cart:", error);
-    alert("Failed to add the product to the cart. Please try again.");
+    showErrorMessage(button, "Failed to add to cart. Try again.");
   } finally {
-    button.disabled = false;
-    button.textContent = "Add to Cart";
+    // Restore button state
+    setTimeout(() => {
+      button.disabled = false;
+      button.innerHTML = "Add to Cart";
+    }, 2000);
   }
 }
 
-// Show login redirect prompt for unauthenticated users
+// Show "Added to Cart" success message
+function showSuccessMessage(button) {
+  const productContainer = button.closest(".product-container");
+  if (productContainer) {
+    const addedMessage = productContainer.querySelector(".added-to-cart");
+    if (addedMessage) {
+      addedMessage.textContent = "Added to Cart!";
+      addedMessage.classList.remove("hidden", "text-red-500");
+      addedMessage.classList.add("text-green-500");
+
+      setTimeout(() => {
+        addedMessage.classList.add("hidden");
+      }, 2000);
+    }
+  }
+}
+
+// Show error message on failure
+function showErrorMessage(button, message) {
+  const productContainer = button.closest(".product-container");
+  if (productContainer) {
+    const addedMessage = productContainer.querySelector(".added-to-cart");
+    if (addedMessage) {
+      addedMessage.textContent = message;
+      addedMessage.classList.remove("hidden", "text-green-500");
+      addedMessage.classList.add("text-red-500");
+
+      setTimeout(() => {
+        addedMessage.classList.add("hidden");
+      }, 3000);
+    }
+  }
+}
+
+// Prompt user to log in if not authenticated
 function showLoginRedirectPrompt() {
   const proceedToLogin = confirm(
     "You must log in to add items to your cart. Would you like to log in now?"
