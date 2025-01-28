@@ -53,30 +53,43 @@ export function renderCategories(categories, categoriesContainer) {
               <h3 class="text-lg font-bold text-idcPrimary limit-text-to-2-lines mb-2">${
                 product.name
               }</h3>
-              <p class="text-xl font-semibold text-idcHighlight">${formatCurrency(
-                product.priceCents
-              )}</p>
-              <div class="quantity-wrapper flex flex-col items-start mt-4">
-                <label for="quantity-${
-                  product._id
-                }" class="text-sm mb-1">Qty:</label>
-                <select id="quantity-${
-                  product._id
-                }" class="quantity-select border border-gray-300 rounded-md mb-4" data-product-id="${
-            product._id
-          }">
-                  ${Array.from(
-                    { length: 10 },
-                    (_, i) => `<option value="${i + 1}">${i + 1}</option>`
-                  ).join("")}
-                </select>
-                <button class="js-add-to-cart w-full px-4 py-2 bg-idcHighlight text-black font-bold rounded-lg" data-product-id="${
-                  product._id
-                }">
-                  Add to Cart
-                </button>
-              </div>
-              <p class="added-to-cart text-green-500 text-sm hidden mt-2">Added to Cart!</p>
+              ${
+                product.hasPrice
+                  ? `
+                    <p class="text-xl font-semibold text-idcHighlight">${formatCurrency(
+                      product.priceCents
+                    )}</p>
+                    <div class="quantity-wrapper flex flex-col items-start mt-4">
+                      <label for="quantity-${
+                        product._id
+                      }" class="text-sm mb-1">Qty:</label>
+                      <select id="quantity-${
+                        product._id
+                      }" class="quantity-select border border-gray-300 rounded-md mb-4" data-product-id="${
+                      product._id
+                    }">
+                        ${Array.from(
+                          { length: 10 },
+                          (_, i) => `<option value="${i + 1}">${i + 1}</option>`
+                        ).join("")}
+                      </select>
+                      <button class="js-add-to-cart w-full px-4 py-2 bg-idcHighlight text-black font-bold rounded-lg" data-product-id="${
+                        product._id
+                      }">
+                        Add to Cart
+                      </button>
+                    </div>
+                    <p class="added-to-cart text-green-500 text-sm hidden mt-2">Added to Cart!</p>
+                  `
+                  : `
+                    <button 
+                      class="consult-price bg-idcHighlight text-black px-4 py-2 rounded-lg w-full"
+                      onclick="window.open('https://wa.me/254725790947?text=Hello, I am interested in ${product.name}. Could you provide the price?', '_blank')"
+                    >
+                      Consult for Price
+                    </button>
+                  `
+              }
             </div>
           `;
           productsWrapper.insertAdjacentHTML("beforeend", productHTML);
