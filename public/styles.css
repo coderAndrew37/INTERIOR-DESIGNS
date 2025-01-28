@@ -18,6 +18,76 @@
   overflow: hidden; /* Prevents content from overflowing during animation */
 }
 
+/* Sidebar styles */
+#sidebar-menu {
+  max-width: 100%;
+  width: 16rem; /* Sidebar width */
+  height: 100vh; /* Full height for consistent background */
+  background-color: #ecf0f1; /* Light gray (idcAccent) for clean design */
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transform: translateX(100%); /* Hidden off-screen initially */
+  transition: transform 0.3s ease-in-out;
+  position: fixed; /* Fixed positioning */
+  top: 0; /* Align with the top */
+  right: 0; /* Slide in from the right */
+  z-index: 50; /* Ensure it appears above other elements */
+  overflow-y: auto; /* Scrolling for long content */
+  color: #34495e; /* Text color (idcText) for contrast */
+  font-family: "Poppins", sans-serif; /* Clean font */
+}
+
+/* Sidebar open state */
+#sidebar-menu.open {
+  transform: translateX(0); /* Slide into view */
+}
+
+/* Sidebar Links */
+#sidebar-menu a {
+  color: #34495e; /* Text color (idcText) */
+  font-weight: 500; /* Slightly bold */
+  display: block; /* Full-width links */
+  padding: 12px 16px; /* Comfortable spacing */
+  text-decoration: none; /* Remove underline */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Subtle divider */
+  transition: background-color 0.3s, color 0.3s; /* Smooth hover effect */
+}
+
+#sidebar-menu a:hover {
+  background-color: #f4d03f; /* Highlight color (idcHighlight) */
+  color: #000; /* Ensure text visibility */
+}
+
+/* Close Button */
+#close-menu {
+  color: #34495e; /* Text color (idcText) */
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  display: block;
+  padding: 0 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+#close-menu:hover {
+  color: #f4d03f; /* Highlight on hover */
+}
+
+/* Overlay styles */
+#overlay {
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent overlay */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 40; /* Below the sidebar */
+  display: none; /* Hidden by default */
+}
+
+#overlay.visible {
+  opacity: 1; /* Make overlay visible */
+  display: block; /* Show overlay */
+}
+
 #projects .grid img {
   height: 200px; /* Set a uniform height */
   width: 100%; /* Ensure the image spans the full width */

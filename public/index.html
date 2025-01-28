@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interiors By Tiffi Limited | Transforming Spaces</title>
+    <title>Interiors By Tifi Limited | Transforming Spaces</title>
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="/output.css" />
@@ -72,9 +72,47 @@
           </button>
 
           <!-- Mobile Menu Button -->
-          <button id="mobile-menu" class="md:hidden">
+          <button id="mobile-menu" class="md:hidden" aria-expanded="false">
             <i class="fas fa-bars text-idcPrimary text-xl"></i>
           </button>
+
+          <!-- Sidebar Menu -->
+          <nav
+            id="sidebar-menu"
+            class="fixed inset-y-0 right-0 w-64 bg-idcAccent transform translate-x-full transition-transform duration-300 ease-in-out z-50 shadow-lg"
+            aria-hidden="true"
+          >
+            <div class="p-4">
+              <!-- Close Button -->
+              <button id="close-menu" class="mb-4 text-idcPrimary text-xl">
+                <i class="fas fa-times"></i>
+              </button>
+              <!-- Navigation Links -->
+              <a href="#about" class="block py-2 px-4 hover:bg-idcHighlight"
+                >About</a
+              >
+              <a href="#services" class="block py-2 px-4 hover:bg-idcHighlight"
+                >Services</a
+              >
+              <a
+                href="/products.html"
+                class="block py-2 px-4 hover:bg-idcHighlight"
+                >Products</a
+              >
+              <a href="#projects" class="block py-2 px-4 hover:bg-idcHighlight"
+                >Portfolio</a
+              >
+              <a href="#contact" class="block py-2 px-4 hover:bg-idcHighlight"
+                >Contact</a
+              >
+            </div>
+          </nav>
+
+          <!-- Overlay (For Outside Click) -->
+          <div
+            id="overlay"
+            class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"
+          ></div>
         </div>
       </div>
     </header>
@@ -86,7 +124,7 @@
     >
       <div>
         <h1 class="text-idcHero font-idcSerif leading-tight text-idcPrimary">
-          Welcome to Interiors By Tiffi Limited
+          Welcome to Interiors By Tifi Limited
         </h1>
         <p class="mt-4 text-idcText text-idcSubHero">
           Crafting tailored, beautiful, and functional interiors for Kenyan
@@ -483,7 +521,7 @@
     <!-- Footer -->
     <footer class="bg-idcBackground text-center py-4">
       <p class="text-idcText">
-        © 2024 Interiors By Tiffi Limited. All Rights Reserved.
+        © 2024 Interiors By Tifi Limited. All Rights Reserved.
       </p>
     </footer>
 

@@ -5,15 +5,11 @@ import "./newsletter.js";
 import "./leads.js";
 import "./animations.js";
 import "./authButton.js";
+import "./sidebarToggle.js";
 
-import {
-  initializeCart,
-  initializeSmoothScroll,
-  initializeNavbar,
-} from "./shared.js";
+import { initializeCart, initializeSmoothScroll } from "./shared.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeCart(); // Cart-related functionality
   initializeSmoothScroll(); // Smooth scrolling for anchor links
-  initializeNavbar(); // Navbar toggle and resizing
 });
