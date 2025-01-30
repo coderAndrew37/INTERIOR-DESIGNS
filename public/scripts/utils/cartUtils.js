@@ -1,6 +1,13 @@
 import { baseUrl } from "../constants.js";
 import { addToCart, updateCartQuantity } from "../../data/cart.js";
 
+document.addEventListener("DOMContentLoaded", async () => {
+  const isUserAuthenticated = await isAuthenticated();
+  if (!isUserAuthenticated) {
+    document.querySelector(".js-cart-quantity").classList.add("hidden");
+  }
+});
+
 // Check if the user is authenticated
 export async function isAuthenticated() {
   try {

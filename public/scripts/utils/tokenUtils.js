@@ -22,10 +22,14 @@ export async function refreshToken() {
 }
 
 // Make an authenticated request with auto-refresh token logic
-export async function makeAuthenticatedRequest(url, options) {
+export async function makeAuthenticatedRequest(
+  url,
+  options,
+  shouldRedirect = false
+) {
   let response = await fetch(url, {
     ...options,
-    credentials: "include", // Include cookies for authentication
+    credentials: "include",
   });
 
   if (response.status === 401) {
@@ -33,14 +37,20 @@ export async function makeAuthenticatedRequest(url, options) {
     const newToken = await refreshToken();
 
     if (newToken) {
-      // Retry the original request with the new token
       response = await fetch(url, {
         ...options,
-        credentials: "include", // Include cookies
+        credentials: "include",
       });
     } else {
-      console.error("Failed to refresh token. Redirecting to login...");
-      window.location.href = "/login.html";
+      console.error("Session expired.");
+
+      // 🚀 Only redirect if explicitly requested (e.g., in cart actions)
+      if (shouldRedirect) {
+        alert("Your session has expired. Please log in again.");
+        window.location.href = "/login.html";
+      }
+
+      return null;
     }
   }
 
