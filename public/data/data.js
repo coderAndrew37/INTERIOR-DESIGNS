@@ -77,9 +77,10 @@ export const projects = [
     desc: "A tranquil and serene retreat in the heart of Amboseli National Park.",
     image: "/images/Amboseli/before3.jpg", // Featured image
     before: [
-      "/images/Amboseli/before1.jpg",
-      "/images/Amboseli/before2.jpg",
-      "/images/Amboseli/before3.jpg",
+      "/images/Amboseli/before_1.webp",
+      "/images/Amboseli/before_2.webp",
+      "/images/Amboseli/before_3.webp",
+      "/images/Amboseli/before_4.webp",
     ],
     after: [
       "/images/Amboseli/after1.jpg",
