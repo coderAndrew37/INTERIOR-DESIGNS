@@ -46,15 +46,15 @@ router.post("/register", async (req, res) => {
 
     res.cookie("refresh_token", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      secure: process.env.NODE_ENV === "production", // Important on Render
+      sameSite: "None", // 🔥 Change from "Strict" to "None"
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.cookie("access_token", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "None", // 🔥 Change from "Strict" to "None"
       maxAge: 45 * 60 * 1000,
     });
 
@@ -85,18 +85,17 @@ router.post("/login", loginLimiter, async (req, res) => {
     const accessToken = generateAccessToken(user._id);
     const refreshToken = generateRefreshToken(user._id);
 
-    // Set tokens as HTTP-only cookies
     res.cookie("refresh_token", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      secure: process.env.NODE_ENV === "production", // Important on Render
+      sameSite: "None", // 🔥 Change from "Strict" to "None"
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.cookie("access_token", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "None", // 🔥 Change from "Strict" to "None"
       maxAge: 45 * 60 * 1000,
     });
 
@@ -124,30 +123,37 @@ router.get("/profile", authMiddleware, async (req, res) => {
 
 // Refresh Token Route
 router.post("/refresh", (req, res) => {
+  console.log("🔄 Received refresh request...");
+
   const refreshToken = req.cookies.refresh_token;
+  console.log("🍪 Refresh Token from Cookies:", refreshToken);
 
   if (!refreshToken) {
-    console.log("No refresh token received");
+    console.log("❌ No refresh token received.");
     return res.status(401).json({ message: "No refresh token provided" });
   }
 
   try {
     const decoded = jwt.verify(refreshToken, jwtRefreshSecret);
-    console.log("Refresh token decoded:", decoded);
+    console.log("✅ Refresh token decoded:", decoded);
 
     const newAccessToken = generateAccessToken(decoded.userId);
+
+    console.log("🎟️ New Access Token Generated:", newAccessToken);
 
     res.cookie("access_token", newAccessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: 45 * 60 * 1000, // 45 minutes
     });
 
     res.status(200).json({ token: newAccessToken });
   } catch (error) {
-    console.error("Error verifying refresh token:", error);
-    res.status(403).json({ message: "Invalid or expired refresh token." });
+    console.error("⚠️ Error verifying refresh token:", error);
+    return res
+      .status(403)
+      .json({ message: "Invalid or expired refresh token." });
   }
 });
 
@@ -189,16 +195,18 @@ router.post(
 // Logout Route
 router.post("/logout", (req, res) => {
   // Clear both access and refresh tokens from cookies
-  res.clearCookie("access_token", {
+  res.cookie("refresh_token", refreshToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "Strict",
+    secure: process.env.NODE_ENV === "production", // Important on Render
+    sameSite: "None", // 🔥 Change from "Strict" to "None"
+    maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
-  res.clearCookie("refresh_token", {
+  res.cookie("access_token", accessToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "Strict",
+    sameSite: "None", // 🔥 Change from "Strict" to "None"
+    maxAge: 45 * 60 * 1000,
   });
 
   res.status(200).json({ message: "Logged out successfully" });
