@@ -2,11 +2,12 @@ import { initializeCart, initializeSmoothScroll } from "./shared.js";
 import { initializeSearchToggle } from "./toggleSearch.js";
 import { categories } from "../data/categories.js";
 import { renderCategories } from "./renderCategories.js";
+import { updateCartQuantity } from "../data/cart.js"; // ✅ Import cart update function
 import "./authButton.js";
 import "./utils/heroSwiper.js";
 import "./utils/search.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const categoriesContainer = document.querySelector("#categories-container");
 
   if (!categoriesContainer) {
@@ -14,21 +15,19 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // ✅ Render categories before enabling smooth scrolling
   renderCategories(categories, categoriesContainer);
 
-  // ✅ Enable smooth scrolling for internal links (hero carousel & category navigation)
+  // ✅ Call this function to update the cart count when the page loads
+  await updateCartQuantity();
+
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", (event) => {
-      const targetId = anchor.getAttribute("href"); // Get hash value (e.g., #beddings)
-      const targetSection = document.querySelector(targetId); // Find corresponding section
+      const targetId = anchor.getAttribute("href");
+      const targetSection = document.querySelector(targetId);
 
       if (targetSection) {
-        event.preventDefault(); // Prevent default anchor jump
-        targetSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+        event.preventDefault();
+        targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     });
   });

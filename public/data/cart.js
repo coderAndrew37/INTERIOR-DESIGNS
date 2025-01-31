@@ -22,12 +22,14 @@ export async function updateCartQuantity() {
     // Calculate total quantity of items in the cart
     const cartQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
-    // Update cart quantity display in the header
+    // ✅ Update cart quantity display in the header
     const cartQuantityElement = document.querySelector(".js-cart-quantity");
+
     if (cartQuantityElement) {
       cartQuantityElement.textContent = cartQuantity;
+
       if (cartQuantity > 0) {
-        cartQuantityElement.classList.remove("hidden"); // Show the quantity
+        cartQuantityElement.classList.remove("hidden"); // Show quantity
       } else {
         cartQuantityElement.classList.add("hidden"); // Hide if zero
       }

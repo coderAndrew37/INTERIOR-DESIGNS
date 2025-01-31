@@ -59,24 +59,20 @@ export function initAddToCartListeners() {
 // Handle adding a product to the cart
 async function handleAddToCart(productId, button) {
   try {
-    // Show loading spinner and disable button
     button.disabled = true;
     button.innerHTML = `
       <span class="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></span>
       Adding...
     `;
 
-    // Simulate API calls
-    await addToCart(productId, 1); // Add the product to the cart
-    await updateCartQuantity(); // Update the cart icon in the navbar
+    await addToCart(productId, 1); // Add product to cart
+    await updateCartQuantity(); // ✅ Update cart quantity in the navbar
 
-    // Show success feedback
     showSuccessMessage(button);
   } catch (error) {
     console.error("Error adding product to cart:", error);
     showErrorMessage(button, "Failed to add to cart. Try again.");
   } finally {
-    // Restore button state
     setTimeout(() => {
       button.disabled = false;
       button.innerHTML = "Add to Cart";
