@@ -7,40 +7,33 @@ import "./utils/heroSwiper.js";
 import "./utils/search.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  initializeSearchToggle();
-  initializeCart();
-  initializeSmoothScroll();
-
   const categoriesContainer = document.querySelector("#categories-container");
-  const categoryNavItems = document.querySelectorAll(".category-item");
 
   if (!categoriesContainer) {
     console.error("Categories container not found in the DOM.");
     return;
   }
 
-  if (!categoryNavItems) {
-    console.error("Category navigation items not found in the DOM.");
-    return;
-  }
-
-  // Render all categories by default
+  // ✅ Render categories before enabling smooth scrolling
   renderCategories(categories, categoriesContainer);
 
-  // Event listener for category navigation
-  categoryNavItems.forEach((item) => {
-    item.addEventListener("click", (e) => {
-      // Remove active class from all items and add to clicked item
-      categoryNavItems.forEach((nav) => nav.classList.remove("active"));
-      e.target.classList.add("active");
+  // ✅ Enable smooth scrolling for internal links (hero carousel & category navigation)
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (event) => {
+      const targetId = anchor.getAttribute("href"); // Get hash value (e.g., #beddings)
+      const targetSection = document.querySelector(targetId); // Find corresponding section
 
-      const selectedCategory = e.target.getAttribute("data-category");
-      const targetSection = categoriesContainer.querySelector(
-        `.category-section[data-category="${selectedCategory}"]`
-      );
       if (targetSection) {
-        targetSection.scrollIntoView({ behavior: "smooth" });
+        event.preventDefault(); // Prevent default anchor jump
+        targetSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }
     });
   });
+
+  initializeSearchToggle();
+  initializeCart();
+  initializeSmoothScroll();
 });

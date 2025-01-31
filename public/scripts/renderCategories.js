@@ -4,24 +4,24 @@ import { initAddToCartListeners } from "./utils/cartUtils.js";
 export function renderCategories(categories, categoriesContainer) {
   categories.forEach((category) => {
     const sectionHTML = `
-      <section class="category-section my-16" data-category="${category.name}">
-        <div class="products-wrapper grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-          <!-- Product Cards Rendered Dynamically Here -->
-        </div>
-        <div 
-          class="relative full-screen-image w-full h-96 sm:h-72 xs:h-48 bg-cover bg-center"
-          style="background-image: url('${category.fullScreenImage}');"
-        >
-          <div 
-            class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white p-4"
-          >
-            <i class="${category.icon} text-idcHighlight text-4xl mb-2"></i>
-            <h2 class="text-3xl font-bold">${category.name}</h2>
-            <p class="text-lg italic">${category.description}</p>
-          </div>
-        </div>
-      </section>
-    `;
+  <section id="${category.name}" class="category-section my-16" data-category="${category.name}">
+    <div class="products-wrapper grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Product Cards Rendered Dynamically Here -->
+    </div>
+    <div 
+      class="relative full-screen-image w-full h-96 sm:h-72 xs:h-48 bg-cover bg-center"
+      style="background-image: url('${category.fullScreenImage}');"
+    >
+      <div 
+        class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white p-4"
+      >
+        <i class="${category.icon} text-idcHighlight text-4xl mb-2"></i>
+        <h2 class="text-3xl font-bold">${category.name}</h2>
+        <p class="text-lg italic">${category.description}</p>
+      </div>
+    </div>
+  </section>
+`;
 
     categoriesContainer.insertAdjacentHTML("beforeend", sectionHTML);
     const section = categoriesContainer.querySelector(
