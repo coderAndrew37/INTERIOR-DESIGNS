@@ -18,6 +18,16 @@
   overflow: hidden; /* Prevents content from overflowing during animation */
 }
 
+#mobile-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #mobile-menu {
+    display: block;
+  }
+}
+
 /* Sidebar styles */
 #sidebar-menu {
   max-width: 100%;
@@ -25,8 +35,9 @@
   height: 100vh; /* Full height for consistent background */
   background-color: #ecf0f1; /* Light gray (idcAccent) for clean design */
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  transform: translateX(100%); /* Hidden off-screen initially */
-  transition: transform 0.3s ease-in-out;
+  display: none; /* Hide by default */
+  transform: translateX(100%); /* Keep it off-screen */
+  /transition: transform 0.3s ease-in-out;
   position: fixed; /* Fixed positioning */
   top: 0; /* Align with the top */
   right: 0; /* Slide in from the right */
@@ -55,6 +66,12 @@
 #sidebar-menu a:hover {
   background-color: #f4d03f; /* Highlight color (idcHighlight) */
   color: #000; /* Ensure text visibility */
+}
+
+@media (max-width: 768px) {
+  #sidebar-menu {
+    display: block; /* Only visible on mobile */
+  }
 }
 
 /* Close Button */
